@@ -1,26 +1,42 @@
+@layer theme, base, mui, components, utilities;
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.btn-filled {
+  @apply bg-[#003593]  hover:bg-[#6C85C6] active:bg-[#3559B6] disabled:bg-[#C5C6D0] disabled:hover:bg-[#C5C6D0] text-white disabled:text-[#8F909A] cursor-pointer disabled:cursor-default;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.btn-outlined {
+  @apply bg-transparent border border-[#003593] text-[#003593] hover:bg-[#EFF2F9] disabled:border-[#C5C6D0] disabled:hover:bg-transparent disabled:text-[#8F909A] active:bg-[#E7EBF6] cursor-pointer disabled:cursor-default;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.btn-tonal {
+  @apply bg-[#F5F7FB] text-[#003593] hover:bg-[#EFF2F9] disabled:bg-[#E2E2EC] disabled:hover:bg-[#E2E2EC] disabled:text-[#8F909A] active:bg-[#E9EDF7] cursor-pointer disabled:cursor-default;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.btn-text {
+  @apply bg-transparent text-[#003593]  hover:text-[#6B8CED] disabled:hover:bg-transparent disabled:text-[#8F909A]  active:text-[#B4C5FF] cursor-pointer disabled:cursor-default;
+}
+
+.btn-large {
+  @apply p-6 text-[20px];
+}
+
+.btn-medium {
+  @apply py-[18px] px-[24px] text-[16px];
+}
+
+.btn-small {
+  @apply py-[14px] px-[18px] text-[12px];
+}
+
+.btn-chip {
+  @apply text-[#003593] text-[16px]   bg-[#EEF0FF] disabled:bg-[#E2E2EC] disabled:text-[#757680] w-[93px] h-[43px] rounded-[8px] flex items-center justify-center gap-2 font-semibold;
+}
+
+.active-link {
+  @apply text-[#003593] font-semibold;
+}
+
+.inactive-link {
+  @apply text-[#757680] font-semibold hover:text-[#003593];
 }
