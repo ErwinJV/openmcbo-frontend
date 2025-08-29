@@ -8,6 +8,7 @@ interface ButtonProps {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   text?: string;
+  removePadding?: boolean;
 }
 
 export default function Button({
@@ -18,12 +19,15 @@ export default function Button({
   onClick,
   rightIcon,
   text,
+  removePadding,
 }: ButtonProps) {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`btn-${size} btn-${variant} flex items-center gap-2 justify-center font-semibold`}
+      className={`btn-${size} btn-${variant} flex items-center gap-2 justify-center font-semibold ${
+        removePadding ? "remove-padding" : ""
+      }`}
     >
       {leftIcon}
       <span>{text}</span>
