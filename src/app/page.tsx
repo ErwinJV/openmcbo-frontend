@@ -5,7 +5,7 @@ import Chip from "@/components/Chip";
 import { getClient } from "@/graphql/client";
 import { GetPropertiesQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
-import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import { IoArrowForward } from "react-icons/io5";
 
 const loadData = async () => {
   const { data } = await getClient().query<GetPropertiesQuery>({
