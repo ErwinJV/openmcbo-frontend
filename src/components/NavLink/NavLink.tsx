@@ -16,6 +16,7 @@ export default function NavLink({ href, label }: NavLinkProps) {
   return (
     <Link
       className={`capitalize ${isActive ? "active-link" : "inactive-link"}`}
+      
       href={href}
     >
       {label}

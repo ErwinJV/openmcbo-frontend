@@ -1,11 +1,12 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Chip from "@/components/Chip";
+import Input from "@/components/Input";
 
 import { getClient } from "@/graphql/client";
 import { GetPropertiesQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
-import { IoArrowForward } from "react-icons/io5";
+import { IoArrowForward, IoEyeOff } from "react-icons/io5";
 
 const loadData = async () => {
   const { data } = await getClient().query<GetPropertiesQuery>({
@@ -50,6 +51,18 @@ export default async function Home() {
         title="Lorem Ipsum amet jhj hjh jh"
         url="#"
       />
+      <div className="w-40">
+        <Input
+          bg="filled"
+          endAdornment={<IoEyeOff />}
+          label="Ejemplo"
+          name="example"
+          size="small"
+          supportText="Example text"
+          type="text"
+          variant="normal"
+        />
+      </div>
     </div>
   );
 }

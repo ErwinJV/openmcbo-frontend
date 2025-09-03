@@ -25,7 +25,6 @@ export default function Card({
           alt={title}
           className="object-cover w-full h-full "
           height={346}
-          quality={10}
           src={srcImg}
           width={360}
         />

@@ -48,3 +48,64 @@
 .remove-padding {
   @apply !p-0;
 }
+
+.input-outlined {
+  @apply border-b border-[#3559B6];
+}
+
+.input-outlined-error {
+  @apply border-b border-[#FF002F];
+}
+
+.input-outlined,
+.input-normal,
+.input-outlined-error,
+.input-normal-error {
+  @apply w-full flex items-center px-3;
+}
+
+.input-normal {
+  @apply border border-[#003593];
+}
+
+.input-normal-error {
+  @apply border border-[#FF002F];
+}
+
+.input-small {
+  @apply h-[43px];
+}
+
+.input-medium {
+  @apply h-12;
+}
+
+.input-large {
+  @apply h-[52px];
+}
+
+.input-bg-transparent {
+  @apply bg-transparent;
+}
+
+.input-bg-filled {
+  @apply bg-[#EFF2F9];
+}
+
+.input-bg-filled-error,
+.input-bg-transparent-error {
+  @apply bg-[#FFF0F1];
+}
+
+.input-support-text-normal {
+  @apply text-[#8F909A];
+}
+
+.input-support-text-error {
+  @apply text-[#FF002F];
+}
+
+.input-support-text-error,
+.input-support-text-normal {
+  @apply text-sm;
+}
