@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Chip from "@/components/Chip";
+import ClientTest from "@/components/ClientTest";
 import Input from "@/components/Input";
 
 import { getClient } from "@/graphql/client";
@@ -32,7 +33,7 @@ const loadData = async () => {
 export default async function Home() {
   const data = await loadData();
   return (
-    <div className="p-12">
+    <div className="p-12 flex flex-col space-y-1.5">
       <h1 className="text-2xl">Hola Mundo</h1>
       {JSON.stringify(data.properties.properties, null, 2)}
 
@@ -63,6 +64,8 @@ export default async function Home() {
           variant="normal"
         />
       </div>
+
+      <ClientTest />
     </div>
   );
 }

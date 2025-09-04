@@ -109,3 +109,15 @@
 .input-support-text-normal {
   @apply text-sm;
 }
+
+.counter-button {
+  @apply h-6 w-6 font-bold text-2xl flex items-center justify-center cursor-pointer box-border;
+}
+
+.counter-button-active {
+  @apply border-2 border-[#003593]  bg-white text-[#003593] active:bg-[#003593] active:text-white;
+}
+
+.counter-button-inactive {
+  @apply bg-[#E2E2EC] text-[#8F909A];
+}
