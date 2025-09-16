@@ -9,7 +9,7 @@ interface InputProps {
   placeholder?: string;
   size: "small" | "medium" | "large";
   type: HTMLInputTypeAttribute;
-  variant: "normal" | "outlined";
+  variant: "normal" | "outlined" | "text";
   supportText?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }

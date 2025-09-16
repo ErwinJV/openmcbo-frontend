@@ -59,8 +59,10 @@
 
 .input-outlined,
 .input-normal,
+.input-text,
 .input-outlined-error,
-.input-normal-error {
+.input-normal-error,
+.input-text-error {
   @apply w-full flex items-center px-3;
 }
 
@@ -69,6 +71,14 @@
 }
 
 .input-normal-error {
+  @apply border border-[#FF002F];
+}
+
+.input-text {
+  @apply border-none;
+}
+
+.input-text-error {
   @apply border border-[#FF002F];
 }
 
@@ -120,4 +130,124 @@
 
 .counter-button-inactive {
   @apply bg-[#E2E2EC] text-[#8F909A];
+}
+
+.checkbox-label {
+  @apply text-[18px];
+}
+
+.disabled-checkbox-label {
+  @apply text-[#8F909A];
+}
+
+.radio-label {
+  @apply text-[18px];
+}
+
+.disabled-radio-label {
+  @apply text-[#8F909A];
+}
+
+.radio-group-container {
+  @apply p-5 font-sans;
+}
+
+.radio-group-title {
+  @apply text-2xl font-bold mb-4;
+}
+
+.radio-group-options {
+  @apply space-y-2;
+}
+
+.radio-group-label {
+  @apply flex items-center space-x-3 p-3  rounded-md cursor-pointer hover:bg-gray-50 transition-colors;
+}
+
+.radio-custom-container {
+  @apply relative flex items-center justify-center;
+}
+
+.radio-input-hidden {
+  @apply absolute opacity-0 cursor-pointer;
+}
+
+.radio-custom {
+  @apply w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all;
+}
+
+.radio-custom-selected {
+  @apply border-blue-500 bg-blue-500;
+}
+
+.radio-custom-disabled {
+  @apply border-gray-200 bg-gray-200 cursor-not-allowed;
+}
+
+.radio-custom-unselected {
+  @apply border-gray-300 bg-white;
+}
+
+.radio-inner-dot {
+  @apply w-3 h-3 rounded-full bg-white;
+}
+
+.radio-inner-disabled {
+  @apply w-3 h-3 rounded-full bg-gray-600;
+}
+
+.radio-label-text {
+  @apply text-gray-700;
+}
+
+.radio-label-disabled {
+  @apply text-[#757680];
+}
+
+.radio-label-text,
+.radio-label-disabled {
+  @apply text-[18px];
+}
+
+.radio-feedback {
+  @apply mt-4 p-3 bg-gray-100 rounded-md;
+}
+
+.gallery-button {
+  @apply w-full h-17 lg:h-13 p-4 flex justify-center items-center space-x-1 cursor-pointer;
+}
+
+.gallery-button-selected {
+  @apply bg-[#EFF2F9];
+}
+
+.gallery-button-unselected {
+  @apply bg-[#E3E8F5];
+}
+
+.gallery-button-text {
+  @apply text-[16px] font-bold;
+}
+
+@media (max-width: 1023px) {
+  .gallery-button-text {
+    @apply hidden;
+  }
+}
+.gallery-button-text-selected {
+  @apply text-[#003593];
+}
+.gallery-button-text-unselected {
+  @apply text-[#6B8CED];
+}
+.gallery-button-icon {
+  @apply w-6 h-6 text-[#003593];
+}
+
+.gallery-button-icon-unselected {
+  @apply text-[#6B8CED];
+}
+
+.gallery-button-icon-selected {
+  @apply text-[#003593];
 }
