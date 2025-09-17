@@ -1,6 +1,10 @@
 @layer theme, base, mui, components, utilities;
 @import "tailwindcss";
 
+.btn {
+  @apply flex items-center justify-center w-full;
+}
+
 .btn-filled {
   @apply bg-[#003593]  hover:bg-[#6C85C6] active:bg-[#3559B6] disabled:bg-[#C5C6D0] disabled:hover:bg-[#C5C6D0] text-white disabled:text-[#8F909A] cursor-pointer disabled:cursor-default;
 }
@@ -31,6 +35,14 @@
 
 .btn-chip {
   @apply text-[#003593] text-[16px]   bg-[#EEF0FF] disabled:bg-[#E2E2EC] disabled:text-[#757680] w-[93px] h-[43px] rounded-[8px] flex items-center justify-center gap-2 font-semibold;
+}
+
+.remove-padding {
+  @apply !p-0;
+}
+
+.btn-lean {
+  @apply h-11;
 }
 
 .active-link {
@@ -250,4 +262,24 @@
 
 .gallery-button-icon-selected {
   @apply text-[#003593];
+}
+
+.accordion-button {
+  @apply w-full flex justify-between items-center px-4 py-3 bg-white text-gray-700 font-medium focus:outline-none transition-all duration-200;
+}
+
+.accordion-title {
+  @apply text-gray-700 font-bold text-[20px];
+}
+
+.accordion-icon {
+  @apply text-gray-600 transition-transform duration-200 ease-in-out;
+}
+
+.accordion-icon-open {
+  @apply rotate-180;
+}
+
+.accordion-content {
+  @apply overflow-hidden transition-all duration-300 ease-in-out bg-white px-4;
 }

@@ -25,12 +25,12 @@ export default function Button({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`btn-${size} btn-${variant} flex items-center gap-2 justify-center font-semibold ${
-        removePadding ? "remove-padding" : ""
+      className={`btn btn-${size} btn-${variant} flex items-center gap-2 justify-center font-semibold ${
+        removePadding ? "remove-padding btn-lean" : ""
       }`}
     >
       {leftIcon}
-      <span>{text}</span>
+      {text && <span>{text}</span>}
       {rightIcon}
     </button>
   );

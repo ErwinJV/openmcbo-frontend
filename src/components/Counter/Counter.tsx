@@ -30,9 +30,9 @@ export default function Counter({
   }, [decrement, minValue, value]);
 
   return (
-    <div className="flex w-80 justify-between">
+    <div className="flex w-full md:w-80 space-x-7">
       <span className="text-[18px] capitalize">{title}</span>
-      <div className="flex space-x-3">
+      <div className="flex space-x-2">
         <button
           className={`counter-button counter-button${
             value === minValue ? "-inactive" : "-active"
