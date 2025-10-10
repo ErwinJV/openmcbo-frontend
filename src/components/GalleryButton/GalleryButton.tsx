@@ -1,12 +1,14 @@
 "use client";
 
+import { GalleryViewType } from "@/types/context";
 import { useCallback } from "react";
 
 interface GalleryButtonProps {
   icon: React.ReactNode;
-  onClick: () => void;
+  onClick: (view: GalleryViewType) => void;
   selected: boolean;
   text: string;
+  view: GalleryViewType;
 }
 
 export default function GalleryButton({
@@ -14,12 +16,13 @@ export default function GalleryButton({
   onClick,
   selected,
   text,
+  view,
 }: GalleryButtonProps) {
   const handleOnClick = useCallback(() => {
     if (!selected) {
-      onClick();
+      onClick(view);
     }
-  }, [onClick, selected]);
+  }, [onClick, selected, view]);
   return (
     <button
       className={`gallery-button gallery-button-${

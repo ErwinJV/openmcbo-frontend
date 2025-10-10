@@ -18,8 +18,8 @@ export default function SearchBar() {
   return (
     <>
       {/* SEARCH BAR LG */}
-      <div className="hidden lg:flex flex-col w-240">
-        <div className="flex w-79 ">
+      <div className="hidden xl:flex flex-col w-240 ">
+        <div className="flex w-79 bg-white">
           <Button
             variant={status === PropertyStatus.Rent ? "text" : "filled"}
             text="Alquilar"
@@ -59,8 +59,8 @@ export default function SearchBar() {
           </span>
         </div>
       </div>
-      <div className="hidden md:flex lg:hidden flex-col w-148 ">
-        <div className="flex w-full">
+      <div className="hidden md:flex xl:hidden flex-col w-148 ">
+        <div className="flex w-full bg-white">
           <Button
             variant={status === PropertyStatus.Rent ? "text" : "filled"}
             text="Alquilar"
@@ -98,7 +98,7 @@ export default function SearchBar() {
         />
       </div>
       <div className="flex md:hidden flex-col w-80">
-        <div className="flex w-full">
+        <div className="flex w-full bg-white">
           <Button
             variant={status === PropertyStatus.Rent ? "text" : "filled"}
             text="Alquilar"
@@ -114,7 +114,7 @@ export default function SearchBar() {
             removePadding
           />
         </div>
-        <div className="w-full flex items-center h-17 bg-[#F5F7FB] mt-3">
+        <div className="w-full flex items-center  bg-[#F5F7FB] mt-3">
           <span className="w-[86%]">
             <Input
               bg="transparent"

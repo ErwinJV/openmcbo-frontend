@@ -52,7 +52,7 @@ export default function Accordion({ title, children }: AccordionProps) {
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px",
         }}
       >
-        <div className="pt-2">{children}</div>
+        <div className="p-0">{children}</div>
       </div>
     </div>
   );

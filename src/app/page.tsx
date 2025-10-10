@@ -1,13 +1,17 @@
-import Button from "@/components/Button";
-import Card from "@/components/Card";
-import Chip from "@/components/Chip";
-import ClientTest from "@/components/ClientTest";
-import Input from "@/components/Input";
+// import Button from "@/components/Button";
+// import Card from "@/components/Card";
+// import Chip from "@/components/Chip";
+// import ClientTest from "@/components/ClientTest";
+// import Input from "@/components/Input";
+import AvailableOptions from "@/containers/AvailableOptions";
+import LastPosts from "@/containers/LastPosts";
+import MainHero from "@/containers/MainHero";
+import OurServices from "@/containers/OurServices";
 
 import { getClient } from "@/graphql/client";
 import { GetPropertiesQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
-import { IoArrowForward, IoEyeOff } from "react-icons/io5";
+// import { IoArrowForward, IoEyeOff } from "react-icons/io5";
 
 const loadData = async () => {
   const { data } = await getClient().query<GetPropertiesQuery>({
@@ -33,8 +37,12 @@ const loadData = async () => {
 export default async function Home() {
   const data = await loadData();
   return (
-    <div className="p-12 flex flex-col space-y-1.5">
-      <h1 className="text-2xl">Hola Mundo</h1>
+    <>
+      <MainHero />
+      <LastPosts />
+      <AvailableOptions />
+      <OurServices />
+      {/* <h1 className="text-2xl">Hola Mundo</h1>
       {JSON.stringify(data.properties.properties, null, 2)}
 
       <Button
@@ -65,7 +73,7 @@ export default async function Home() {
         />
       </div>
 
-      <ClientTest />
-    </div>
+      <ClientTest /> */}
+    </>
   );
 }

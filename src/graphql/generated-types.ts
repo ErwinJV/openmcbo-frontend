@@ -35,12 +35,14 @@ export type CreateMultiplePropertiesInput = {
 };
 
 export type CreatePropertyInput = {
+  /** Area in square meters of the property */
+  area: Scalars['Int']['input'];
   /** Property's description. Example: "Apartamento amplio, con 4 habitaciones, comedor, dos banos y una sala, etc.". This field is required | Maximum character length of 420  */
   description: Scalars['String']['input'];
-  /** Property's latitude (Google Maps). Example: "41.40338" */
-  lat?: InputMaybe<Scalars['Float']['input']>;
-  /** Property's longitude (Google Maps). Example: "2.17403" */
-  long?: InputMaybe<Scalars['Float']['input']>;
+  /** Property place latitude */
+  lat: Scalars['Float']['input'];
+  /** Property place longitude */
+  long: Scalars['Float']['input'];
   /** Property's total bathrooms. Example: "2" */
   num_bathrooms?: InputMaybe<Scalars['Int']['input']>;
   /** Property's total bedrooms. Example: "4" */
@@ -51,6 +53,8 @@ export type CreatePropertyInput = {
   num_pools?: InputMaybe<Scalars['Int']['input']>;
   /** Property's place. Example: "Av. Bella Vista Maracaibo, Zulia". This field is required | Maximum character length of 125 */
   place: Scalars['String']['input'];
+  /** Property's price. Example: "125000.00". This field is required */
+  price: Scalars['Float']['input'];
   /** Property's status. Example: "SALE". This field is required */
   status: PropertyStatus;
   /** Property's title, Example: "Apartamento en Buena Vista". This field is required | Maximum character length of 80 */
@@ -142,6 +146,8 @@ export type PropertiesDataResponse = {
 };
 
 export type Property = {
+  /** Area in square meters of the property */
+  area: Scalars['Int']['output'];
   /** Property's date creation in epoch format (milliseconds) by Date.now(). Example: "1519211809934" */
   created_at?: Maybe<Scalars['Float']['output']>;
   /** Property's description. Max character length: 125, Example: "Apartamento amplio, con 4 habitaciones, comedor, dos banos y una sala, etc."  */
@@ -163,6 +169,8 @@ export type Property = {
   num_pools?: Maybe<Scalars['Int']['output']>;
   /** Property's place. Example: "Av. Bella Vista Maracaibo, Zulia' */
   place: Scalars['String']['output'];
+  /** Property's price. Example: "125000.00" */
+  price: Scalars['Float']['output'];
   /** Property's slug, generate based of the title property. Max character length: 25, Example: "Apartamento-en-Buena-Vista" */
   slug: Scalars['String']['output'];
   /** Property's status. Example: "SALE" */
@@ -177,6 +185,17 @@ export type Property = {
   user: User;
   /** Property's user id creator. Example: "1b8800a2-2385-403a-893b-3eba76ba4608"  */
   userId: Scalars['String']['output'];
+};
+
+export type PropertyFilterInput = {
+  max_area?: InputMaybe<Scalars['Float']['input']>;
+  min_area?: InputMaybe<Scalars['Float']['input']>;
+  num_bathrooms?: InputMaybe<Scalars['Int']['input']>;
+  num_bedrooms?: InputMaybe<Scalars['Int']['input']>;
+  num_parking_lot?: InputMaybe<Scalars['Int']['input']>;
+  place?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<PropertyStatus>;
+  type?: InputMaybe<PropertyType>;
 };
 
 export type PropertyImage = {
@@ -202,15 +221,26 @@ export type PropertyUpdateResponse = {
 };
 
 export type Query = {
+  filterProperties: PropertiesDataResponse;
   /** Returns a paginated list of properties */
   properties: PropertiesDataResponse;
-  /** Return a single property by required term (property id or slug) */
+  /** Return a single property by required term (property id) */
   property: Property;
+  /** Return a single property by required slug (property id or slug) */
+  propertyBySlug: Property;
+  /** Search properties by term (title, description, place) and pagination params */
+  searchProperties: PropertiesDataResponse;
   /** Return a single user required by id (uuid), authorization bearer token is required in the header request */
   user: User;
   /** Return a paginated list of users, authorization bearer token is required in the header request */
   users: UsersDataResponse;
   verifyAuthToken: AuthVerificationResponse;
+};
+
+
+export type QueryFilterPropertiesArgs = {
+  filters?: InputMaybe<PropertyFilterInput>;
+  paginationDto: PaginationDto;
 };
 
 
@@ -220,6 +250,17 @@ export type QueryPropertiesArgs = {
 
 
 export type QueryPropertyArgs = {
+  term: Scalars['String']['input'];
+};
+
+
+export type QueryPropertyBySlugArgs = {
+  slug: Scalars['String']['input'];
+};
+
+
+export type QuerySearchPropertiesArgs = {
+  paginationDto: PaginationDto;
   term: Scalars['String']['input'];
 };
 
@@ -234,13 +275,15 @@ export type QueryUsersArgs = {
 };
 
 export type UpdatePropertyInput = {
+  /** Area in square meters of the property */
+  area?: InputMaybe<Scalars['Int']['input']>;
   /** Property's description. Example: "Apartamento amplio, con 4 habitaciones, comedor, dos banos y una sala, etc.". This field is required | Maximum character length of 420  */
   description?: InputMaybe<Scalars['String']['input']>;
   /** User's id (uuid), Example: "c2793525-56c5-4fce-8240-f2d32d9fc695". This field is required */
   id: Scalars['String']['input'];
-  /** Property's latitude (Google Maps). Example: "41.40338" */
+  /** Property place latitude */
   lat?: InputMaybe<Scalars['Float']['input']>;
-  /** Property's longitude (Google Maps). Example: "2.17403" */
+  /** Property place longitude */
   long?: InputMaybe<Scalars['Float']['input']>;
   /** Property's total bathrooms. Example: "2" */
   num_bathrooms?: InputMaybe<Scalars['Int']['input']>;
@@ -252,6 +295,8 @@ export type UpdatePropertyInput = {
   num_pools?: InputMaybe<Scalars['Int']['input']>;
   /** Property's place. Example: "Av. Bella Vista Maracaibo, Zulia". This field is required | Maximum character length of 125 */
   place?: InputMaybe<Scalars['String']['input']>;
+  /** Property's price. Example: "125000.00". This field is required */
+  price?: InputMaybe<Scalars['Float']['input']>;
   /** Property's status. Example: "SALE". This field is required */
   status?: InputMaybe<PropertyStatus>;
   /** Property's title, Example: "Apartamento en Buena Vista". This field is required | Maximum character length of 80 */
@@ -308,3 +353,17 @@ export type UsersDataResponse = {
   /** Users, paginated by default in 10 */
   users: Array<User>;
 };
+
+export type GetPropertiesQueryVariables = Exact<{
+  paginationDto: PaginationDto;
+}>;
+
+
+export type GetPropertiesQuery = { properties: { total: number, properties: Array<{ id: string, title: string, slug: string, status: PropertyStatus, type: PropertyType, description: string, place: string, lat?: number | null, long?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_pools?: number | null, num_parking_lot?: number | null, created_at?: number | null, updated_at?: number | null, user: { id: string, name: string, last_name: string, email: string }, images?: Array<{ url: string }> | null }> } };
+
+export type GetPropertyQueryVariables = Exact<{
+  term: Scalars['String']['input'];
+}>;
+
+
+export type GetPropertyQuery = { property: { id: string, title: string, description: string, type: PropertyType, status: PropertyStatus, place: string, long?: number | null, lat?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_parking_lot?: number | null } };

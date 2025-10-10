@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 
 interface RadioGroupProps {
   options: { id: string; label: string; value: string; disabled?: boolean }[];
-  value: string;
-  onChange?: (value: string) => void;
+  value: unknown;
+  onChange?: (value: unknown) => void;
 }
 
 export default function RadioGroup({

@@ -23,7 +23,7 @@ export default function SearchFilter({
   }, [clear]);
 
   return (
-    <ul className="flex flex-col space-y-3.5 py-13 px-10.5 w-80 md:w-137.5 lg:w-105">
+    <ul className="flex flex-col space-y-3.5 py-4 px-5 w-80 md:w-137.5 lg:w-105 ">
       {inputs.map((input) => (
         <li key={input.key} className="w-full">
           {input.element}

@@ -161,7 +161,7 @@
 }
 
 .radio-group-container {
-  @apply p-5 font-sans;
+  @apply p-0 font-sans;
 }
 
 .radio-group-title {
@@ -226,7 +226,7 @@
 }
 
 .gallery-button {
-  @apply w-full h-17 lg:h-13 p-4 flex justify-center items-center space-x-1 cursor-pointer;
+  @apply w-full h-17 xl:h-13 p-4 flex justify-center items-center space-x-1 cursor-pointer;
 }
 
 .gallery-button-selected {
@@ -265,11 +265,11 @@
 }
 
 .accordion-button {
-  @apply w-full flex justify-between items-center px-4 py-3 bg-white text-gray-700 font-medium focus:outline-none transition-all duration-200;
+  @apply w-full flex justify-between items-center px-2 py-3 bg-transparent text-gray-700 font-medium focus:outline-none transition-all duration-200;
 }
 
 .accordion-title {
-  @apply text-gray-700 font-bold text-[20px];
+  @apply text-gray-700 font-semibold text-[20px];
 }
 
 .accordion-icon {
@@ -281,5 +281,58 @@
 }
 
 .accordion-content {
-  @apply overflow-hidden transition-all duration-300 ease-in-out bg-white px-4;
+  @apply overflow-hidden transition-all duration-300 ease-in-out bg-transparent px-4;
+}
+
+/* ICON CARD CSS*/
+
+.not-show {
+  @apply hidden;
+}
+
+/* TEXT FADE CSS */
+
+/* Contenedor principal */
+.text-fade-container {
+  @apply relative;
+}
+
+/* Contenedor del texto */
+.text-content-wrapper {
+  @apply relative transition-all duration-300;
+}
+
+/* Contenido del texto */
+.text-content {
+  @apply text-gray-700 leading-normal;
+}
+
+/* Estado colapsado del texto */
+.text-content-collapsed {
+  @apply overflow-hidden;
+}
+
+/* Estado expandido del texto - con scroll cuando es necesario */
+.text-content-expanded {
+  @apply overflow-y-auto;
+  max-height: 80vh; /* O cualquier altura máxima que prefieras */
+}
+
+/* Overlay de efecto niebla */
+.fade-overlay {
+  @apply absolute bottom-0 left-0 right-0 h-8 pointer-events-none;
+  background: linear-gradient(to bottom, transparent 0%, white 100%);
+}
+
+/* Contenedor del botón */
+.button-wrapper {
+  @apply mt-2 flex justify-end;
+}
+
+.filter-hidden {
+  @apply hidden;
+}
+
+.filter-container {
+  @apply z-10 absolute right-0 top-10 bg-[#F5F7FB];
 }

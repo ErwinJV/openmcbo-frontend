@@ -4,6 +4,10 @@ import { PropertiesDataResponse, Property } from "./generated-types";
 export interface GetPropertiesQuery {
   properties: PropertiesDataResponse;
 }
+
+export interface GetPropertyQuery {
+  propertyBySlug: Property;
+}
 export interface GetPropertiesQueryVariables {
   paginationDto: {
     limit: number;
@@ -66,6 +70,6 @@ export const GET_PROPERTY_QUERY = gql`
       num_bathrooms
       num_bedrooms
       num_parking_lot
-     
+    }
   }
 `;
