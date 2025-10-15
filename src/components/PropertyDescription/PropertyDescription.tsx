@@ -29,15 +29,15 @@ export default function PropertyDescription({
   area,
 }: PropertyDescriptionProps) {
   return (
-    <article className=" grid grid-cols-1 xl:grid-cols-5 xl:grid-rows-5  w-9/10  md:w-170 xl:h-162 xl:w-282 mx-auto gap-2">
+    <article className=" grid grid-cols-1 xl:grid-cols-5 xl:grid-rows-4  w-9/10  md:w-170 xl:h-162 xl:w-282 mx-auto gap-2">
       <div className="hidden xl:inline-block xl:col-span-2 xl:row-span-4">
         <Image
           alt="Property article image"
           className="object-cover w-full h-full"
-          height={720}
-          quality={70}
+          height={320}
+          quality={60}
           src={imgUrl}
-          width={1080}
+          width={480}
         />
       </div>
       <div className="col-span-1 xl:col-span-3 xl:row-span-4 xl:flex xl:flex-col space-y-2 xl:p-4">
@@ -73,22 +73,7 @@ export default function PropertyDescription({
           </li>
         </ul>
         <TextFade buttonComponent={MyCustomButton} maxHeight="120px">
-          <p className="text-[#757680] text-[16px] h-full ">
-            {description} Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Fuga assumenda quidem placeat accusantium, voluptas corporis
-            qui asperiores dolorum cum, quibusdam vel veniam illo itaque? Omnis
-            laudantium voluptate quos molestias optio. Lorem ipsum dolor, sit
-            amet consectetur adipisicing elit. Quibusdam recusandae pariatur
-            obcaecati, aperiam optio, molestias vitae soluta impedit atque,
-            eligendi consectetur natus odio veritatis rem veniam debitis
-            doloribus reprehenderit et. Velit blanditiis rerum cupiditate
-            voluptates illum? At sequi, rem odio, aut commodi veniam inventore
-            natus cupiditate aperiam, voluptates repudiandae perspiciatis quasi
-            impedit amet! Cum repudiandae libero nesciunt rem tenetur quidem.
-            Blanditiis obcaecati, esse sed magni cum optio. Pariatur odio
-            voluptatum blanditiis officiis numquam culpa cum, repellat, a unde
-            voluptas eligendi. Quae veritatis praesentium ullam velit, facere
-          </p>
+          <p className="text-[#757680] text-[16px] h-full ">{description}</p>
         </TextFade>
       </div>
     </article>

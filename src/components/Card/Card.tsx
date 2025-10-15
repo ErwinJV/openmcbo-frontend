@@ -97,7 +97,7 @@ export default function Card({
   */
 
   return (
-    <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-2xl">
+    <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl">
       <div
         className="relative w-full h-[286.65px] md:h-[318.28px] lg:h-[346px] bg-[#EFF2F9] overflow-hidden"
         onMouseDown={onMouseDown}
@@ -122,6 +122,7 @@ export default function Card({
                 src={src}
                 width={360}
                 priority={index === 0}
+                quality={50}
               />
             </div>
           ))}
@@ -151,7 +152,7 @@ export default function Card({
             ${price.toLocaleString("ve")}
           </h2>
         </div>
-        <p className="text-[#8F909A] w-full h-[52px] text-[13.21px] md:text-[14.67px] lg:text-[16px] truncate">
+        <p className="text-[#8F909A] w-full h-[52px] text-lg  md:text-xl truncate">
           {description}
         </p>
 

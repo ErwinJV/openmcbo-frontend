@@ -5,7 +5,7 @@ interface NavbarCollapseProps {
 }
 
 const links: Readonly<{ href: string; label: string }[]> = [
-  { href: "/", label: "inicios" },
+  { href: "/", label: "inicio" },
   { href: "/inmuebles", label: "inmuebles" },
   { href: "/sobre-nosotros", label: "sobre nosotros" },
 ];

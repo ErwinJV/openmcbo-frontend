@@ -30,7 +30,7 @@ export default function Counter({
   }, [decrement, minValue, value]);
 
   return (
-    <div className="flex w-full md:w-80 space-x-7">
+    <div className="flex w-full md:w-80 justify-between">
       <span className="text-[18px] capitalize">{title}</span>
       <div className="flex space-x-2">
         <button

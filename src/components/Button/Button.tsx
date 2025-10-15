@@ -30,7 +30,7 @@ export default function Button({
       }`}
     >
       {leftIcon}
-      {text && <span>{text}</span>}
+      {text && <span className="text-[16px]">{text}</span>}
       {rightIcon}
     </button>
   );

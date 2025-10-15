@@ -48,7 +48,7 @@ export default function LeafletMap({
   lat,
   lng,
   address,
-  zoom = 16,
+  zoom = 12,
   height = "400px",
 }: LeafletMapProps) {
   const mapRef = useRef<L.Map | null>(null);
@@ -56,7 +56,13 @@ export default function LeafletMap({
   return (
     <MapContainer
       center={[lat, lng]}
-      zoom={zoom}
+      maxZoom={zoom}
+      minZoom={zoom}
+      zoomControl={false}
+      touchZoom={false}
+      doubleClickZoom={false}
+      dragging={false}
+      boxZoom={false}
       style={{ height, width: "100%" }}
       ref={mapRef}
       scrollWheelZoom={true}

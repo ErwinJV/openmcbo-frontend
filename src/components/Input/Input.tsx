@@ -12,6 +12,7 @@ interface InputProps {
   variant: "normal" | "outlined" | "text";
   supportText?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
 }
 
 export default function Input({
@@ -26,6 +27,7 @@ export default function Input({
   error,
   supportText,
   onChange,
+  value,
 }: InputProps) {
   const errorSuffix = error ? "-error" : "";
   return (
@@ -45,6 +47,7 @@ export default function Input({
           type={type}
           id={name}
           onChange={onChange}
+          value={value ?? ""}
         />
         {endAdornment ?? <button>{endAdornment}</button>}
       </div>

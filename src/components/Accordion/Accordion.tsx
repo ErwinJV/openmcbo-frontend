@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
 interface AccordionProps {
@@ -13,21 +13,21 @@ export default function Accordion({ title, children }: AccordionProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Cerrar el accordion al hacer clic fuera de él
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        accordionRef.current &&
-        !accordionRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       accordionRef.current &&
+  //       !accordionRef.current.contains(event.target as Node)
+  //     ) {
+  //       setIsOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <div ref={accordionRef} className="relative w-full">
@@ -41,6 +41,7 @@ export default function Accordion({ title, children }: AccordionProps) {
         <span className="accordion-title">{title}</span>
         <IoChevronDown
           className={`accordion-icon ${isOpen ? "accordion-icon-open" : ""}`}
+          size={22}
         />
       </button>
 

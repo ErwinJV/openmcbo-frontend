@@ -17,7 +17,7 @@ export default function Chip({ label, onDelete }: ChipProps) {
 
   return (
     <button className="btn-chip">
-      {label}
+      <span>{label}</span>
       <IoClose size={16} className="cursor-pointer" onClick={handleDelete} />
     </button>
   );

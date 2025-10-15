@@ -8,7 +8,6 @@ export const toggleScroll = (enableScroll: boolean): void => {
     // Reactivar el scroll: restaurar estilos originales
     document.body.style.overflow = originalBodyOverflow;
     document.body.style.paddingRight = originalBodyPadding;
-    console.log({ enableScroll });
   } else {
     // Desactivar el scroll: guardar estilo actual y ocultar scroll
     originalBodyOverflow = document.body.style.overflow;

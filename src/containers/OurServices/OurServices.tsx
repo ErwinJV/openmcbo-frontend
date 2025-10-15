@@ -26,16 +26,16 @@ const services: {
 ];
 export default function OurServices() {
   return (
-    <section className="w-screen">
-      <div className="container flex flex-col space-y-2 mx-auto">
-        <h2 className="capitalize text-[#003593] text-4xl text-center font-bold">
+    <section className="w-full">
+      <div className="container flex flex-col space-y-8 mx-auto px-5 lg:px-0">
+        <h2 className="capitalize text-[#003593] text-4xl md:text-5xl text-center font-bold">
           Nuestros Servicios
         </h2>
-        <p className="text-[#9795B5] text-[16px] text-center">
+        <p className="text-[#9795B5] text-xl md:text-2xl  xl:text-3xl text-center">
           Te acompañamos en todo el proceso para consignar el lugar de tus
           sueños
         </p>
-        <div className="w-full flex justify-center space-x-1.5 flex-wrap">
+        <div className="w-full flex justify-center space-x-3 flex-wrap space-y-3">
           {services.map((service) => (
             <IconCard
               description={service.description}

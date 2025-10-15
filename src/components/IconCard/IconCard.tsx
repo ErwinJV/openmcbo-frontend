@@ -20,10 +20,10 @@ export default function IconCard({
       className="
       flex flex-col items-center justify-center text-center p-8
       bg-[#F5F7FB] rounded-2xl
-      w-[360px] h-[428px]
-      md:w-[320px] md:h-[380px] md:p-6
-      sm:w-[280px] sm:h-[340px] sm:p-4
-      ${className}
+      w-[360px] h-[460px]
+      md:w-[320px] md:h-[460px] md:p-6
+      sm:w-[280px] sm:h-[360px] sm:p-4
+      
     "
     >
       {/* Contenedor del icono */}
@@ -44,8 +44,8 @@ export default function IconCard({
         className="
         text-[#3559B6] font-bold
         text-2xl mb-4
-        md:text-xl md:mb-3
-        sm:text-lg sm:mb-3
+        md:text-3xl md:mb-3
+        sm:text-xl sm:mb-3
       "
       >
         {title}
@@ -56,8 +56,8 @@ export default function IconCard({
         className="
         text-[#757680] font-normal
         text-base mb-6
-        md:text-sm md:mb-5
-        sm:text-sm sm:mb-4
+        md:text-xl md:mb-5
+        sm:text-lg sm:mb-4
       "
       >
         {description}
@@ -66,7 +66,7 @@ export default function IconCard({
       {/* [ESPACIO PARA BOTÓN] */}
       <div className="w-auto self-center">
         <Button
-          size="small"
+          size="large"
           rightIcon={<IoArrowForward className="text-blue-700 " />}
           variant="text"
           text="Contactanos"

@@ -8,7 +8,7 @@ import { toggleScroll } from "@/helpers/toggle-scroll";
 export default function Wrapper() {
   const [open, setOpen] = useState<boolean>(false);
   const toggle = useCallback(() => {
-    toggleScroll(!open);
+    toggleScroll(open);
     setOpen((value) => !value);
   }, [open]);
 

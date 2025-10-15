@@ -2,6 +2,7 @@
 
 import Accordion from "@/components/Accordion";
 import Button from "@/components/Button";
+import Chip from "@/components/Chip";
 import Counter from "@/components/Counter";
 import Input from "@/components/Input";
 import Pad from "@/components/Pad";
@@ -9,10 +10,12 @@ import RadioGroup from "@/components/RadioGroup";
 import SearchFilter from "@/components/SearchFilter";
 import { PropertyStatus, PropertyType } from "@/graphql/generated-types";
 import { PropertiesContext } from "@/providers/PropertiesProvider/properties-filter-context";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useContext, useMemo, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 
 export default function FilterSection() {
+  const router = useRouter();
   const { filterNavigate, handleSearchParams, searchParams } =
     useContext(PropertiesContext);
 
@@ -25,28 +28,28 @@ export default function FilterSection() {
   const incrementRooms = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_bedrooms || 0) + 1,
+      num_bedrooms: Number(searchParams.num_bedrooms || "0") + 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const decrementRooms = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_bedrooms || 0) - 1,
+      num_bedrooms: Number(searchParams.num_bedrooms || "0") - 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const incrementBaths = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_bathrooms || 0) + 1,
+      num_bathrooms: Number(searchParams.num_bathrooms || "0") + 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const decrementBaths = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_bathrooms || 0) - 1,
+      num_bathrooms: Number(searchParams.num_bathrooms || "0") - 1,
     });
   }, [handleSearchParams, searchParams]);
 
@@ -60,14 +63,14 @@ export default function FilterSection() {
   const incrementParking = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_parking_lot || 0) + 1,
+      num_parking_lot: Number(searchParams.num_parking_lot || "0") + 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const decrementParking = useCallback(() => {
     handleSearchParams({
       ...searchParams,
-      num_bedrooms: (searchParams.num_parking_lot || 0) - 1,
+      num_parking_lot: Number(searchParams.num_parking_lot || "0") - 1,
     });
   }, [handleSearchParams, searchParams]);
 
@@ -98,6 +101,13 @@ export default function FilterSection() {
     [handleSearchParams, searchParams]
   );
 
+  const cleanParams = useCallback(() => {
+    handleSearchParams({});
+
+    const url = `/inmuebles`;
+    router.push(url, { scroll: false });
+  }, [handleSearchParams, router]);
+
   const submit = useCallback(() => {
     filterNavigate();
     toggleFilter();
@@ -122,7 +132,7 @@ export default function FilterSection() {
                   value: PropertyStatus.Rent,
                 },
               ]}
-              value={searchParams.status || PropertyStatus.Sale}
+              value={searchParams.status}
               onChange={handlePropertyStatus}
             />
           </Accordion>
@@ -142,6 +152,7 @@ export default function FilterSection() {
                 size="medium"
                 type="number"
                 variant="normal"
+                value={searchParams.min_area ?? ""}
               />
               <Input
                 bg="transparent"
@@ -151,6 +162,7 @@ export default function FilterSection() {
                 size="medium"
                 type="number"
                 variant="normal"
+                value={searchParams.max_area ?? ""}
               />
             </div>
           </Accordion>
@@ -170,7 +182,7 @@ export default function FilterSection() {
                 },
                 { id: "casa", label: "Casa", value: PropertyType.House },
               ]}
-              value={searchParams.type || PropertyType.House}
+              value={searchParams.type}
               onChange={handlePropertyType}
             />
           </Accordion>
@@ -212,30 +224,82 @@ export default function FilterSection() {
       },
     ],
     [
-      incrementRooms,
-      decrementRooms,
+      searchParams.status,
+      searchParams.min_area,
+      searchParams.max_area,
+      searchParams.type,
       searchParams.num_bedrooms,
       searchParams.num_bathrooms,
       searchParams.num_parking_lot,
-      searchParams.status,
-      searchParams.type,
+      handlePropertyStatus,
+      handleMinArea,
+      handleMaxArea,
+      handlePropertyType,
+      incrementRooms,
+      decrementRooms,
       incrementBaths,
       decrementBaths,
       incrementParking,
       decrementParking,
-      handlePropertyStatus,
-      handlePropertyType,
-      handleMinArea,
-      handleMaxArea,
     ]
   );
+
+  const handleDeleteType = useCallback(() => {
+    const filterParams = Object.fromEntries(
+      Object.entries(searchParams).filter(([key, _]) => key !== "type")
+    );
+    const stringSearchParams = Object.fromEntries(
+      Object.entries(filterParams).map(([key, value]) => [key, String(value)])
+    );
+    const filterSearchParams = new URLSearchParams(
+      stringSearchParams
+    ).toString();
+
+    handleSearchParams(filterParams);
+
+    const url = `/inmuebles?${filterSearchParams}`;
+    router.push(url, { scroll: false });
+  }, [handleSearchParams, router, searchParams]);
+
+  const handleDeleteStatus = useCallback(() => {
+    const filterParams = Object.fromEntries(
+      Object.entries(searchParams).filter(([key, _]) => key !== "status")
+    );
+    const stringSearchParams = Object.fromEntries(
+      Object.entries(filterParams).map(([key, value]) => [key, String(value)])
+    );
+    const filterSearchParams = new URLSearchParams(
+      stringSearchParams
+    ).toString();
+
+    handleSearchParams(filterParams);
+
+    const url = `/inmuebles?${filterSearchParams}`;
+    router.push(url, { scroll: false });
+  }, [handleSearchParams, router, searchParams]);
 
   return (
     <>
       <Pad amt={30} />
       <section className="w-full ">
         <div className="container mx-auto flex justify-between md:w-170 lg:w-230 xl:w-282">
-          <div></div>{" "}
+          <div className=" hidden md:flex md:space-x-2">
+            {searchParams.type === PropertyType.Apartment ? (
+              <Chip label="Apartamento" onDelete={handleDeleteType} />
+            ) : searchParams.type === PropertyType.House ? (
+              <Chip label="Casa" />
+            ) : (
+              <></>
+            )}
+
+            {searchParams.status === PropertyStatus.Sale ? (
+              <Chip label="Venta" onDelete={handleDeleteStatus} />
+            ) : searchParams.status === PropertyStatus.Rent ? (
+              <Chip label="Alquiler" onDelete={handleDeleteStatus} />
+            ) : (
+              <></>
+            )}
+          </div>
           <div className="relative">
             <div className="w-auto">
               <Button
@@ -249,7 +313,11 @@ export default function FilterSection() {
             <div
               className={`${showFilter ? "filter-container" : "filter-hidden"}`}
             >
-              <SearchFilter inputs={filterContent} submit={submit} />
+              <SearchFilter
+                inputs={filterContent}
+                submit={submit}
+                clear={cleanParams}
+              />
             </div>
           </div>
         </div>

@@ -1,8 +1,5 @@
-// import Button from "@/components/Button";
-// import Card from "@/components/Card";
-// import Chip from "@/components/Chip";
-// import ClientTest from "@/components/ClientTest";
-// import Input from "@/components/Input";
+import Pad from "@/components/Pad";
+import WhatWeDo from "@/components/WhatWeDo";
 import AvailableOptions from "@/containers/AvailableOptions";
 import LastPosts from "@/containers/LastPosts";
 import MainHero from "@/containers/MainHero";
@@ -11,21 +8,24 @@ import OurServices from "@/containers/OurServices";
 import { getClient } from "@/graphql/client";
 import { GetPropertiesQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
-// import { IoArrowForward, IoEyeOff } from "react-icons/io5";
 
-const loadData = async () => {
+const lastProperties = async () => {
   const { data } = await getClient().query<GetPropertiesQuery>({
     query: gql`
         query {
-          properties(paginationDto: { limit:${50}, offset: 0, order: "DESC" }) {
+          properties(paginationDto: { limit:${10}, offset: 0, order: "DESC" }) {
             properties {
               id
               title
+              price
+              slug
+              description
               images {
+                id
                 url
               }
             }
-            total
+            
           }
         }
       `,
@@ -35,45 +35,18 @@ const loadData = async () => {
 };
 
 export default async function Home() {
-  const data = await loadData();
+  const { properties } = await lastProperties();
   return (
     <>
       <MainHero />
+      <Pad amt={70} />
       <LastPosts />
-      <AvailableOptions />
+      <Pad amt={70} />
+      <AvailableOptions properties={properties.properties} />
+      <Pad amt={70} />
       <OurServices />
-      {/* <h1 className="text-2xl">Hola Mundo</h1>
-      {JSON.stringify(data.properties.properties, null, 2)}
-
-      <Button
-        // leftIcon={<IoArrowBack />}
-        size="medium"
-        variant="text"
-        text="Enabled"
-        rightIcon={<IoArrowForward />}
-      />
-      <Chip label="Delete" />
-      <Card
-        description="Lorem ipsum sit amet aes hum nases dheuas dhcn hks jdj k jdnhjak aklaeifh j hj hj hj hj h jh jkj hk jh jh jh j jh j hj hj h jh j hj hj h jh "
-        price={5500}
-        srcImg="https://images.unsplash.com/photo-1756302637887-1c00e98fd0cc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        title="Lorem Ipsum amet jhj hjh jh"
-        url="#"
-      />
-      <div className="w-40">
-        <Input
-          bg="filled"
-          endAdornment={<IoEyeOff />}
-          label="Ejemplo"
-          name="example"
-          size="small"
-          supportText="Example text"
-          type="text"
-          variant="normal"
-        />
-      </div>
-
-      <ClientTest /> */}
+      <Pad amt={50} />
+      <WhatWeDo />
     </>
   );
 }

@@ -6,7 +6,7 @@ export interface GetPropertiesQuery {
 }
 
 export interface GetPropertyQuery {
-  propertyBySlug: Property;
+  propertyBySlug: Property | null | undefined;
 }
 export interface GetPropertiesQueryVariables {
   paginationDto: {

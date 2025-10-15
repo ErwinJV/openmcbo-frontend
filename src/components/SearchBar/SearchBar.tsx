@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import Button from "../Button";
 import { PropertyStatus } from "@/graphql/generated-types";
 import Input from "../Input";
@@ -8,13 +9,25 @@ import { IoSearch } from "react-icons/io5";
 export default function SearchBar() {
   const [status, setStatus] = useState<PropertyStatus>(PropertyStatus.Rent);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  console.log({ searchTerm });
+
+  const router = useRouter();
+
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
     },
     []
   );
+
+  const handleSearch = useCallback(() => {
+    const filterSearchParams = new URLSearchParams({
+      place: searchTerm,
+      status,
+    }).toString();
+
+    const url = `/inmuebles?${filterSearchParams}`;
+    router.push(url);
+  }, [searchTerm, status, router]);
   return (
     <>
       {/* SEARCH BAR LG */}
@@ -55,6 +68,7 @@ export default function SearchBar() {
               size="small"
               rightIcon={<IoSearch className="text-xl font-bold" />}
               removePadding
+              onClick={handleSearch}
             />
           </span>
         </div>
@@ -95,6 +109,7 @@ export default function SearchBar() {
           size="small"
           rightIcon={<IoSearch className="text-xl font-bold" />}
           removePadding
+          onClick={handleSearch}
         />
       </div>
       <div className="flex md:hidden flex-col w-80">
@@ -133,6 +148,7 @@ export default function SearchBar() {
               size="small"
               rightIcon={<IoSearch className="text-xl font-bold" />}
               removePadding
+              onClick={handleSearch}
             />
           </span>
         </div>

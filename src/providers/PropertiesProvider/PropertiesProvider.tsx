@@ -10,7 +10,7 @@
 import { PropertiesContext } from "./properties-filter-context";
 import { PaginationDto, PropertyFilterInput } from "@/graphql/generated-types";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // function makeClient() {
 //   const httpLink = new HttpLink({
@@ -58,6 +58,15 @@ export default function PropertiesProvider({
 
     const url = `/inmuebles?${filterSearchParams}`;
     router.push(url, { scroll: false });
+  }, [router, searchParams]);
+
+  useEffect(() => {
+    // Prefetch rutas de administrador cuando el componente se monte
+    const filterSearchParams = new URLSearchParams(
+      searchParams as Record<string, string>
+    ).toString();
+    const url = `/inmuebles?${filterSearchParams}`;
+    router.prefetch(url);
   }, [router, searchParams]);
 
   const handleSearchParams = useCallback(
