@@ -246,7 +246,7 @@ export default function FilterSection() {
 
   const handleDeleteType = useCallback(() => {
     const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key, _]) => key !== "type")
+      Object.entries(searchParams).filter(([key]) => key !== "type")
     );
     const stringSearchParams = Object.fromEntries(
       Object.entries(filterParams).map(([key, value]) => [key, String(value)])
@@ -263,7 +263,7 @@ export default function FilterSection() {
 
   const handleDeleteStatus = useCallback(() => {
     const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key, _]) => key !== "status")
+      Object.entries(searchParams).filter(([key]) => key !== "status")
     );
     const stringSearchParams = Object.fromEntries(
       Object.entries(filterParams).map(([key, value]) => [key, String(value)])
