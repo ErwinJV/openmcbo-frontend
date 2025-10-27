@@ -1,11 +1,14 @@
+// page.tsx (modificado)
 import Pad from "@/components/Pad";
 import MapSection from "@/containers/MapSection";
 import PropertiesSlider from "@/containers/PropertiesSlider";
 import PropertySection from "@/containers/PropertySection";
+import PropertyNotAvailable from "@/components/PropertyNotAvailable";
 import { getClient } from "@/graphql/client";
 import {
   PaginationDto,
   PropertiesDataResponse,
+  Property,
   PropertyFilterInput,
 } from "@/graphql/generated-types";
 import { GetPropertyQuery } from "@/graphql/queries";
@@ -21,7 +24,6 @@ const getProperty = async (slug: string) => {
     query: gql`
       query GetProperty($slug: String!) {
         propertyBySlug(slug: $slug) {
-          # Use the variable here
           id
           title
           description
@@ -32,7 +34,6 @@ const getProperty = async (slug: string) => {
           lat
           long
           num_bedrooms
-
           images {
             id
             url
@@ -51,11 +52,6 @@ const getProperty = async (slug: string) => {
     variables: {
       slug,
     },
-    // context: {
-    //   fetchOptions: {
-    //     next: { revalidate: 60 * 60 },
-    //   },
-    // },
   });
 
   return data;
@@ -88,27 +84,39 @@ const getFilteredProperties = async (
         }
       }
     `,
-
     variables: {
       filters: searchParams,
       paginationDto: pagination,
     },
-    // context: {
-    //   fetchOptions: {
-    //     next: { revalidate: 60 * 60 },
-    //   },
-    // },
   });
 
   return data;
+};
+
+// Función para validar si la propiedad está completa
+const isPropertyComplete = (property: Property) => {
+  const hasMinimumImages = property.images && property.images.length >= 5;
+  const hasRequiredFields =
+    property.description &&
+    property.title &&
+    property.price &&
+    property.lat &&
+    property.long;
+
+  return hasMinimumImages && hasRequiredFields;
 };
 
 export default async function PropertyPage({ params }: PropertyPageProps) {
   const { slug } = await params;
   console.log({ slug });
   const { propertyBySlug } = await getProperty(slug);
+
   if (!propertyBySlug) {
     notFound();
+  }
+
+  if (!isPropertyComplete(propertyBySlug)) {
+    return <PropertyNotAvailable />;
   }
 
   const {
@@ -122,6 +130,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     },
     { limit: 10, offset: 0 }
   );
+
   const cards = properties
     .filter((prop) => prop.id !== propertyBySlug?.id)
     .map((prop) => ({

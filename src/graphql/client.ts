@@ -6,6 +6,10 @@ import {
   registerApolloClient,
 } from "@apollo/client-integration-nextjs";
 
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env" });
+
 export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
