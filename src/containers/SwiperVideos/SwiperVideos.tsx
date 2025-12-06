@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import {
   IoVideocamOutline,
@@ -49,7 +49,7 @@ export default function SwiperVideos({ videos }: SwiperVideosProps) {
   return (
     <div className="relative w-9/10 h-48 md:w-170 md:h-87.5 xl:w-282 xl:h-98 mx-auto">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination]}
         spaceBetween={0}
         slidesPerView={1}
         navigation={{

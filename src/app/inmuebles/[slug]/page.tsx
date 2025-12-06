@@ -94,14 +94,33 @@ const getFilteredProperties = async (
 };
 
 // Función para validar si la propiedad está completa
-const isPropertyComplete = (property: Property) => {
+const isPropertyComplete = async (property: Property) => {
   const hasMinimumImages = property.images && property.images.length >= 5;
   const hasRequiredFields =
-    property.description &&
-    property.title &&
-    property.price &&
-    property.lat &&
-    property.long;
+    property.description && property.title && property.price;
+
+  // const images360 = property.images360
+  //   ? property.images360.map((image360) => image360.url)
+  //   : [];
+
+  // const allAvailableImages360 = property.images360
+  //   ? await allAvailableFiles(images360)
+  //   : false;
+
+  // const videos = property.videos
+  //   ? property.videos.map((video) => video.url)
+  //   : [];
+  // const allAvailableVideos = property.videos
+  //   ? await allAvailableFiles(videos)
+  //   : true;
+
+  // const images = property.images
+  //   ? property.images.map((image) => image.url)
+  //   : [];
+
+  // const allAvailableImages = property.images
+  //   ? await allAvailableFiles(images)
+  //   : true;
 
   return hasMinimumImages && hasRequiredFields;
 };
@@ -115,7 +134,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     notFound();
   }
 
-  if (!isPropertyComplete(propertyBySlug)) {
+  const propertyComplete = await isPropertyComplete(propertyBySlug);
+
+  if (!propertyComplete) {
     return <PropertyNotAvailable />;
   }
 
@@ -150,7 +171,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
         long={propertyBySlug.long || 0}
       />
       <Pad amt={30} />
-      <section className="container mx-auto flex flex-col w-9/10 md:w-170  xl:w-282">
+      <section className="w-full flex flex-col ps-4">
         <h2 className="font-bold text-xl lg:text-2xl mb-5 ">
           Otras opciones que podrian interesarte
         </h2>

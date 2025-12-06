@@ -10,6 +10,7 @@ export default function FancyBoxWrapper({
   const [fancyboxRef] = useFancybox({
     closeButton: true,
     wheel: "slide",
+    
   });
   return <div ref={fancyboxRef}>{children}</div>;
 }

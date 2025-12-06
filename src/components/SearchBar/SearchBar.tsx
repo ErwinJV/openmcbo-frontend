@@ -59,6 +59,7 @@ export default function SearchBar() {
               variant="text"
               placeholder="Buscar por Ubicacion"
               onChange={handleSearchChange}
+              value={searchTerm}
             />
           </span>
           <span className="w-[10%]">
@@ -101,6 +102,7 @@ export default function SearchBar() {
             variant="text"
             placeholder="Buscar por Ubicacion"
             onChange={handleSearchChange}
+            value={searchTerm}
           />
         </div>
         <Button
@@ -112,7 +114,7 @@ export default function SearchBar() {
           onClick={handleSearch}
         />
       </div>
-      <div className="flex md:hidden flex-col w-80">
+      <div className="flex md:hidden flex-col w-74 ">
         <div className="flex w-full bg-white">
           <Button
             variant={status === PropertyStatus.Rent ? "text" : "filled"}
@@ -140,6 +142,7 @@ export default function SearchBar() {
               variant="text"
               placeholder="Buscar por Ubicacion"
               onChange={handleSearchChange}
+              value={searchTerm}
             />
           </span>
           <span className="w-[23%]">

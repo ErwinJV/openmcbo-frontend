@@ -15,7 +15,7 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
     cache: new InMemoryCache(),
     defaultOptions: {
       query: {
-        fetchPolicy: "cache-first",
+        // fetchPolicy: "cache-first",
       },
     },
     link: new HttpLink({

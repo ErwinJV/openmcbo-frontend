@@ -52,22 +52,22 @@ export default function PropertyDescription({
         </h3>
         <ul className="flex space-x-4 w-full justify-between flex-wrap ">
           <li className="flex flex-col justify-center ">
-            <h5 className="lg:text-lg font-bold">Area</h5>
-            <p className="text-[14px] text-[#8F909A] ">
+            <h5 className="lg:text-xl font-bold">Area</h5>
+            <p className="text-lg text-[#8F909A] ">
               {area.toLocaleString("ve")} m2
             </p>
           </li>
           <li className="flex flex-col justify-center">
-            <h5 className="lg:text-lg font-bold">Habitaciones</h5>
-            <p className="text-[14px] text-[#8F909A] ">{num_bedrooms}</p>
+            <h5 className="lg:text-xl font-bold">Habitaciones</h5>
+            <p className="text-lg text-[#8F909A] ">{num_bedrooms}</p>
           </li>
           <li className="flex flex-col justify-center">
-            <h5 className="lg:text-lg font-bold">Banos</h5>
-            <p className="text-[14px] text-[#8F909A] ">{num_baths}</p>
+            <h5 className="lg:text-xl font-bold">Banos</h5>
+            <p className="text-lg text-[#8F909A] ">{num_baths}</p>
           </li>
           <li className="flex flex-col justify-center">
-            <h5 className="lg:text-lg font-bold">Tipo de inmueble</h5>
-            <p className="text-[14px] text-[#8F909A] ">
+            <h5 className="lg:text-xl font-bold">Tipo de inmueble</h5>
+            <p className="text-lg text-[#8F909A] ">
               {type === PropertyType.Apartment ? "Apartamento" : "Casa"}
             </p>
           </li>

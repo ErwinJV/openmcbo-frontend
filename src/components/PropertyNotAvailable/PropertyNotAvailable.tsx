@@ -1,6 +1,9 @@
 // components/PropertyNotAvailable.tsx
 import Link from "next/link";
 import { FaExclamationTriangle, FaHome } from "react-icons/fa";
+import PreviousPageButton from "./PreviousPageButton";
+import Button from "../Button";
+import Pad from "../Pad";
 
 export default function PropertyNotAvailable() {
   return (
@@ -23,20 +26,17 @@ export default function PropertyNotAvailable() {
         </p>
 
         <div className="space-y-4">
-          <Link
-            href="/inmuebles"
-            className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center gap-2"
-          >
-            <FaHome className="text-lg" />
-            Explorar Más Propiedades
+          <Link href="/inmuebles">
+            <Button
+              size="small"
+              variant="filled"
+              text="Explorar Más Propiedades"
+              leftIcon={<FaHome className="text-lg" />}
+              removePadding
+            />
           </Link>
-
-          <button
-            onClick={() => window.history.back()}
-            className="w-full border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-200"
-          >
-            Volver Atrás
-          </button>
+          <Pad amt={10} />
+          <PreviousPageButton />
         </div>
       </div>
     </div>
