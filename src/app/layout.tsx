@@ -25,7 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const foo = process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"];
+  const foo = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
   console.log("GraphQL Endpoint:", foo);
   return (
     <html lang="en">
