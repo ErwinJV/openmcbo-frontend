@@ -18,7 +18,7 @@ export default function Paginator({ totalElements }: PaginatorProps) {
 
   const handlePageChange = (newOffset: number) => {
     const stringSearchParams = Object.fromEntries(
-      Object.entries(searchParams).map(([key, value]) => [key, String(value)])
+      Object.entries(searchParams).map(([key, value]) => [key, String(value)]),
     );
     const filterSearchParams = new URLSearchParams({
       ...stringSearchParams,
@@ -50,14 +50,14 @@ export default function Paginator({ totalElements }: PaginatorProps) {
           className={`
             flex items-center justify-center
             px-2 py-1 mx-0.5 rounded-md transition-colors duration-200 
-            bg-white text-gray-700 border border-gray-300
-            hover:bg-[#003593] hover:text-white
+            bg-white text-black border border-gray-300
+            hover:bg-white hover:text-black
             sm:px-3 sm:py-2 sm:mx-1
-            ${currentPage === i ? "bg-blue-600 text-white" : ""}
+            ${currentPage === i ? "bg-blue-600 text-white hover:text-white" : ""}
           `}
         >
           {i}
-        </button>
+        </button>,
       );
     }
     return pages;
@@ -71,10 +71,11 @@ export default function Paginator({ totalElements }: PaginatorProps) {
         disabled={currentPage === 1}
         className={`
           flex items-center justify-center order-2 sm:order-1
-          px-3 py-2 rounded-md bg-white border border-gray-300 
-          text-gray-700 transition-colors duration-200
-          disabled:opacity-50 disabled:cursor-not-allowed
-          hover:bg-[#003593] hover:text-white
+          px-3 py-2 rounded-md bg-[#003593] border border-gray-300 
+          text-white transition-colors duration-200
+          disabled:opacity-70
+          disabled:cursor-not-allowed
+          hover:bg-white hover:text-black
           w-full sm:w-auto text-sm sm:text-base
         `}
       >
@@ -96,10 +97,11 @@ export default function Paginator({ totalElements }: PaginatorProps) {
         disabled={currentPage === totalPages}
         className={`
           flex items-center justify-center order-3
-          px-3 py-2 rounded-md bg-white border border-gray-300 
-          text-gray-700 transition-colors duration-200
-          disabled:opacity-50 disabled:cursor-not-allowed
-          hover:bg-[#003593] hover:text-white
+          px-3 py-2 rounded-md bg-[#003593] border border-gray-300 
+          text-white transition-colors duration-200
+          disabled:cursor-not-allowed
+          disabled:opacity-70
+          hover:bg-white hover:text-black
           w-full sm:w-auto text-sm sm:text-base
         `}
       >
