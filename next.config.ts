@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
       "images.unsplash.com",
       "cdnjs.cloudflare.com",
       "picsum.photos",
-      "",
+      "res.cloudinary.com",
     ],
     remotePatterns: [
       {
