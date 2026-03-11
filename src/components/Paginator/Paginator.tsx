@@ -47,9 +47,14 @@ export default function Paginator({ totalElements }: PaginatorProps) {
         <button
           key={i}
           onClick={() => handlePageChange((i - 1) * limit)}
-          className={`paginator-page-btn ${
-            currentPage === i ? "paginator-active-page" : ""
-          }`}
+          className={`
+            flex items-center justify-center
+            px-2 py-1 mx-0.5 rounded-md transition-colors duration-200 
+            bg-white text-gray-700 border border-gray-300
+            hover:bg-[#003593] hover:text-white
+            sm:px-3 sm:py-2 sm:mx-1
+            ${currentPage === i ? "bg-blue-600 text-white" : ""}
+          `}
         >
           {i}
         </button>
@@ -59,25 +64,48 @@ export default function Paginator({ totalElements }: PaginatorProps) {
   };
 
   return (
-    <div className="paginator-container">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 my-6 sm:my-8 md:space-x-2">
+      {/* Botón Anterior */}
       <button
         onClick={() => handlePageChange(Math.max(0, (currentPage - 2) * limit))}
         disabled={currentPage === 1}
-        className="paginator-nav-btn paginator-prev-btn"
+        className={`
+          flex items-center justify-center order-2 sm:order-1
+          px-3 py-2 rounded-md bg-white border border-gray-300 
+          text-gray-700 transition-colors duration-200
+          disabled:opacity-50 disabled:cursor-not-allowed
+          hover:bg-[#003593] hover:text-white
+          w-full sm:w-auto text-sm sm:text-base
+        `}
       >
-        <IoChevronBack className="paginator-nav-icon paginator-prev-icon" />
-        Anterior
+        <IoChevronBack className="mr-1 text-base sm:text-lg" />
+        <span className="sm:hidden">Prev</span>
+        <span className="hidden sm:inline">Anterior</span>
       </button>
 
-      <div className="paginator-pages-container">{generatePageNumbers()}</div>
+      {/* Números de página */}
+      <div className="flex items-center justify-center order-1 sm:order-2 overflow-x-auto w-full sm:w-auto">
+        <div className="flex space-x-1 px-2 sm:px-0">
+          {generatePageNumbers()}
+        </div>
+      </div>
 
+      {/* Botón Siguiente */}
       <button
         onClick={() => handlePageChange(currentPage * limit)}
         disabled={currentPage === totalPages}
-        className="paginator-nav-btn paginator-next-btn"
+        className={`
+          flex items-center justify-center order-3
+          px-3 py-2 rounded-md bg-white border border-gray-300 
+          text-gray-700 transition-colors duration-200
+          disabled:opacity-50 disabled:cursor-not-allowed
+          hover:bg-[#003593] hover:text-white
+          w-full sm:w-auto text-sm sm:text-base
+        `}
       >
-        Siguiente
-        <IoChevronForward className="paginator-nav-icon paginator-next-icon" />
+        <span className="sm:hidden">Next</span>
+        <span className="hidden sm:inline">Siguiente</span>
+        <IoChevronForward className="ml-1 text-base sm:text-lg" />
       </button>
     </div>
   );

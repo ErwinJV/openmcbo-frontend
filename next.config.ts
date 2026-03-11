@@ -2,8 +2,21 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/graphql-proxy",
+        destination: process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"] || "",
+      },
+    ];
+  },
   images: {
-    domains: ["images.unsplash.com", "cdnjs.cloudflare.com"],
+    domains: [
+      "images.unsplash.com",
+      "cdnjs.cloudflare.com",
+      "picsum.photos",
+      "res.cloudinary.com",
+    ],
     remotePatterns: [
       {
         protocol: "http", // Use 'https' if your local server supports it

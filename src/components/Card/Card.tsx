@@ -115,15 +115,21 @@ export default function Card({
         >
           {srcImg.map((src, index) => (
             <div key={index} className="flex-shrink-0 w-full h-full">
-              <Image
-                alt={`${title} - Imagen ${index + 1}`}
-                className="object-cover w-full h-full"
-                height={346}
-                src={src}
-                width={360}
-                priority={index === 0}
-                quality={50}
-              />
+              {!src ? (
+                <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                  <span className="text-gray-500">Sin imagen</span>
+                </div>
+              ) : (
+                <Image
+                  alt={`${title} - Imagen ${index + 1}`}
+                  className="object-cover w-full h-full"
+                  height={346}
+                  src={src}
+                  width={360}
+                  quality={50}
+                  loading="lazy"
+                />
+              )}
             </div>
           ))}
         </div>

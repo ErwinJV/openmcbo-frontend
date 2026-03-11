@@ -57,11 +57,11 @@ const getFilteredProperties = async (
       filters: searchParams,
       paginationDto: pagination,
     },
-    context: {
-      fetchOptions: {
-        next: { revalidate: 60 * 60 },
-      },
-    },
+    // context: {
+    //   fetchOptions: {
+    //     next: { revalidate: 60 * 60 },
+    //   },
+    // },
   });
 
   return data;

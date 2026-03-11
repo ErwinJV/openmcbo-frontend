@@ -6,17 +6,24 @@ import {
   registerApolloClient,
 } from "@apollo/client-integration-nextjs";
 
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env" });
+
 export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
     defaultOptions: {
       query: {
-        fetchPolicy: "cache-first",
+        // fetchPolicy: "cache-first",
       },
     },
     link: new HttpLink({
       // this needs to be an absolute url, as relative urls cannot be used in SSR
-      uri: `${process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"]}`,
+      uri:
+        typeof window === "undefined"
+          ? "http://localhost:3000/graphql-proxy"
+          : "/graphql-proxy",
       fetchOptions: {
         // you can pass additional options that should be passed to `fetch` here,
         // e.g. Next.js-related `fetch` options regarding caching and revalidation

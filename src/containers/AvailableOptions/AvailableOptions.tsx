@@ -20,7 +20,7 @@ export default async function AvailableOptions({
   }));
 
   return (
-    <section className="w-full container mx-auto px-6 md:px-8  ">
+    <section className="w-full  px-6 md:px-8  ">
       <div className=" flex flex-col mx-auto justify-center space-y-6 w-full">
         <div className="flex flex-col lg:flex-row w-full lg:justify-between">
           <div className="flex flex-col space-y-1">

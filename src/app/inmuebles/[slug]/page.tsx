@@ -1,11 +1,14 @@
+// page.tsx (modificado)
 import Pad from "@/components/Pad";
 import MapSection from "@/containers/MapSection";
 import PropertiesSlider from "@/containers/PropertiesSlider";
 import PropertySection from "@/containers/PropertySection";
+import PropertyNotAvailable from "@/components/PropertyNotAvailable";
 import { getClient } from "@/graphql/client";
 import {
   PaginationDto,
   PropertiesDataResponse,
+  Property,
   PropertyFilterInput,
 } from "@/graphql/generated-types";
 import { GetPropertyQuery } from "@/graphql/queries";
@@ -21,7 +24,6 @@ const getProperty = async (slug: string) => {
     query: gql`
       query GetProperty($slug: String!) {
         propertyBySlug(slug: $slug) {
-          # Use the variable here
           id
           title
           description
@@ -32,7 +34,6 @@ const getProperty = async (slug: string) => {
           lat
           long
           num_bedrooms
-
           images {
             id
             url
@@ -51,11 +52,6 @@ const getProperty = async (slug: string) => {
     variables: {
       slug,
     },
-    // context: {
-    //   fetchOptions: {
-    //     next: { revalidate: 60 * 60 },
-    //   },
-    // },
   });
 
   return data;
@@ -88,27 +84,60 @@ const getFilteredProperties = async (
         }
       }
     `,
-
     variables: {
       filters: searchParams,
       paginationDto: pagination,
     },
-    // context: {
-    //   fetchOptions: {
-    //     next: { revalidate: 60 * 60 },
-    //   },
-    // },
   });
 
   return data;
+};
+
+// Función para validar si la propiedad está completa
+const isPropertyComplete = async (property: Property) => {
+  const hasMinimumImages = property.images && property.images.length >= 5;
+  const hasRequiredFields =
+    property.description && property.title && property.price;
+
+  // const images360 = property.images360
+  //   ? property.images360.map((image360) => image360.url)
+  //   : [];
+
+  // const allAvailableImages360 = property.images360
+  //   ? await allAvailableFiles(images360)
+  //   : false;
+
+  // const videos = property.videos
+  //   ? property.videos.map((video) => video.url)
+  //   : [];
+  // const allAvailableVideos = property.videos
+  //   ? await allAvailableFiles(videos)
+  //   : true;
+
+  // const images = property.images
+  //   ? property.images.map((image) => image.url)
+  //   : [];
+
+  // const allAvailableImages = property.images
+  //   ? await allAvailableFiles(images)
+  //   : true;
+
+  return hasMinimumImages && hasRequiredFields;
 };
 
 export default async function PropertyPage({ params }: PropertyPageProps) {
   const { slug } = await params;
   console.log({ slug });
   const { propertyBySlug } = await getProperty(slug);
+
   if (!propertyBySlug) {
     notFound();
+  }
+
+  const propertyComplete = await isPropertyComplete(propertyBySlug);
+
+  if (!propertyComplete) {
+    return <PropertyNotAvailable />;
   }
 
   const {
@@ -122,6 +151,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     },
     { limit: 10, offset: 0 }
   );
+
   const cards = properties
     .filter((prop) => prop.id !== propertyBySlug?.id)
     .map((prop) => ({
@@ -141,7 +171,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
         long={propertyBySlug.long || 0}
       />
       <Pad amt={30} />
-      <section className="container mx-auto flex flex-col w-9/10 md:w-170  xl:w-282">
+      <section className="w-full flex flex-col ps-4">
         <h2 className="font-bold text-xl lg:text-2xl mb-5 ">
           Otras opciones que podrian interesarte
         </h2>

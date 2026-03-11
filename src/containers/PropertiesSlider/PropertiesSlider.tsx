@@ -21,10 +21,10 @@ interface PropertiesSliderProps {
 
 export default function PropertiesSlider({ cards }: PropertiesSliderProps) {
   return (
-    <div className="w-full">
+    <div className="w-full mx-auto">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={24}
+        spaceBetween={8}
         slidesPerView={1}
         centeredSlides={false}
         loop={true}
@@ -43,20 +43,19 @@ export default function PropertiesSlider({ cards }: PropertiesSliderProps) {
         }}
         breakpoints={{
           // Mobile: 1 card
-          0: {
+          320: {
             slidesPerView: 1,
-            spaceBetween: 16,
+            spaceBetween: 8,
           },
           // Small tablet: 1.3 cards (muestra parte de la siguiente)
           480: {
             slidesPerView: 1.3,
-            spaceBetween: 16,
+            spaceBetween: 24,
           },
-          // Tablet: 2 cards exactas
 
           // Large tablet: 2.2 cards
-          900: {
-            slidesPerView: 2.2,
+          680: {
+            slidesPerView: 2,
             spaceBetween: 24,
           },
           // Desktop: 3 cards exactas
@@ -72,21 +71,22 @@ export default function PropertiesSlider({ cards }: PropertiesSliderProps) {
             spaceBetween: 24,
           },
         }}
-        className="w-full"
       >
         {cards.map((card, index) => (
-          <SwiperSlide key={index} className="h-auto">
-            <div className="flex justify-center h-full pb-8">
-              {" "}
-              {/* Padding bottom para la paginación */}
-              <Card
-                description={card.description}
-                price={card.price}
-                srcImg={card.srcImg}
-                title={card.title}
-                url={card.url}
-              />
-            </div>
+          <SwiperSlide key={index} className="w-full">
+            {" "}
+            {/* Padding bottom para la paginación */}
+            <Card
+              description={card.description}
+              price={card.price}
+              srcImg={
+                card.srcImg
+                  ? [card.srcImg[0], card.srcImg[1], card.srcImg[2]]
+                  : []
+              }
+              title={card.title}
+              url={card.url}
+            />
           </SwiperSlide>
         ))}
 

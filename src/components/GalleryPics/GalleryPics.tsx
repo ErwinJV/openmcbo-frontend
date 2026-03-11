@@ -15,15 +15,15 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
     );
   }
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-4 gap-3 w-9/10 h- md:w-170 md:h-87.5  xl:w-282 xl:h-98 mx-auto">
-      <li className=" md:row-span-2 md:col-span-2">
+    <ul className="grid grid-cols-1 md:grid-cols-4  gap-3 w-9/10  md:w-170   xl:w-282  mx-auto ">
+      <li className=" md:row-span-2 md:col-span-2 aspect-square">
         <Link
           className="w-full h-full"
           href={pics[0].url}
           data-fancybox="gallery"
         >
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full "
             src={pics[0].url}
             alt={pics[0].id}
             width={480}
@@ -32,14 +32,14 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
           />
         </Link>
       </li>
-      <li className="hidden md:flex ">
+      <li className="hidden md:flex  aspect-square  ">
         <Link
           className="w-full h-full"
           href={pics[1].url}
           data-fancybox="gallery"
         >
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full overflow-hidden"
             src={pics[1].url}
             alt={pics[1].id}
             width={480}
@@ -48,14 +48,14 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
           />
         </Link>
       </li>
-      <li className="hidden md:inline-block ">
+      <li className="hidden md:inline-block aspect-square ">
         <Link
           className="w-full h-full"
           href={pics[2].url}
           data-fancybox="gallery"
         >
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full overflow-hidden"
             src={pics[2].url}
             alt={pics[2].id}
             width={480}
@@ -64,14 +64,10 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
           />
         </Link>
       </li>
-      <li className="hidden md:inline-block ">
-        <Link
-          className="w-full h-full"
-          href={pics[3].url}
-          data-fancybox="gallery"
-        >
+      <li className="hidden md:inline-block aspect-square ">
+        <Link className="w-full" href={pics[3].url} data-fancybox="gallery">
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full aspect-square"
             src={pics[3].url}
             alt={pics[3].id}
             width={480}
@@ -80,7 +76,7 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
           />
         </Link>
       </li>
-      <li className="hidden md:inline-block relative ">
+      <li className="hidden md:inline-block relative aspect-square ">
         <Link
           className="w-full h-full z-20"
           href={pics[4].url}
