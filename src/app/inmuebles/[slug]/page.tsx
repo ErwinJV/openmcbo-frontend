@@ -59,7 +59,7 @@ const getProperty = async (slug: string) => {
 
 const getFilteredProperties = async (
   searchParams: PropertyFilterInput,
-  pagination: PaginationDto
+  pagination: PaginationDto,
 ) => {
   const { data } = await getClient().query<{
     filterProperties: PropertiesDataResponse;
@@ -149,7 +149,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       min_area: null,
       max_area: null,
     },
-    { limit: 10, offset: 0 }
+    { limit: 10, offset: 0 },
   );
 
   const cards = properties
@@ -171,12 +171,16 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
         long={propertyBySlug.long || 0}
       />
       <Pad amt={30} />
-      <section className="w-full flex flex-col ps-4">
-        <h2 className="font-bold text-xl lg:text-2xl mb-5 ">
-          Otras opciones que podrian interesarte
-        </h2>
-        <PropertiesSlider cards={cards} />
-      </section>
+      {cards.length !== 0 ? (
+        <section className="w-full flex flex-col ps-4">
+          <h2 className="font-bold text-xl lg:text-2xl mb-5 ">
+            Otras opciones que podrian interesarte
+          </h2>
+          <PropertiesSlider cards={cards} />
+        </section>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

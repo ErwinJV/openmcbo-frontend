@@ -11,19 +11,13 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: [
-      "images.unsplash.com",
-      "cdnjs.cloudflare.com",
-      "picsum.photos",
-      "res.cloudinary.com",
-    ],
+    qualities: [30, 70, 60, 50],
     remotePatterns: [
-      {
-        protocol: "http", // Use 'https' if your local server supports it
-        hostname: "localhost",
-        port: "8080",
-        pathname: "/uploads/**", // The double asterisk includes all subdirectories
-      },
+      new URL("https://images.unsplash.com/**"),
+      new URL("https://cdnjs.cloudflare.com/**"),
+      new URL("https://picsum.photos/**"),
+      new URL("https://lh3.googleusercontent.com/**"),
+      new URL("https://res.cloudinary.com/**"),
     ],
   },
 };
