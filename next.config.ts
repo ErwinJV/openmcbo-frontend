@@ -2,14 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  async rewrites() {
-    return [
-      {
-        source: "/graphql-proxy",
-        destination: process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"] || "",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/graphql-proxy",
+  //       destination: process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"] || "",
+  //     },
+  //   ];
+  // },
   images: {
     qualities: [30, 70, 60, 50],
     remotePatterns: [
