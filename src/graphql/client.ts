@@ -20,7 +20,10 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
     },
     link: new HttpLink({
       // this needs to be an absolute url, as relative urls cannot be used in SSR
-      uri: `${process.env["NEXT_PUBLIC_GRAPHQL_ENDPOINT"]}`,
+      uri:
+        typeof window === "undefined"
+          ? "http://localhost:3000/graphql-proxy"
+          : "/graphql-proxy",
       fetchOptions: {
         // you can pass additional options that should be passed to `fetch` here,
         // e.g. Next.js-related `fetch` options regarding caching and revalidation

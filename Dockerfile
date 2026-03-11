@@ -6,8 +6,8 @@ WORKDIR /app
 
 
 
-ENV NEXT_PUBLIC_API="http://localhost:3300"
-ENV NEXT_PUBLIC_GRAPHQL_ENDPOINT="http://localhost:3300/graphql"
+# ENV NEXT_PUBLIC_API="http://localhost:3300"
+# ENV NEXT_PUBLIC_GRAPHQL_ENDPOINT="http://localhost:3300/graphql"
 
 
 # Copia los archivos de dependencias (incluyendo yarn.lock si existe)
