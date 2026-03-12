@@ -57,7 +57,7 @@ export default function FilterSection() {
     (value: unknown) => {
       handleSearchParams({ ...searchParams, type: value as PropertyType });
     },
-    [handleSearchParams, searchParams]
+    [handleSearchParams, searchParams],
   );
 
   const incrementParking = useCallback(() => {
@@ -78,7 +78,7 @@ export default function FilterSection() {
     (value: unknown) => {
       handleSearchParams({ ...searchParams, status: value as PropertyStatus });
     },
-    [handleSearchParams, searchParams]
+    [handleSearchParams, searchParams],
   );
 
   const handleMinArea = useCallback(
@@ -88,7 +88,7 @@ export default function FilterSection() {
         min_area: parseInt(e.target.value),
       });
     },
-    [handleSearchParams, searchParams]
+    [handleSearchParams, searchParams],
   );
 
   const handleMaxArea = useCallback(
@@ -98,7 +98,7 @@ export default function FilterSection() {
         max_area: parseInt(e.target.value),
       });
     },
-    [handleSearchParams, searchParams]
+    [handleSearchParams, searchParams],
   );
 
   const cleanParams = useCallback(() => {
@@ -241,18 +241,18 @@ export default function FilterSection() {
       decrementBaths,
       incrementParking,
       decrementParking,
-    ]
+    ],
   );
 
   const handleDeleteType = useCallback(() => {
     const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key]) => key !== "type")
+      Object.entries(searchParams).filter(([key]) => key !== "type"),
     );
     const stringSearchParams = Object.fromEntries(
-      Object.entries(filterParams).map(([key, value]) => [key, String(value)])
+      Object.entries(filterParams).map(([key, value]) => [key, String(value)]),
     );
     const filterSearchParams = new URLSearchParams(
-      stringSearchParams
+      stringSearchParams,
     ).toString();
 
     handleSearchParams(filterParams);
@@ -263,13 +263,13 @@ export default function FilterSection() {
 
   const handleDeleteStatus = useCallback(() => {
     const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key]) => key !== "status")
+      Object.entries(searchParams).filter(([key]) => key !== "status"),
     );
     const stringSearchParams = Object.fromEntries(
-      Object.entries(filterParams).map(([key, value]) => [key, String(value)])
+      Object.entries(filterParams).map(([key, value]) => [key, String(value)]),
     );
     const filterSearchParams = new URLSearchParams(
-      stringSearchParams
+      stringSearchParams,
     ).toString();
 
     handleSearchParams(filterParams);
@@ -281,9 +281,9 @@ export default function FilterSection() {
   return (
     <>
       <Pad amt={30} />
-      <section className="w-full ">
-        <div className="container mx-auto flex justify-between md:w-170 lg:w-230 xl:w-282">
-          <div className=" hidden md:flex md:space-x-2">
+      <section className="w-full">
+        <div className="container mx-auto flex justify-between w-[90%] md:w-170 lg:w-230 xl:w-282">
+          <div className="md:flex md:space-x-2">
             {searchParams.type === PropertyType.Apartment ? (
               <Chip label="Apartamento" onDelete={handleDeleteType} />
             ) : searchParams.type === PropertyType.House ? (
