@@ -14,7 +14,7 @@ const socialLinks: Readonly<
   { href: string; label: string; icon: React.ReactNode }[]
 > = [
   {
-    href: "https://www.facebook.com/openmcbo",
+    href: "#",
     label: "Facebook",
     icon: <IoLogoFacebook className="text-[#3559B6] text-2xl" />,
   },
