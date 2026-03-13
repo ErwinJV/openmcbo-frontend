@@ -18,10 +18,19 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
     <ul className="grid grid-cols-1 md:grid-cols-4  gap-3 w-9/10  md:w-170   xl:w-282  mx-auto ">
       <li className=" md:row-span-2 md:col-span-2 aspect-square">
         <Link
-          className="w-full h-full"
+          className="w-full h-full relative"
           href={pics[0].url}
           data-fancybox="gallery"
         >
+          {pics.length !== 1 ? (
+            <div className="absolute z-10 md:hidden bottom-0 left-0 w-full h-[50%] bg-black/40">
+              <span className="text-white font-bold text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                +{pics.length - 1}
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
           <Image
             className="object-cover w-full h-full "
             src={pics[0].url}
@@ -82,11 +91,15 @@ export default function GalleryPics({ pics }: GalleryPicsProps) {
           href={pics[4].url}
           data-fancybox="gallery"
         >
-          <div className="absolute z-10 bottom-0 left-0 w-full h-full bg-black/40">
-            <span className="text-white font-bold text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              +{pics.length - 5}
-            </span>
-          </div>
+          {pics.length - 5 !== 0 ? (
+            <div className="absolute z-10 bottom-0 left-0 w-full h-full bg-black/40">
+              <span className="text-white font-bold text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                +{pics.length - 5}
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
           <Image
             className="object-cover w-full h-full"
             src={pics[4].url}

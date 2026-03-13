@@ -24,7 +24,7 @@ export default function Wrapper() {
         onClick={toggle}
         icon={<IoMenu className="text-[#003593]" size={26} />}
       />
-      <NavbarCollapse open={open} />
+      <NavbarCollapse open={open} toggle={toggle} />
     </>
   );
 }

@@ -2,6 +2,7 @@ import NavLink from "../NavLink";
 
 interface NavbarCollapseProps {
   open: boolean;
+  toggle: () => void;
 }
 
 const links: Readonly<{ href: string; label: string }[]> = [
@@ -10,7 +11,7 @@ const links: Readonly<{ href: string; label: string }[]> = [
   { href: "/sobre-nosotros", label: "sobre nosotros" },
 ];
 
-export default function NavbarCollapse({ open }: NavbarCollapseProps) {
+export default function NavbarCollapse({ open, toggle }: NavbarCollapseProps) {
   return (
     <ul
       className={` ${
@@ -19,7 +20,7 @@ export default function NavbarCollapse({ open }: NavbarCollapseProps) {
     >
       {links.map((link) => (
         <li key={link.href}>
-          <NavLink href={link.href} label={link.label} />
+          <NavLink href={link.href} label={link.label} onClick={toggle} />
         </li>
       ))}
     </ul>
