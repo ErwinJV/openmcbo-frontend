@@ -33,7 +33,7 @@ export default function Swiper360Images({ images }: Swiper360ImagesProps) {
   const swiperRef = useRef<SwiperType | null>(null);
   if (!images || images.length === 0) {
     return (
-      <div className="w-9/10 h-48 md:w-170 md:h-87.5  xl:h-98 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 mx-auto">
+      <div className=" h-48 w-170 md:h-87.5  xl:h-98 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 mx-auto">
         <div className="text-center text-gray-500">
           <IoImagesOutline className="w-12 h-12 mx-auto mb-3 text-gray-400" />
           <p className="text-sm font-medium">No hay vistas 360 disponibles</p>
@@ -46,7 +46,7 @@ export default function Swiper360Images({ images }: Swiper360ImagesProps) {
   }
 
   return (
-    <div className="w-9/10 h-48 md:w-170 md:h-87.5 xl:w-282 xl:h-98 mx-auto">
+    <div className=" md:w-170 md:h-87.5 xl:w-282 xl:h-98 mx-auto">
       <div className="relative w-full">
         <Swiper
           modules={[Navigation, Pagination]}
@@ -106,7 +106,7 @@ const Viewer360 = ({ panorama }: { panorama: string }) => {
       }
     } catch {
       alert(
-        `Tenemos problemas para cargar una de las imagenes 360, lamentamos las molestias`
+        `Tenemos problemas para cargar una de las imagenes 360, lamentamos las molestias`,
       );
     }
   }, [panorama]);
