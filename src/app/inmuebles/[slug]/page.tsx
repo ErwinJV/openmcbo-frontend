@@ -1,6 +1,6 @@
 // page.tsx (modificado)
 import Pad from "@/components/Pad";
-import MapSection from "@/containers/MapSection";
+// import MapSection from "@/containers/MapSection";
 import PropertiesSlider from "@/containers/PropertiesSlider";
 import PropertySection from "@/containers/PropertySection";
 import PropertyNotAvailable from "@/components/PropertyNotAvailable";
@@ -165,11 +165,11 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   return (
     <>
       <PropertySection property={propertyBySlug} />
-      <Pad amt={100} />
+      {/* <Pad amt={100} />
       <MapSection
         lat={propertyBySlug.lat || 0}
         long={propertyBySlug.long || 0}
-      />
+      /> */}
       <Pad amt={30} />
       {cards.length !== 0 ? (
         <section className="w-full flex flex-col ps-4">
