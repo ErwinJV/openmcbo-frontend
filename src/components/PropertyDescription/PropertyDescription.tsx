@@ -57,14 +57,22 @@ export default function PropertyDescription({
               {area.toLocaleString("ve")} m2
             </p>
           </li>
-          <li className="flex flex-col justify-center">
-            <h5 className="lg:text-xl font-bold">Habitaciones</h5>
-            <p className="text-lg text-[#8F909A] ">{num_bedrooms}</p>
-          </li>
-          <li className="flex flex-col justify-center">
-            <h5 className="lg:text-xl font-bold">Banos</h5>
-            <p className="text-lg text-[#8F909A] ">{num_baths}</p>
-          </li>
+          {num_bedrooms && num_bedrooms > 0 ? (
+            <li className="flex flex-col justify-center">
+              <h5 className="lg:text-xl font-bold">Habitaciones</h5>
+              <p className="text-lg text-[#8F909A] ">{num_bedrooms}</p>
+            </li>
+          ) : (
+            <></>
+          )}
+          {num_baths && num_baths > 0 ? (
+            <li className="flex flex-col justify-center">
+              <h5 className="lg:text-xl font-bold">Banos</h5>
+              <p className="text-lg text-[#8F909A] ">{num_baths}</p>
+            </li>
+          ) : (
+            <></>
+          )}
           <li className="flex flex-col justify-center">
             <h5 className="lg:text-xl font-bold">Tipo de inmueble</h5>
             <p className="text-lg text-[#8F909A] ">

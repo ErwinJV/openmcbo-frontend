@@ -13,7 +13,7 @@ const lastProperties = async () => {
   const { data } = await getClient().query<GetPropertiesQuery>({
     query: gql`
         query {
-          properties(paginationDto: { limit:${10}, offset: 0, order: "DESC" }) {
+          properties(paginationDto: { limit:${50}, offset: 0, order: "DESC" }) {
             properties {
               id
               title
