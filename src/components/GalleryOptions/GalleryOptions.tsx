@@ -10,6 +10,7 @@ import {
 import GalleryButton from "../GalleryButton";
 import { useContext } from "react";
 import { PropertyContext } from "@/providers/PropertyProvider/property-page-context";
+import { Gi3dGlasses } from "react-icons/gi";
 
 interface GalleryOptionsProps {
   hasVideos: boolean;
@@ -45,7 +46,7 @@ export default function GalleryOptions({
       {has360Pics && (
         <GalleryButton
           icon={
-            <IoArrowForwardSharp
+            <Gi3dGlasses
               className={`gallery-button-icon gallery-button-icon-${
                 galleryView === "pics360" ? "selected" : "unselected"
               }`}
