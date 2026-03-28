@@ -6,6 +6,7 @@ import PropertySection from "@/containers/PropertySection";
 import PropertyNotAvailable from "@/components/PropertyNotAvailable";
 import { getClient } from "@/graphql/client";
 import {
+  GetPropertiesQuery,
   PaginationDto,
   PropertiesDataResponse,
   Property,
@@ -17,6 +18,38 @@ import { notFound } from "next/navigation";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
+}
+
+const getProperties = async () => {
+  const { data } = await getClient().query<GetPropertiesQuery>({
+    query: gql`
+        query {
+          properties(paginationDto: { limit:${50}, offset: 0, order: "DESC" }) {
+            properties {
+              slug
+            
+              
+            }
+            
+          }
+        }
+      `,
+  });
+
+  return data;
+};
+
+export async function generateStaticParams() {
+  const properties = await getProperties(); // Trae una lista de IDs desde NeonDB
+
+  const propertiesSlug = properties.properties.properties.map((property) => ({
+    slug: property.slug,
+  }));
+
+  if (!properties) {
+    return [{ slug: "" }];
+  }
+  return propertiesSlug;
 }
 
 const getProperty = async (slug: string) => {
@@ -127,7 +160,7 @@ const isPropertyComplete = async (property: Property) => {
 
 export default async function PropertyPage({ params }: PropertyPageProps) {
   const { slug } = await params;
-  console.log({ slug });
+
   const { propertyBySlug } = await getProperty(slug);
 
   if (!propertyBySlug) {

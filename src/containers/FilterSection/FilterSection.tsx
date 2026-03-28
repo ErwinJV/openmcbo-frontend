@@ -19,6 +19,8 @@ export default function FilterSection() {
   const { filterNavigate, handleSearchParams, searchParams } =
     useContext(PropertiesContext);
 
+  console.log({ searchParams });
+
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
   const toggleFilter = useCallback(() => {

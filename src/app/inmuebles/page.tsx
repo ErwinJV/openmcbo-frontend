@@ -13,6 +13,7 @@ import {
 import PropertiesProvider from "@/providers/PropertiesProvider";
 import { gql } from "@apollo/client";
 import Paginator from "@/components/Paginator";
+import SearchResults from "@/components/SearchResults";
 
 interface PropertiesPageProps {
   searchParams: Promise<PropertyFilterInput & PaginationDto>;
@@ -20,7 +21,7 @@ interface PropertiesPageProps {
 
 const getFilteredProperties = async (
   searchParams: PropertyFilterInput,
-  pagination: PaginationDto
+  pagination: PaginationDto,
 ) => {
   const { data } = await getClient().query<{
     filterProperties: PropertiesDataResponse;
@@ -57,11 +58,6 @@ const getFilteredProperties = async (
       filters: searchParams,
       paginationDto: pagination,
     },
-    // context: {
-    //   fetchOptions: {
-    //     next: { revalidate: 60 * 60 },
-    //   },
-    // },
   });
 
   return data;
@@ -76,7 +72,7 @@ export default async function PropertiesPage({
     num_bathrooms,
     num_bedrooms,
     num_parking_lot,
-    place,
+    term,
     status,
     type,
     limit,
@@ -93,11 +89,11 @@ export default async function PropertiesPage({
       num_bathrooms: Number(num_bathrooms),
       num_bedrooms: Number(num_bedrooms),
       num_parking_lot: Number(num_parking_lot),
-      place,
+      term,
       status,
       type,
     },
-    { limit: Number(limit), offset: Number(offset), order }
+    { limit: Number(limit), offset: Number(offset), order },
   );
 
   const isPropertiesEmptyOrNull =
@@ -114,7 +110,7 @@ export default async function PropertiesPage({
         num_parking_lot,
         offset: offset || 0,
         order: order || "created_at",
-        place,
+        term: term || "",
         status,
         type,
       }}
@@ -124,6 +120,9 @@ export default async function PropertiesPage({
           propertyStatus={status as PropertyStatus}
           propertyType={type as PropertyType}
         />
+
+        <SearchResults total={total} />
+
         <FilterSection />
 
         {isPropertiesEmptyOrNull ? (

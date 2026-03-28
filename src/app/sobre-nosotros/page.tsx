@@ -22,12 +22,14 @@ export default function AboutUsPage() {
             Sobre Nosotros
           </h1>
           <h2 className="text-3xl md:text-5xl text-center xl:text-left xl:text-6xl font-extrabold text-[#003593]">
-            Lorem ipsum dolor sit amet consectetur
+            Conectando familias con su espacio ideal en Maracaibo
           </h2>
           <p className="text-[#8F909A] text-xl md:text-2xl xl:w-[80%] text-center xl:text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit ux sed
-            eiusmod tempor incididunt ut labore et dolore.enim admix minim
-            veniam quis nostrud.
+            En Open Maracaibo entendemos que buscar una propiedad es mucho más
+            que una simple transacción; es el comienzo de una nueva etapa. Por
+            eso, hemos creado un espacio diseñado para simplificar el mercado
+            inmobiliario local, conectándote con las mejores opciones de la
+            ciudad de forma rápida, directa y segura.
           </p>
         </div>
         <div className="md:col-span-1 md:row-span-1 xl:col-span-2 xl-row-span-1 flex flex-col md:justify-between items-center space-y-8">
@@ -42,10 +44,11 @@ export default function AboutUsPage() {
               />
               <h3 className="text-[#0D263B] text-2xl">Asesoramiento</h3>
               <p className="text-[#7C8893] text-lg md:text-xl text-center xl:text-left">
-                When unknown printer took galley of type and scrambled.
+                Guía experta y personalizada en cada paso de tu proceso de
+                compra, venta o alquiler.
               </p>
             </div>
-            <div className="flex flex-col space-y-2 w-full md:w-[45%] lg:w-[50%]   items-center xl:items-start">
+            <div className="flex flex-col space-y-2 w-full md:w-[45%] xl:w-auto items-center xl:items-start">
               <Image
                 alt="money icon"
                 className="w-[54] h-[54] md:w-[80px] md:h-[80px] "
@@ -55,7 +58,8 @@ export default function AboutUsPage() {
               />
               <h3 className="text-[#0D263B] text-2xl">Confianza</h3>
               <p className="text-[#7C8893] text-lg md:text-xl text-center xl:text-left">
-                When unknown printer took galley of type and scrambled.
+                Transacciones transparentes, respaldadas por un profundo
+                conocimiento del mercado local.
               </p>
             </div>
           </div>
