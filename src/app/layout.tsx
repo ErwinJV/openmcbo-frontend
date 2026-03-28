@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   description: "Tu Inmobiliaria en Maracaibo",
 };
 
+export const revalidate = 60 * 60 * 24 * 365;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const foo = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-  console.log("GraphQL Endpoint:", foo);
   return (
     <html lang="en">
       <body

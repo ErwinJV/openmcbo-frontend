@@ -16,12 +16,12 @@ export default function SearchBar() {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
     },
-    []
+    [],
   );
 
   const handleSearch = useCallback(() => {
     const filterSearchParams = new URLSearchParams({
-      place: searchTerm,
+      term: searchTerm,
       status,
     }).toString();
 
@@ -57,7 +57,7 @@ export default function SearchBar() {
               size="small"
               type="search"
               variant="text"
-              placeholder="Buscar por Ubicacion"
+              placeholder="Buscar por Ubicacion, Titulo o Descripcion..."
               onChange={handleSearchChange}
               value={searchTerm}
             />
@@ -100,7 +100,7 @@ export default function SearchBar() {
             size="small"
             type="text"
             variant="text"
-            placeholder="Buscar por Ubicacion"
+            placeholder="Buscar por Ubicacion, Titulo o Descripcion..."
             onChange={handleSearchChange}
             value={searchTerm}
           />
@@ -140,7 +140,7 @@ export default function SearchBar() {
               size="small"
               type="text"
               variant="text"
-              placeholder="Buscar por Ubicacion"
+              placeholder="Buscar por Ubicacion, Titulo o Descripcion..."
               onChange={handleSearchChange}
               value={searchTerm}
             />

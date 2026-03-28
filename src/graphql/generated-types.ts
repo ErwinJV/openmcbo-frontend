@@ -202,8 +202,8 @@ export type PropertyFilterInput = {
   num_bathrooms?: InputMaybe<Scalars['Int']['input']>;
   num_bedrooms?: InputMaybe<Scalars['Int']['input']>;
   num_parking_lot?: InputMaybe<Scalars['Int']['input']>;
-  place?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<PropertyStatus>;
+  term?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<PropertyType>;
 };
 
@@ -251,6 +251,8 @@ export type Query = {
   filterProperties: PropertiesDataResponse;
   /** Returns a paginated list of properties */
   properties: PropertiesDataResponse;
+  /** Returns a paginated list of properties  */
+  propertiesDashboard: PropertiesDataResponse;
   /** Return a single property by required term (property id) */
   property: Property;
   /** Return a single property by required slug (property id or slug) */
@@ -272,6 +274,11 @@ export type QueryFilterPropertiesArgs = {
 
 
 export type QueryPropertiesArgs = {
+  paginationDto: PaginationDto;
+};
+
+
+export type QueryPropertiesDashboardArgs = {
   paginationDto: PaginationDto;
 };
 
