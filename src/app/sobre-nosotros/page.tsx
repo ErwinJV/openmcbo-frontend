@@ -6,13 +6,13 @@ import { IoArrowForward } from "react-icons/io5";
 
 export default function AboutUsPage() {
   return (
-    <main className="container mx-auto w-[90%]  md:w-169  xl:w-270  ">
+    <main className="container mx-auto w-[90%]  md:w-169  xl:w-270 py-7  ">
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-3 xl:grid-rows-1 w-full h-full ">
         <div className="md:col-span-1 md:row-span-1 xl:row-span-2 xl:col-span-1">
           <Image
             src="/img/about-us.webp"
             className="w-full h-full object-cover"
-            width={1080}
+            width={200}
             height={720}
             alt="Sobre Nosotros"
           />
