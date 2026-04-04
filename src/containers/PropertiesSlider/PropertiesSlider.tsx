@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Card from "../../components/Card";
+import { SwiperOptions } from "swiper/types";
 
 interface CardData {
   description: string;
@@ -17,16 +18,51 @@ interface CardData {
 
 interface PropertiesSliderProps {
   cards: CardData[];
+  breakpoints?: SwiperOptions["breakpoints"];
 }
 
-export default function PropertiesSlider({ cards }: PropertiesSliderProps) {
+const defaultBreakpoints: SwiperOptions["breakpoints"] = {
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 16,
+  },
+
+  480: {
+    slidesPerView: 1.3,
+    spaceBetween: 20,
+  },
+
+  768: {
+    slidesPerView: 2,
+    spaceBetween: 24,
+  },
+
+  1024: {
+    slidesPerView: 2.5,
+    spaceBetween: 24,
+  },
+
+  1440: {
+    slidesPerView: 3.5,
+    spaceBetween: 24,
+  },
+
+  1920: {
+    slidesPerView: 4,
+    spaceBetween: 24,
+  },
+};
+
+export default function PropertiesSlider({
+  breakpoints,
+  cards,
+}: PropertiesSliderProps) {
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full max-w-full min-w-0 mx-auto relative">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={8}
+        spaceBetween={16}
         slidesPerView={1}
-        centeredSlides={false}
         loop={true}
         autoplay={{
           delay: 3000,
@@ -41,74 +77,37 @@ export default function PropertiesSlider({ cards }: PropertiesSliderProps) {
           el: ".swiper-pagination",
           type: "bullets",
         }}
-        breakpoints={{
-          // Mobile: 1 card
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 8,
-          },
-          // Small tablet: 1.3 cards (muestra parte de la siguiente)
-          480: {
-            slidesPerView: 1.3,
-            spaceBetween: 24,
-          },
-
-          // Large tablet: 2.2 cards
-          680: {
-            slidesPerView: 2,
-            spaceBetween: 24,
-          },
-          // Desktop: 3 cards exactas
-
-          // Large desktop: 3.5 cards (muestra parte de la siguiente)
-          1440: {
-            slidesPerView: 3,
-            spaceBetween: 24,
-          },
-          // Extra large desktop: 4 cards
-          1920: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-          },
-        }}
+        breakpoints={breakpoints ? breakpoints : defaultBreakpoints}
       >
         {cards.map((card, index) => (
-          <SwiperSlide key={index} className="w-full">
-            {" "}
-            {/* Padding bottom para la paginación */}
-            <Card
-              description={card.description}
-              price={card.price}
-              srcImg={
-                card.srcImg
-                  ? [card.srcImg[0], card.srcImg[1], card.srcImg[2]]
-                  : []
-              }
-              title={card.title}
-              url={card.url}
-            />
+          <SwiperSlide key={index}>
+            <div className="h-full">
+              <Card
+                description={card.description}
+                price={card.price}
+                srcImg={card.srcImg ? card.srcImg.slice(0, 3) : []}
+                title={card.title}
+                url={card.url}
+              />
+            </div>
           </SwiperSlide>
         ))}
 
-        {/* Navigation buttons - solo visible en desktop */}
         {/* <div className="swiper-button-prev !hidden lg:!flex after:!text-gray-600 after:!text-2xl after:!font-bold hover:after:!text-blue-600 !w-10 !h-10 !bg-white !rounded-full !shadow-lg" />
         <div className="swiper-button-next !hidden lg:!flex after:!text-gray-600 after:!text-2xl after:!font-bold hover:after:!text-blue-600 !w-10 !h-10 !bg-white !rounded-full !shadow-lg" /> */}
-
-        {/* Pagination */}
         {/* <div className="swiper-pagination !relative !mt-6" /> */}
       </Swiper>
 
-      {/* Estilos globales para Swiper */}
       <style jsx global>{`
         .swiper {
-          padding-bottom: 2rem;
+          padding-bottom: 2rem !important; /* Asegura espacio para la paginación */
         }
         .swiper-pagination-bullet {
           background: #d1d5db;
           opacity: 0.6;
           width: 10px;
           height: 10px;
-          margin: 0 6px;
+          margin: 0 6px !important;
         }
         .swiper-pagination-bullet-active {
           background: #2563eb;
