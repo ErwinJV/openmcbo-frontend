@@ -19,8 +19,6 @@ export default function FilterSection() {
   const { filterNavigate, handleSearchParams, searchParams } =
     useContext(PropertiesContext);
 
-  console.log({ searchParams });
-
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
   const toggleFilter = useCallback(() => {
@@ -51,13 +49,18 @@ export default function FilterSection() {
   const decrementBaths = useCallback(() => {
     handleSearchParams({
       ...searchParams,
+      offset: 0,
       num_bathrooms: Number(searchParams.num_bathrooms || "0") - 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const handlePropertyType = useCallback(
     (value: unknown) => {
-      handleSearchParams({ ...searchParams, type: value as PropertyType });
+      handleSearchParams({
+        ...searchParams,
+        offset: 0,
+        type: value as PropertyType,
+      });
     },
     [handleSearchParams, searchParams],
   );
@@ -65,6 +68,7 @@ export default function FilterSection() {
   const incrementParking = useCallback(() => {
     handleSearchParams({
       ...searchParams,
+      offset: 0,
       num_parking_lot: Number(searchParams.num_parking_lot || "0") + 1,
     });
   }, [handleSearchParams, searchParams]);
@@ -72,13 +76,18 @@ export default function FilterSection() {
   const decrementParking = useCallback(() => {
     handleSearchParams({
       ...searchParams,
+      offset: 0,
       num_parking_lot: Number(searchParams.num_parking_lot || "0") - 1,
     });
   }, [handleSearchParams, searchParams]);
 
   const handlePropertyStatus = useCallback(
     (value: unknown) => {
-      handleSearchParams({ ...searchParams, status: value as PropertyStatus });
+      handleSearchParams({
+        ...searchParams,
+        offset: 0,
+        status: value as PropertyStatus,
+      });
     },
     [handleSearchParams, searchParams],
   );
@@ -87,6 +96,7 @@ export default function FilterSection() {
     (e: ChangeEvent<HTMLInputElement>) => {
       handleSearchParams({
         ...searchParams,
+        offset: 0,
         min_area: parseInt(e.target.value),
       });
     },
@@ -285,7 +295,7 @@ export default function FilterSection() {
       <Pad amt={30} />
       <section className="w-full">
         <div className="container mx-auto flex justify-between w-[90%] md:w-170 lg:w-230 xl:w-282">
-          <div className="md:flex md:space-x-2">
+          <div className="flex justify-center  md:space-x-2">
             {searchParams.type === PropertyType.Apartment ? (
               <Chip label="Apartamento" onDelete={handleDeleteType} />
             ) : searchParams.type === PropertyType.House ? (

@@ -15,6 +15,7 @@ import {
 import { GetPropertyQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
 import { notFound } from "next/navigation";
+import { SwiperOptions } from "swiper/types";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -132,30 +133,44 @@ const isPropertyComplete = async (property: Property) => {
   const hasRequiredFields =
     property.description && property.title && property.price;
 
-  // const images360 = property.images360
-  //   ? property.images360.map((image360) => image360.url)
-  //   : [];
-
-  // const allAvailableImages360 = property.images360
-  //   ? await allAvailableFiles(images360)
-  //   : false;
-
-  // const videos = property.videos
-  //   ? property.videos.map((video) => video.url)
-  //   : [];
-  // const allAvailableVideos = property.videos
-  //   ? await allAvailableFiles(videos)
-  //   : true;
-
-  // const images = property.images
-  //   ? property.images.map((image) => image.url)
-  //   : [];
-
-  // const allAvailableImages = property.images
-  //   ? await allAvailableFiles(images)
-  //   : true;
-
   return hasMinimumImages && hasRequiredFields;
+};
+
+const breakpoints: SwiperOptions["breakpoints"] = {
+  // Mobile: 1 card
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 16,
+  },
+  // Small tablet: 1.3 cards
+  480: {
+    slidesPerView: 1.3,
+    spaceBetween: 16,
+  },
+  // Tablet estándar (actualizado de 680 a 768)
+  768: {
+    slidesPerView: 2,
+    spaceBetween: 24,
+  },
+  // Desktop estándar (faltaba este salto, de 680 a 1440 era muy brusco)
+  1024: {
+    slidesPerView: 1.7,
+    spaceBetween: 24,
+  },
+  1240: {
+    slidesPerView: 3,
+    spaceBetween: 24,
+  },
+  // Large desktop: 3.5 cards
+  1440: {
+    slidesPerView: 2.3,
+    spaceBetween: 24,
+  },
+  // Extra large desktop: 4 cards
+  1920: {
+    slidesPerView: 2,
+    spaceBetween: 24,
+  },
 };
 
 export default async function PropertyPage({ params }: PropertyPageProps) {
@@ -205,11 +220,11 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       /> */}
       <Pad amt={30} />
       {cards.length !== 0 ? (
-        <section className="w-full flex flex-col ps-4">
+        <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
           <h2 className="font-bold text-xl lg:text-2xl mb-5 ">
             Otras opciones que podrian interesarte
           </h2>
-          <PropertiesSlider cards={cards} />
+          <PropertiesSlider cards={cards} breakpoints={breakpoints} />
         </section>
       ) : (
         <></>

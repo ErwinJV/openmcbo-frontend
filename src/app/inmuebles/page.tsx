@@ -126,17 +126,14 @@ export default async function PropertiesPage({
         <FilterSection />
 
         {isPropertiesEmptyOrNull ? (
-          <section className="w-full flex flex-col justify-center items-center p-13">
+          <section className="w-full flex flex-col justify-center items-center ">
             <Image
-              src={"/img/404.svg"}
-              className="w-[90%] sm:w-150 "
+              src={"/img/not-found-results.webp"}
+              className="w-full sm:w-150 md:w-190  lg:w-240 "
               width={1080}
               height={720}
-              alt="404 image"
+              alt="Not found image"
             />
-            <h1 className="text-[#3559B6] text-2xl mt-12 mb-3">
-              Oops! no hay resultados!
-            </h1>
           </section>
         ) : (
           <>

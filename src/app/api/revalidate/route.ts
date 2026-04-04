@@ -33,15 +33,13 @@ export async function POST(req: NextRequest) {
       //     // revalidatePath('/usuarios/[id]', 'page'); // Si necesitas revalidar páginas dinámicas específicas
       //     break;
 
-      case "property":
-        revalidatePath("/");
+      case "properties":
+        revalidatePath("/", "page");
         revalidatePath("/inmuebles");
         if (id) {
           revalidatePath(`/inmuebles/${id}`, "page");
-
-          // Revalida la página del inmueble específico
         }
-        // Si los productos se muestran en el home
+
         break;
 
       default:
