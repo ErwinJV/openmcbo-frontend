@@ -27,7 +27,7 @@ export default function GalleryOptions({
 }: GalleryOptionsProps) {
   const { galleryView, handleGalleryView } = useContext(PropertyContext);
   return (
-    <div className="flex w-full md:w-170 xl:w-140 lg:justify-end">
+    <div className="flex w-full md:w-170 xl:w-140 lg:justify-end items-end">
       {hasPics && (
         <GalleryButton
           icon={

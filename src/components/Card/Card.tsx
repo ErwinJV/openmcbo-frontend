@@ -5,20 +5,13 @@ import Link from "next/link";
 import { useState, useCallback } from "react";
 
 interface CardProps {
-  description: string;
   price: number;
   srcImg: string[];
   title: string;
   url: string;
 }
 
-export default function Card({
-  description,
-  price,
-  srcImg,
-  title,
-  url,
-}: CardProps) {
+export default function Card({ price, srcImg, title, url }: CardProps) {
   const [currentImage, setCurrentImage] = useState(0);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
@@ -36,7 +29,6 @@ export default function Card({
     setCurrentImage(index);
   };
 
-  // Manejo de eventos táctiles y de mouse
   const handleStart = (clientX: number) => {
     setIsDragging(true);
     setStartX(clientX);
@@ -53,7 +45,7 @@ export default function Card({
     setIsDragging(false);
 
     const diff = startX - currentX;
-    const threshold = 50; // Umbral mínimo de desplazamiento
+    const threshold = 50;
 
     if (diff > threshold) {
       nextImage();
@@ -75,7 +67,6 @@ export default function Card({
     handleEnd();
   };
 
-  // Eventos táctiles
   const onTouchStart = (e: React.TouchEvent) => {
     handleStart(e.touches[0].clientX);
   };
@@ -87,14 +78,6 @@ export default function Card({
   const onTouchEnd = () => {
     handleEnd();
   };
-
-  // Auto-play opcional (descomenta si lo quieres)
-  /*
-  useEffect(() => {
-    const interval = setInterval(nextImage, 5000);
-    return () => clearInterval(interval);
-  }, [nextImage]);
-  */
 
   return (
     <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl">
@@ -149,9 +132,15 @@ export default function Card({
         </div>
       </div>
 
-      <div className="flex flex-col space-y-1  justify-between w-full h-[144.45px] md:h-[160.72px] lg:h-[173px] py-[13.21px] px-[19.81px] md:py-[14.67px] md:px-[22.01px] lg:py-4 lg:px-6">
-        <div className="flex flex-col  justify-between w-full">
-          <h1 className=" font-bold text-[19.81px] md:text-xl  ">{title}</h1>
+      <div className="flex flex-col space-y-1 justify-between w-full h-[144.45px] md:h-[160.72px] lg:h-[173px] py-[13.21px] px-[19.81px] md:py-[14.67px] md:px-[22.01px] lg:py-4 lg:px-6">
+        <div className="flex flex-col justify-between w-full">
+          {/* Aplicación de line-clamp para limitar la altura del texto */}
+          <h1
+            className="font-bold text-[19.81px] md:text-xl line-clamp-2"
+            title={title}
+          >
+            {title}
+          </h1>
           <h2 className="font-semibold text-[#8F909A] text-[14.56px] md:text-[16.51px] lg:text-[18px] w-[50px] md:w-[56px] lg:w-[61px] ">
             ${price.toLocaleString("us")}
           </h2>
