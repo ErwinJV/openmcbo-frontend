@@ -31,17 +31,17 @@ export default function Input({
 }: InputProps) {
   const errorSuffix = error ? "-error" : "";
   return (
-    <div className="flex flex-col space-y-1">
+    <div className="flex flex-col space-y-1 w-full">
       {label && (
         <label className="text-[16px] capitalize" htmlFor={name}>
           {label}:
         </label>
       )}
       <div
-        className={`input-${variant}${errorSuffix} input-${size} input-bg-${bg}${errorSuffix}`}
+        className={`input-${variant}${errorSuffix} input-${size}  input-bg-${bg}${errorSuffix}`}
       >
         <input
-          className="outline-0! h-full w-full text-[16px] "
+          className="outline-0! h-full w-full text-[11px] sm:text-[16px] "
           name={name}
           placeholder={placeholder}
           type={type}

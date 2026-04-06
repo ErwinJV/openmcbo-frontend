@@ -12,7 +12,6 @@ export default function PropertiesGrid({ properties }: PropertiesGridProps) {
       <div className="  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-24 ">
         {properties.map((property) => (
           <Card
-            description={property.description}
             price={property.price}
             srcImg={
               property.images && property.images.length >= 3

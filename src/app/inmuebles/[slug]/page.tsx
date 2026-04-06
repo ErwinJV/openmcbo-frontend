@@ -27,9 +27,7 @@ const getProperties = async () => {
         query {
           properties(paginationDto: { limit:${50}, offset: 0, order: "DESC" }) {
             properties {
-              slug
-            
-              
+              slug    
             }
             
           }
