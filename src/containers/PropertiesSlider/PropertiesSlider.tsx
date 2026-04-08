@@ -83,7 +83,6 @@ export default function PropertiesSlider({
           <SwiperSlide key={index}>
             <div className="h-full">
               <Card
-                description={card.description}
                 price={card.price}
                 srcImg={card.srcImg ? card.srcImg.slice(0, 3) : []}
                 title={card.title}
