@@ -39,7 +39,7 @@ export default async function Home() {
   return (
     <>
       <MainHero />
-      <Pad amt={70} />
+      <Pad amt={30} />
       <LastPosts />
       <Pad amt={70} />
       <AvailableOptions properties={properties.properties} />
