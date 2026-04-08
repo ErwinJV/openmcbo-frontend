@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Button from "../Button";
-import { IoArrowForward } from "react-icons/io5";
+import {
+  IoArrowForward,
+  IoChevronBack,
+  IoChevronForward,
+} from "react-icons/io5";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 
@@ -80,9 +84,9 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
   };
 
   return (
-    <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl">
+    <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl group">
       <div
-        className="relative w-full h-[286.65px] md:h-[318.28px] lg:h-[346px] bg-[#EFF2F9] overflow-hidden"
+        className="relative group w-full h-[286.65px] md:h-[318.28px] lg:h-[346px] bg-[#EFF2F9] overflow-hidden"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -105,11 +109,11 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
               ) : (
                 <Image
                   alt={`${title} - Imagen ${index + 1}`}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full pointer-events-none select-none"
                   height={346}
                   src={src}
                   width={360}
-                  quality={50}
+                  quality={70}
                   loading="lazy"
                 />
               )}
@@ -117,15 +121,50 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
           ))}
         </div>
 
+        {/* Flechas de navegación (Angle Left / Angle Right) */}
+        {srcImg.length > 1 && (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 bg-white/80 hover:bg-white rounded-full text-gray-800 shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10"
+              aria-label="Imagen anterior"
+            >
+              <IoChevronBack size={20} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 bg-white/80 hover:bg-white rounded-full text-gray-800 shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10"
+              aria-label="Siguiente imagen"
+            >
+              <IoChevronForward size={20} />
+            </button>
+          </>
+        )}
+
         {/* Indicadores de puntos */}
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {srcImg.map((_, index) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === currentImage ? "bg-white scale-125" : "bg-white/50"
               }`}
-              onClick={() => goToImage(index)}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToImage(index);
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
               aria-label={`Ir a imagen ${index + 1}`}
             />
           ))}
@@ -141,6 +180,7 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
           >
             {title}
           </h1>
+
           <h2 className="font-semibold text-[#8F909A] text-[14.56px] md:text-[16.51px] lg:text-[18px] w-[50px] md:w-[56px] lg:w-[61px] ">
             ${price.toLocaleString("us")}
           </h2>

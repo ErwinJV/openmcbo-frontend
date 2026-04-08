@@ -81,7 +81,9 @@ export default function PropertyDescription({
           </li>
         </ul>
         <TextFade buttonComponent={MyCustomButton} maxHeight="120px">
-          <p className="text-[#757680] text-[16px] h-full ">{description}</p>
+          <pre className="text-[#757680] text-[16px] h-full ">
+            {description}
+          </pre>
         </TextFade>
       </div>
     </article>
