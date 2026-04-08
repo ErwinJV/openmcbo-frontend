@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "Tu Inmobiliaria en Maracaibo",
 };
 
-export const revalidate = 60 * 60 * 24 * 365;
+export const revalidate = 3600; // Revalidate every hour (3600 seconds)
 
 export default function RootLayout({
   children,
