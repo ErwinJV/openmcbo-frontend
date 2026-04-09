@@ -43,17 +43,21 @@ export default function Paginator({ totalElements }: PaginatorProps) {
     }
 
     for (let i = startPage; i <= endPage; i++) {
+      const isActive = currentPage === i;
       pages.push(
         <button
           key={i}
           onClick={() => handlePageChange((i - 1) * limit)}
+          aria-current={isActive ? "page" : undefined}
           className={`
-            flex items-center justify-center
-            px-2 py-1 mx-0.5 rounded-md transition-colors duration-200 
-            bg-white text-black border border-gray-300
-            hover:bg-white hover:text-black
-            sm:px-3 sm:py-2 sm:mx-1
-            ${currentPage === i ? "bg-blue-600 text-white hover:text-white" : ""}
+            min-w-[2.5rem] h-10 flex items-center justify-center
+            px-3 py-2 mx-0.5 rounded-md transition-all duration-200 
+            text-sm font-medium
+            ${
+              isActive
+                ? "bg-[#003593] text-white shadow-md border border-[#003593]"
+                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-[#003593]"
+            }
           `}
         >
           {i}
@@ -63,52 +67,55 @@ export default function Paginator({ totalElements }: PaginatorProps) {
     return pages;
   };
 
+  if (totalPages <= 1) return null; // No renderizar si solo hay 1 página
+
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 my-6 sm:my-8 md:space-x-2">
+    <nav
+      aria-label="Navegación de páginas"
+      className="flex flex-wrap items-center justify-center gap-2 my-8 w-full"
+    >
       {/* Botón Anterior */}
       <button
         onClick={() => handlePageChange(Math.max(0, (currentPage - 2) * limit))}
         disabled={currentPage === 1}
+        aria-label="Página anterior"
         className={`
-          flex items-center justify-center order-2 sm:order-1
-          px-3 py-2 rounded-md bg-[#003593] border border-gray-300 
-          text-white transition-colors duration-200
-          disabled:opacity-70
-          disabled:cursor-not-allowed
-          hover:bg-white hover:text-black
-          w-full sm:w-auto text-sm sm:text-base
+          flex items-center justify-center h-10 px-3 sm:px-4 rounded-md 
+          transition-all duration-200 text-sm font-medium
+          ${
+            currentPage === 1
+              ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60"
+              : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-[#003593] active:bg-gray-100"
+          }
         `}
       >
-        <IoChevronBack className="mr-1 text-base sm:text-lg" />
-        <span className="sm:hidden">Prev</span>
+        <IoChevronBack className="mr-1 text-lg" />
         <span className="hidden sm:inline">Anterior</span>
       </button>
 
       {/* Números de página */}
-      <div className="flex items-center justify-center order-1 sm:order-2 overflow-x-auto w-full sm:w-auto">
-        <div className="flex space-x-1 px-2 sm:px-0">
-          {generatePageNumbers()}
-        </div>
+      <div className="flex items-center justify-center overflow-x-auto no-scrollbar">
+        {generatePageNumbers()}
       </div>
 
       {/* Botón Siguiente */}
       <button
         onClick={() => handlePageChange(currentPage * limit)}
         disabled={currentPage === totalPages}
+        aria-label="Página siguiente"
         className={`
-          flex items-center justify-center order-3
-          px-3 py-2 rounded-md bg-[#003593] border border-gray-300 
-          text-white transition-colors duration-200
-          disabled:cursor-not-allowed
-          disabled:opacity-70
-          hover:bg-white hover:text-black
-          w-full sm:w-auto text-sm sm:text-base
+          flex items-center justify-center h-10 px-3 sm:px-4 rounded-md 
+          transition-all duration-200 text-sm font-medium
+          ${
+            currentPage === totalPages
+              ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60"
+              : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-[#003593] active:bg-gray-100"
+          }
         `}
       >
-        <span className="sm:hidden">Next</span>
         <span className="hidden sm:inline">Siguiente</span>
-        <IoChevronForward className="ml-1 text-base sm:text-lg" />
+        <IoChevronForward className="ml-1 text-lg" />
       </button>
-    </div>
+    </nav>
   );
 }
