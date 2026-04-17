@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       new URL("https://picsum.photos/**"),
       new URL("https://lh3.googleusercontent.com/**"),
       new URL("https://res.cloudinary.com/**"),
+      new URL("https://cdnjs.cloudflare.com/**"),
     ],
   },
 };
