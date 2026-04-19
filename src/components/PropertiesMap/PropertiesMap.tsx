@@ -27,11 +27,11 @@ interface PropertiesMapProps {
   height?: string;
 }
 
-const PropertiesMap: React.FC<PropertiesMapProps> = ({
+export default function PropertiesMap({
   main_property,
   relatives_properties,
   height = "450px",
-}) => {
+}: PropertiesMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -293,6 +293,4 @@ const PropertiesMap: React.FC<PropertiesMapProps> = ({
       `}</style>
     </div>
   );
-};
-
-export default PropertiesMap;
+}
