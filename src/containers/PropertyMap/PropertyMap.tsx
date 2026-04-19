@@ -4,32 +4,33 @@ import dynamic from "next/dynamic";
 // import { useEffect, useState } from "react";
 
 interface PropertyMapProps {
-  lat: number;
-  long: number;
+  main_property: {
+    lat: number;
+    long: number;
+    title: string;
+  };
+  relatives_properties: {
+    lat: number;
+    long: number;
+    title: string;
+  }[];
 }
 
-export default function PropertyMap({ lat, long }: PropertyMapProps) {
-  const LeafletMap = dynamic(
-    () => import("../../components/LeafletMap/LeafletMap"),
-    {
-      ssr: false,
-      loading: () => (
-        <div
-          style={{
-            height: "400px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          Cargando mapa...
-        </div>
-      ),
-    }
-  );
+export default function PropertyMap({
+  main_property,
+  relatives_properties,
+}: PropertyMapProps) {
+  const LeafletMap = dynamic(() => import("@/components/PropertiesMap"), {
+    ssr: false,
+  });
+
+  // const [isClient, setIsClient] = useState(false);
   return (
     <>
-      <LeafletMap lat={lat} lng={long} />
+      <LeafletMap
+        main_property={main_property}
+        relatives_properties={relatives_properties}
+      />
     </>
   );
 }

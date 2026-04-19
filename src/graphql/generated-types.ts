@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
 };
 
 export type AuthInput = {
@@ -152,8 +153,8 @@ export type PropertiesDataResponse = {
 export type Property = {
   /** Area in square meters of the property */
   area: Scalars['Int']['output'];
-  /** Property's date creation in epoch format (milliseconds) by Date.now(). Example: "1519211809934" */
-  created_at?: Maybe<Scalars['Float']['output']>;
+  /** Property's creation date in ISO format. Example: "2023-01-01T00:00:00.000Z" */
+  created_at?: Maybe<Scalars['DateTime']['output']>;
   /** Property's description. Max character length: 125, Example: "Apartamento amplio, con 4 habitaciones, comedor, dos banos y una sala, etc."  */
   description: Scalars['String']['output'];
   /** Property's id (uuid). Example: "f7d27564-939c-42f2-90f8-ee8eece4bc8c" */
@@ -186,8 +187,8 @@ export type Property = {
   title: Scalars['String']['output'];
   /** Property's type. Example: "HOUSE" */
   type: PropertyType;
-  /** Property's last update date in epoch format (milliseconds) by Date.now() method. Example: "1519211809934" */
-  updated_at?: Maybe<Scalars['Float']['output']>;
+  /** Property's last update date in ISO format. Example: "2023-01-01T00:00:00.000Z" */
+  updated_at?: Maybe<Scalars['DateTime']['output']>;
   /** Property's user creator */
   user: User;
   /** Property's user id creator. Example: "1b8800a2-2385-403a-893b-3eba76ba4608"  */
@@ -359,8 +360,8 @@ export type UpdateUserInput = {
 };
 
 export type User = {
-  /** Users's date creation in epoch format (milliseconds) by Date.now(). Example: "1519211809934" */
-  created_at: Scalars['Float']['output'];
+  /** Users's date creation in ISO format. Example: "2023-01-01T00:00:00.000Z" */
+  created_at: Scalars['DateTime']['output'];
   /** User's email, must be unique. Example: "example@email.com" */
   email: Scalars['String']['output'];
   /** User's id (uuid), Example: "c2793525-56c5-4fce-8240-f2d32d9fc695" */
@@ -379,8 +380,8 @@ export type User = {
   properties?: Maybe<Array<Property>>;
   /** Contains the user roles: Array  Example: ['USER', 'ADMIN'] */
   roles: Array<Scalars['String']['output']>;
-  /** Property's last update date in epoch format (milliseconds) by Date.now(). Example: "1519211809934" */
-  updated_at: Scalars['Float']['output'];
+  /** User's last update date in ISO format. Example: "2023-01-01T00:00:00.000Z" */
+  updated_at: Scalars['DateTime']['output'];
 };
 
 export type UserUpdateResponse = {
@@ -399,7 +400,7 @@ export type GetPropertiesQueryVariables = Exact<{
 }>;
 
 
-export type GetPropertiesQuery = { properties: { total: number, properties: Array<{ id: string, title: string, slug: string, status: PropertyStatus, type: PropertyType, description: string, place: string, lat?: number | null, long?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_pools?: number | null, num_parking_lot?: number | null, created_at?: number | null, updated_at?: number | null, user: { id: string, name: string, last_name: string, email: string }, images?: Array<{ url: string }> | null }> } };
+export type GetPropertiesQuery = { properties: { total: number, properties: Array<{ id: string, title: string, slug: string, status: PropertyStatus, type: PropertyType, description: string, place: string, lat?: number | null, long?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_pools?: number | null, num_parking_lot?: number | null, created_at?: any | null, updated_at?: any | null, user: { id: string, name: string, last_name: string, email: string }, images?: Array<{ url: string }> | null }> } };
 
 export type GetPropertyQueryVariables = Exact<{
   term: Scalars['String']['input'];

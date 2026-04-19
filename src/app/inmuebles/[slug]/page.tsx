@@ -16,6 +16,9 @@ import { GetPropertyQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
 import { notFound } from "next/navigation";
 import { SwiperOptions } from "swiper/types";
+import dynamic from "next/dynamic";
+import { title } from "process";
+import PropertyMap from "@/containers/PropertyMap";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -107,6 +110,8 @@ const getFilteredProperties = async (
             title
             price
             slug
+            lat
+            long
             description
             images {
               id
@@ -208,9 +213,30 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       url: `/inmuebles/${prop.slug}`,
     }));
 
+  const locations = properties.map((prop) => ({
+    lat: prop.lat || 0,
+    long: prop.long || 0,
+    title: prop.title,
+  }));
+
+  const mainLocation = {
+    lat: propertyBySlug.lat || 0,
+    long: propertyBySlug.long || 0,
+    title: propertyBySlug.title,
+  };
+
   return (
     <>
       <PropertySection property={propertyBySlug} />
+      <Pad amt={50} />
+
+      <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
+        <PropertyMap
+          main_property={mainLocation}
+          relatives_properties={locations}
+        />
+      </section>
+
       {/* <Pad amt={100} />
       <MapSection
         lat={propertyBySlug.lat || 0}
