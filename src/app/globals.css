@@ -1,6 +1,10 @@
 @layer theme, base, mui, components, utilities;
 @import "tailwindcss";
 
+pre {
+  @apply font-sans;
+}
+
 .btn {
   @apply flex items-center justify-center w-full;
 }
