@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button";
+import { WHATSAPP_URL_BUY } from "@/schema/contact";
 export default function WhatWeDo() {
   return (
     <section className="w-full  p-5 bg-[#EFF2F9] py-12 ">
@@ -22,7 +23,11 @@ export default function WhatWeDo() {
             Si tienes preguntas o consultas sobre la propiedad que deseas
             adquirir, no dudes en contactar nuestros servicios
           </p>
-          <Link href="#" className="w-auto md:self-center lg:self-start">
+          <Link
+            href={WHATSAPP_URL_BUY}
+            className="w-auto md:self-center lg:self-start"
+            target="_blank"
+          >
             <Button size="medium" text="Contactanos" variant="filled" />
           </Link>
         </div>

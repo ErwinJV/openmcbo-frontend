@@ -1,6 +1,5 @@
-// page.tsx (modificado)
 import Pad from "@/components/Pad";
-// import MapSection from "@/containers/MapSection";
+
 import PropertiesSlider from "@/containers/PropertiesSlider";
 import PropertySection from "@/containers/PropertySection";
 import PropertyNotAvailable from "@/components/PropertyNotAvailable";
@@ -16,8 +15,7 @@ import { GetPropertyQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
 import { notFound } from "next/navigation";
 import { SwiperOptions } from "swiper/types";
-import dynamic from "next/dynamic";
-import { title } from "process";
+
 import PropertyMap from "@/containers/PropertyMap";
 
 interface PropertyPageProps {
@@ -42,7 +40,7 @@ const getProperties = async () => {
 };
 
 export async function generateStaticParams() {
-  const properties = await getProperties(); // Trae una lista de IDs desde NeonDB
+  const properties = await getProperties();
 
   const propertiesSlug = properties.properties.properties.map((property) => ({
     slug: property.slug,

@@ -80,7 +80,7 @@ export default function PropertiesSlider({
         breakpoints={breakpoints ? breakpoints : defaultBreakpoints}
       >
         {cards.map((card, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={card.url}>
             <div className="h-full">
               <Card
                 price={card.price}
