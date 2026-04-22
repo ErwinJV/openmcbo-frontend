@@ -46,6 +46,7 @@ const getFilteredProperties = async (
             area
             price
             slug
+            main_picture_url
             images {
               id
               url

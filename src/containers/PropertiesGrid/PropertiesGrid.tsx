@@ -24,6 +24,7 @@ export default function PropertiesGrid({ properties }: PropertiesGridProps) {
             }
             title={property.title}
             url={`/inmuebles/${property.slug}`}
+            main_picture={property.main_picture_url || ""}
             key={property.id}
           />
         ))}

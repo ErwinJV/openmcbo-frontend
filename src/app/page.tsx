@@ -20,6 +20,7 @@ const lastProperties = async () => {
               price
               slug
               description
+              main_picture_url
               images {
                 id
                 url

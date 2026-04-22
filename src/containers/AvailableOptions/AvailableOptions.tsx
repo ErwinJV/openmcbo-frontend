@@ -130,6 +130,7 @@ export default async function AvailableOptions({
     srcImg: property.images ? property.images.map((img) => img.url) : [],
     title: property.title,
     url: `/inmuebles/${property.slug}`,
+    main_picture: property.main_picture_url || "",
   }));
 
   return (

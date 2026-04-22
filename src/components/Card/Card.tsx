@@ -13,20 +13,31 @@ interface CardProps {
   srcImg: string[];
   title: string;
   url: string;
+  main_picture: string;
 }
 
-export default function Card({ price, srcImg, title, url }: CardProps) {
+export default function Card({
+  price,
+  srcImg,
+  title,
+  url,
+  main_picture,
+}: CardProps) {
   const [currentImage, setCurrentImage] = useState(0);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
   const nextImage = useCallback(() => {
-    setCurrentImage((prev) => (prev === srcImg.length - 1 ? 0 : prev + 1));
+    setCurrentImage((prev) =>
+      prev === [main_picture, ...srcImg].length - 1 ? 0 : prev + 1,
+    );
   }, [srcImg.length]);
 
   const prevImage = useCallback(() => {
-    setCurrentImage((prev) => (prev === 0 ? srcImg.length - 1 : prev - 1));
+    setCurrentImage((prev) =>
+      prev === 0 ? [main_picture, ...srcImg].length - 1 : prev - 1,
+    );
   }, [srcImg.length]);
 
   const goToImage = (index: number) => {
@@ -100,8 +111,8 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
           className="flex transition-transform duration-300 ease-out h-full"
           style={{ transform: `translateX(-${currentImage * 100}%)` }}
         >
-          {srcImg.map((src, index) => (
-            <div key={index} className="flex-shrink-0 w-full h-full">
+          {[main_picture, ...srcImg].map((src, index) => (
+            <div key={src + index} className="flex-shrink-0 w-full h-full">
               {!src ? (
                 <div className="w-full h-full flex items-center justify-center bg-gray-200">
                   <span className="text-gray-500">Sin imagen</span>
@@ -122,7 +133,7 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
         </div>
 
         {/* Flechas de navegación (Angle Left / Angle Right) */}
-        {srcImg.length > 1 && (
+        {[main_picture, ...srcImg].length > 1 && (
           <>
             <button
               onClick={(e) => {
@@ -153,7 +164,7 @@ export default function Card({ price, srcImg, title, url }: CardProps) {
 
         {/* Indicadores de puntos */}
         <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-          {srcImg.map((_, index) => (
+          {[main_picture, ...srcImg].map((_, index) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full transition-all ${

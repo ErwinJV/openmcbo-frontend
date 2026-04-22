@@ -262,7 +262,7 @@ export default function PropertiesMap({
     <div className="properties-map-wrapper" style={{ width: "100%" }}>
       <div
         ref={mapContainerRef}
-        className="properties-map-container z-1"
+        className="properties-map-container"
         style={{
           width: "100%",
           height: height,
