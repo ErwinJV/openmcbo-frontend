@@ -95,7 +95,11 @@ export default function Card({
   };
 
   return (
-    <div className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl group">
+    <Link
+      href={url}
+      className="flex flex-col w-[298.8px] md:w-[332px] lg:w-[360px] h-[431.1px] md:h-[479px] lg:h-[519px] shadow-xl group"
+      target="_blank"
+    >
       <div
         className="relative group w-full h-[286.65px] md:h-[318.28px] lg:h-[346px] bg-[#EFF2F9] overflow-hidden"
         onMouseDown={onMouseDown}
@@ -197,7 +201,7 @@ export default function Card({
           </h2>
         </div>
 
-        <Link href={url} className="md:hidden self-start" target="_blank">
+        <div className="md:hidden self-start">
           <Button
             size="small"
             variant="text"
@@ -205,12 +209,8 @@ export default function Card({
             text="Ver completo"
             removePadding
           />
-        </Link>
-        <Link
-          href={url}
-          className="hidden md:inline lg:hidden self-start"
-          target="_blank"
-        >
+        </div>
+        <div className="hidden md:inline lg:hidden self-start">
           <Button
             size="medium"
             variant="text"
@@ -218,12 +218,8 @@ export default function Card({
             text="Ver completo"
             removePadding
           />
-        </Link>
-        <Link
-          href={url}
-          className="hidden lg:inline self-start"
-          target="_blank"
-        >
+        </div>
+        <div className="hidden lg:inline self-start">
           <Button
             size="large"
             variant="text"
@@ -231,8 +227,8 @@ export default function Card({
             text="Ver completo"
             removePadding
           />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

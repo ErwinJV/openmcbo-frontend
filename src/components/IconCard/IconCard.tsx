@@ -19,9 +19,11 @@ export default function IconCard({
   link,
 }: IconCardProps) {
   return (
-    <div
+    <Link
+      href={link}
+      target="_blank"
       className="
-        flex flex-col items-center justify-center text-center
+        flex flex-col items-center justify-center
         bg-[#F5F7FB] rounded-2xl
         w-full max-w-[360px] h-auto min-h-[460px]
         md:max-w-[320px] md:min-h-[460px]
@@ -29,6 +31,7 @@ export default function IconCard({
         px-6 py-8
         md:px-5 md:py-6
         sm:px-4 sm:py-4
+        transition-transform duration-300 ease-in-out hover:scale-105
       "
     >
       {/* Contenedor del icono - CÍRCULO FIJO Y UNIFORME */}
@@ -79,6 +82,7 @@ export default function IconCard({
           md:text-3xl md:mb-2
           sm:text-xl sm:mb-2
           w-full
+          text-center
         "
       >
         {title}
@@ -92,24 +96,21 @@ export default function IconCard({
           md:text-xl md:mb-4
           sm:text-lg sm:mb-3
           w-full
+          text-justify
         "
       >
         {description}
       </p>
 
       {/* Botón */}
-      <Link
-        href={link}
-        className="w-auto self-center mt-auto pt-2"
-        target="_blank"
-      >
+      <div className="w-auto self-center mt-auto pt-2">
         <Button
           size="large"
           rightIcon={<IoArrowForward className="text-blue-700" />}
           variant="text"
           text="Contactanos"
         />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }

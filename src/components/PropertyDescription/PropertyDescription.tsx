@@ -3,6 +3,7 @@ import Image from "next/image";
 import TextFade from "../TextFade";
 
 import MyCustomButton from "./MyCustomButton";
+import Pad from "../Pad";
 
 interface PropertyDescriptionProps {
   area: number;
@@ -50,6 +51,7 @@ export default function PropertyDescription({
         <h3 className=" text-black  text-lg md:text-xl xl:text-2xl ">
           {place}
         </h3>
+        <Pad amt={20} />
         <ul className="flex space-x-4 w-full justify-between flex-wrap ">
           <li className="flex flex-col justify-center ">
             <h5 className="lg:text-xl font-bold">Area</h5>
@@ -80,6 +82,7 @@ export default function PropertyDescription({
             </p>
           </li>
         </ul>
+        <Pad amt={20} />
         <TextFade buttonComponent={MyCustomButton} maxHeight="120px">
           <p className="text-[#757680] text-[16px] h-100 overflow-y-auto w-full whitespace-pre-wrap break-words ">
             {description}
