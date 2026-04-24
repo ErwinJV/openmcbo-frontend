@@ -12,8 +12,8 @@ export default function AboutUsPage() {
           <Image
             src="/img/about-us.webp"
             className="w-full h-full object-cover"
-            width={2040}
-            height={1080}
+            width={2160}
+            height={1440}
             alt="Sobre Nosotros"
           />
         </div>

@@ -36,7 +36,7 @@ export default function PropertyDescription({
           alt="Property article image"
           className="object-cover w-full h-full"
           height={320}
-          quality={60}
+          quality={95}
           src={imgUrl}
           width={480}
         />

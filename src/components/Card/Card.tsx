@@ -125,10 +125,10 @@ export default function Card({
                 <Image
                   alt={`${title} - Imagen ${index + 1}`}
                   className="object-cover w-full h-full pointer-events-none select-none"
-                  height={346}
+                  height={1080}
                   src={src}
-                  width={360}
-                  quality={70}
+                  width={1080}
+                  quality={90}
                   loading="lazy"
                 />
               )}

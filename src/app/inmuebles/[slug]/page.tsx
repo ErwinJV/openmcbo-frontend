@@ -67,6 +67,7 @@ const getProperty = async (slug: string) => {
           lat
           long
           num_bedrooms
+          main_picture_url
           images {
             id
             url

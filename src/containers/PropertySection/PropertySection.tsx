@@ -44,7 +44,10 @@ export default function PropertySection({ property }: PropertySectionProps) {
       {property.images && (
         <GalleryWrapper targetView="pics">
           <FancyBoxWrapper>
-            <GalleryPics pics={property.images ? property.images : null} />
+            <GalleryPics
+              pics={property.images ? property.images : null}
+              main_picture={property.main_picture_url || ""}
+            />
           </FancyBoxWrapper>
         </GalleryWrapper>
       )}
@@ -83,7 +86,7 @@ export default function PropertySection({ property }: PropertySectionProps) {
         <PropertyDescription
           area={100}
           description={property.description}
-          imgUrl={property?.images[0].url}
+          imgUrl={property?.main_picture_url || ""}
           place={property.place}
           price={property.price}
           title={property.title}
