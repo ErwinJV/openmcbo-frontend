@@ -1,6 +1,5 @@
-// page.tsx (modificado)
 import Pad from "@/components/Pad";
-// import MapSection from "@/containers/MapSection";
+
 import PropertiesSlider from "@/containers/PropertiesSlider";
 import PropertySection from "@/containers/PropertySection";
 import PropertyNotAvailable from "@/components/PropertyNotAvailable";
@@ -16,8 +15,7 @@ import { GetPropertyQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
 import { notFound } from "next/navigation";
 import { SwiperOptions } from "swiper/types";
-import dynamic from "next/dynamic";
-import { title } from "process";
+
 import PropertyMap from "@/containers/PropertyMap";
 
 interface PropertyPageProps {
@@ -42,7 +40,7 @@ const getProperties = async () => {
 };
 
 export async function generateStaticParams() {
-  const properties = await getProperties(); // Trae una lista de IDs desde NeonDB
+  const properties = await getProperties();
 
   const propertiesSlug = properties.properties.properties.map((property) => ({
     slug: property.slug,
@@ -113,6 +111,7 @@ const getFilteredProperties = async (
             lat
             long
             description
+            main_picture_url
             images {
               id
               url
@@ -150,6 +149,34 @@ const breakpoints: SwiperOptions["breakpoints"] = {
     slidesPerView: 1.3,
     spaceBetween: 16,
   },
+  500: {
+    slidesPerView: 1.4,
+    spaceBetween: 16,
+  },
+
+  560: {
+    slidesPerView: 1.5,
+    spaceBetween: 16,
+  },
+  610: {
+    slidesPerView: 1.6,
+    spaceBetween: 16,
+  },
+
+  630: {
+    slidesPerView: 1.7,
+    spaceBetween: 10,
+  },
+
+  650: {
+    slidesPerView: 1.8,
+    spaceBetween: 10,
+  },
+
+  700: {
+    slidesPerView: 1.9,
+    spaceBetween: 10,
+  },
   // Tablet estándar (actualizado de 680 a 768)
   768: {
     slidesPerView: 2,
@@ -157,23 +184,14 @@ const breakpoints: SwiperOptions["breakpoints"] = {
   },
   // Desktop estándar (faltaba este salto, de 680 a 1440 era muy brusco)
   1024: {
-    slidesPerView: 1.7,
+    slidesPerView: 1.8,
     spaceBetween: 24,
   },
-  1240: {
-    slidesPerView: 3,
+  1280: {
+    slidesPerView: 2.6,
     spaceBetween: 24,
   },
   // Large desktop: 3.5 cards
-  1440: {
-    slidesPerView: 2.3,
-    spaceBetween: 24,
-  },
-  // Extra large desktop: 4 cards
-  1920: {
-    slidesPerView: 2,
-    spaceBetween: 24,
-  },
 };
 
 export default async function PropertyPage({ params }: PropertyPageProps) {
@@ -206,6 +224,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   const cards = properties
     .filter((prop) => prop.id !== propertyBySlug?.id)
     .map((prop) => ({
+      main_picture: prop.main_picture_url || "",
       description: prop.description,
       price: prop.price,
       srcImg: prop.images ? prop.images.map((img) => img.url) : [],
@@ -228,7 +247,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   return (
     <>
       <PropertySection property={propertyBySlug} />
-      <Pad amt={50} />
+      <Pad amt={100} />
 
       <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
         <PropertyMap

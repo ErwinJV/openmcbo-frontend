@@ -26,7 +26,14 @@ export default function PropertySection({ property }: PropertySectionProps) {
             has360Pics={
               property.images360 && property.images360.length > 0 ? true : false
             }
-            hasPics={!!property.images && property.images.length > 0}
+            hasPics={
+              !!property.images &&
+              property.images.length > 0 &&
+              ((property.videos && property.videos.length > 0) ||
+                (property.images360 && property.images360.length > 0))
+                ? true
+                : false
+            }
             hasVideos={
               property.videos && property.videos.length > 0 ? true : false
             }
@@ -57,7 +64,14 @@ export default function PropertySection({ property }: PropertySectionProps) {
           has360Pics={
             property.images360 && property.images360.length > 0 ? true : false
           }
-          hasPics={!!property.images && property.images.length > 0}
+          hasPics={
+            !!property.images &&
+            property.images.length > 0 &&
+            ((property.videos && property.videos.length > 0) ||
+              (property.images360 && property.images360.length > 0))
+              ? true
+              : false
+          }
           hasVideos={
             property.videos && property.videos.length > 0 ? true : false
           }

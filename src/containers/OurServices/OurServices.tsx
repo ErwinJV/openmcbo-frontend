@@ -1,27 +1,36 @@
 import IconCard from "@/components/IconCard";
+import {
+  WHATSAPP_URL_BUY,
+  WHATSAPP_URL_RENT,
+  WHATSAPP_URL_SELL,
+} from "@/schema/contact";
 
 const services: {
   iconSrc: string;
   title: string;
   description: string;
+  link: string;
 }[] = [
   {
     description:
-      "Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.",
+      "Haz realidad el sueño de tener casa propia. Contamos con un catálogo exclusivo de propiedades en las mejores zonas y te guiamos en cada paso del proceso de compra.",
     iconSrc: "/icons/house-service.svg",
     title: "Comprar",
+    link: WHATSAPP_URL_BUY,
   },
   {
     description:
-      "Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.",
+      "¿Buscas un nuevo comienzo? Te ofrecemos opciones flexibles de alquiler que se ajustan a tu presupuesto, con un proceso de selección ágil y acompañamiento legal garantizado.",
     iconSrc: "/icons/building-service.svg",
     title: "Alquilar",
+    link: WHATSAPP_URL_RENT,
   },
   {
     description:
-      "Lorem ipsum dolor sit amet consecte adipiscing elit amet hendrerit pretium nulla sed enim iaculis mi.",
+      "Ponemos tu inmueble frente a los compradores correctos. Con nuestra asesoría técnica y legal, vendes más rápido, de forma segura y al mejor precio del mercado actual.",
     iconSrc: "/icons/key-service.svg",
     title: "Vender",
+    link: WHATSAPP_URL_SELL,
   },
 ];
 export default function OurServices() {
@@ -42,6 +51,7 @@ export default function OurServices() {
               key={service.title + service.description}
               iconSrc={service.iconSrc}
               title={service.title}
+              link={service.link}
             />
           ))}
         </div>

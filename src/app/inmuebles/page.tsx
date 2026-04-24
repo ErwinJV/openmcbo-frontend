@@ -15,6 +15,8 @@ import { gql } from "@apollo/client";
 import Paginator from "@/components/Paginator";
 import SearchResults from "@/components/SearchResults";
 
+import VisualLoadingTrigger from "@/components/VisualLoadingTrigger";
+
 interface PropertiesPageProps {
   searchParams: Promise<PropertyFilterInput & PaginationDto>;
 }
@@ -44,6 +46,7 @@ const getFilteredProperties = async (
             area
             price
             slug
+            main_picture_url
             images {
               id
               url
@@ -115,6 +118,7 @@ export default async function PropertiesPage({
       }}
     >
       <>
+        <VisualLoadingTrigger />
         <PropertiesHero
           propertyStatus={status as PropertyStatus}
           propertyType={type as PropertyType}
@@ -137,7 +141,23 @@ export default async function PropertiesPage({
         ) : (
           <>
             <PropertiesGrid properties={properties} />
-            <Paginator totalElements={total} />
+
+            <Paginator
+              totalElements={total}
+              searchParams={{
+                limit,
+                max_area,
+                min_area,
+                num_bathrooms,
+                num_bedrooms,
+                num_parking_lot,
+                term,
+                status,
+                type,
+                offset,
+                order,
+              }}
+            />
           </>
         )}
       </>

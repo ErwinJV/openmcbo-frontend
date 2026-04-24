@@ -9,7 +9,7 @@ interface PropertiesGridProps {
 export default function PropertiesGrid({ properties }: PropertiesGridProps) {
   return (
     <div className="my-12 w-full flex justify-center">
-      <div className="  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-24 ">
+      <div className="  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 ">
         {properties.map((property) => (
           <Card
             price={property.price}
@@ -24,6 +24,7 @@ export default function PropertiesGrid({ properties }: PropertiesGridProps) {
             }
             title={property.title}
             url={`/inmuebles/${property.slug}`}
+            main_picture={property.main_picture_url || ""}
             key={property.id}
           />
         ))}

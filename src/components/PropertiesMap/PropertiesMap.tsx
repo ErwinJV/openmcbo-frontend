@@ -269,28 +269,83 @@ export default function PropertiesMap({
           borderRadius: "8px",
           overflow: "hidden",
           boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+          position: "relative", // Añadir position relative
+          zIndex: 1, // Establecer un z-index bajo
         }}
       />
       <style jsx>{`
         .properties-map-wrapper {
           position: relative;
           width: 100%;
+          z-index: 1; /* Asegurar que el wrapper tenga z-index bajo */
+        }
+
+        .properties-map-container {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Resetear z-index de elementos internos de Leaflet */
+        .properties-map-container :global(.leaflet-map-pane) {
+          z-index: 2 !important;
+        }
+
+        .properties-map-container :global(.leaflet-control) {
+          z-index: 7 !important;
+        }
+
+        .properties-map-container :global(.leaflet-top),
+        .properties-map-container :global(.leaflet-bottom) {
+          z-index: 10 !important;
         }
 
         .properties-map-container :global(.leaflet-control-attribution) {
           font-size: 10px;
+          z-index: 5 !important;
         }
 
-        .properties-map-container :global(.leaflet-container) {
-          z-index: 1;
+        /* Asegurar que los popups aparezcan por encima de todo */
+        .properties-map-container :global(.leaflet-popup) {
+          z-index: 20 !important;
+        }
+
+        .properties-map-container :global(.leaflet-popup-pane) {
+          z-index: 20 !important;
         }
 
         .properties-map-container :global(.custom-main-marker) {
           filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+          z-index: 1000 !important;
         }
 
         .properties-map-container :global(.custom-relative-marker) {
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+          z-index: 500 !important;
+        }
+
+        .properties-map-container :global(.leaflet-container) {
+          z-index: 1 !important;
+        }
+
+        /* Asegurar que el contenedor del mapa no se superponga a elementos flotantes */
+        .properties-map-container :global(.leaflet-pane) {
+          z-index: 1 !important;
+        }
+
+        .properties-map-container :global(.leaflet-overlay-pane) {
+          z-index: 4 !important;
+        }
+
+        .properties-map-container :global(.leaflet-shadow-pane) {
+          z-index: 5 !important;
+        }
+
+        .properties-map-container :global(.leaflet-marker-pane) {
+          z-index: 6 !important;
+        }
+
+        .properties-map-container :global(.leaflet-tooltip-pane) {
+          z-index: 7 !important;
         }
       `}</style>
     </div>

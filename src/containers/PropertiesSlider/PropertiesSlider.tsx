@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,6 +10,7 @@ import { SwiperOptions } from "swiper/types";
 
 interface CardData {
   description: string;
+  main_picture: string;
   price: number;
   srcImg: string[];
   title: string;
@@ -60,17 +61,24 @@ export default function PropertiesSlider({
   return (
     <div className="w-full max-w-full min-w-0 mx-auto relative">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Pagination, Autoplay]}
         spaceBetween={16}
         slidesPerView={1}
         loop={true}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+        allowTouchMove={false}
+        onTouchMove={(e) => {
+          //pause slider
+          e.autoplay.pause();
+        }}
+        onTouchEnd={(e) => {
+          setTimeout(() => {
+            e.autoplay.resume();
+          }, 3000);
         }}
         pagination={{
           clickable: true,
@@ -79,14 +87,15 @@ export default function PropertiesSlider({
         }}
         breakpoints={breakpoints ? breakpoints : defaultBreakpoints}
       >
-        {cards.map((card, index) => (
-          <SwiperSlide key={index}>
+        {cards.map((card) => (
+          <SwiperSlide key={card.url}>
             <div className="h-full">
               <Card
                 price={card.price}
                 srcImg={card.srcImg ? card.srcImg.slice(0, 3) : []}
                 title={card.title}
                 url={card.url}
+                main_picture={card.main_picture}
               />
             </div>
           </SwiperSlide>
