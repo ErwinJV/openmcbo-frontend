@@ -17,3 +17,9 @@ const DEFAULT_MESSAGE_SELL = `Hola, estoy interesado en vender una propiedad. ¿
 export const WHATSAPP_URL_SELL = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
   DEFAULT_MESSAGE_SELL,
 )}`;
+
+export const customMessagesByProperty = (title: string) => {
+  const message = `Hola, estoy interesado en la propiedad "${title}". ¿Podrían brindarme más información?`;
+
+  return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+};

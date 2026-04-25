@@ -17,6 +17,7 @@ import { notFound } from "next/navigation";
 import { SwiperOptions } from "swiper/types";
 
 import PropertyMap from "@/containers/PropertyMap";
+import ContactProperty from "@/components/ContactProperty";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -273,6 +274,10 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       ) : (
         <></>
       )}
+      <ContactProperty
+        price={propertyBySlug.price.toLocaleString("us")}
+        title={propertyBySlug.title}
+      />
     </>
   );
 }

@@ -28,7 +28,7 @@ const socialLinks: Readonly<
 
 export default function Footer() {
   return (
-    <footer className="w-full max-h-92  bg-white pt-12">
+    <footer className="w-full max-h-92  bg-white pt-12" id="footer">
       <div className="w-full flex flex-col  container mx-auto ">
         <nav className="w-full mx-auto  space-y-5  flex flex-col lg:flex-row lg:space-y-0  items-center justify-around pb-8 ">
           <Link href="/">
