@@ -44,7 +44,7 @@ export default function OurServices() {
           Te acompañamos en todo el proceso para consignar el lugar de tus
           sueños
         </p>
-        <div className="w-full flex justify-center space-x-4  flex-wrap ">
+        <div className="w-full flex justify-center space-y-4 lg:space-y-0 space-x-4  flex-wrap ">
           {services.map((service) => (
             <IconCard
               description={service.description}
