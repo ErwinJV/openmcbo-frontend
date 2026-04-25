@@ -258,11 +258,6 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
         />
       </section>
 
-      {/* <Pad amt={100} />
-      <MapSection
-        lat={propertyBySlug.lat || 0}
-        long={propertyBySlug.long || 0}
-      /> */}
       <Pad amt={30} />
       {cards.length !== 0 ? (
         <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
