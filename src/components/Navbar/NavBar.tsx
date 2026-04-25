@@ -11,7 +11,10 @@ const links: Readonly<{ href: string; label: string }[]> = [
 
 export default function NavBar() {
   return (
-    <header className="w-full h-[80px] md:h-[160px] lg:h-[110px] flex md:items-center bg-white relative">
+    <header
+      className="w-full h-[80px] md:h-[160px] lg:h-[110px] flex md:items-center bg-white relative"
+      id="navbar"
+    >
       <nav className="container mx-auto  flex md:flex-col lg:flex-row  items-center justify-around">
         <Link href="/">
           <Image
