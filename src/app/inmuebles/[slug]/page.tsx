@@ -248,7 +248,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   return (
     <>
       <PropertySection property={propertyBySlug} />
-      <Pad amt={100} />
+      <Pad amt={30} />
 
       <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
         <PropertyMap

@@ -21,6 +21,7 @@ export default function PropertySection({ property }: PropertySectionProps) {
             {property.title}
           </h1>
         </div>
+        <Pad amt={20} />
         <div className="xl:flex justify-end h-auto hidden ">
           <GalleryOptions
             has360Pics={

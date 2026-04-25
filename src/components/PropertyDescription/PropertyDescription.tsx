@@ -83,11 +83,10 @@ export default function PropertyDescription({
           </li>
         </ul>
         <Pad amt={20} />
-        <TextFade buttonComponent={MyCustomButton} maxHeight="120px">
-          <p className="text-[#757680] text-[16px] h-100 overflow-y-auto w-full whitespace-pre-wrap break-words ">
-            {description}
-          </p>
-        </TextFade>
+
+        <p className="text-[#757680] text-xl md:text-2xl overflow-y-auto w-full whitespace-pre-wrap break-words ">
+          {description}
+        </p>
       </div>
     </article>
   );
