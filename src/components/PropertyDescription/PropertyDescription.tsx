@@ -36,7 +36,7 @@ export default function PropertyDescription({
           alt="Property article image"
           className="object-cover w-full h-full"
           height={320}
-          quality={60}
+          quality={95}
           src={imgUrl}
           width={480}
         />
@@ -83,11 +83,10 @@ export default function PropertyDescription({
           </li>
         </ul>
         <Pad amt={20} />
-        <TextFade buttonComponent={MyCustomButton} maxHeight="120px">
-          <p className="text-[#757680] text-[16px] h-100 overflow-y-auto w-full whitespace-pre-wrap break-words ">
-            {description}
-          </p>
-        </TextFade>
+
+        <p className="text-[#757680] text-xl md:text-2xl overflow-y-auto w-full whitespace-pre-wrap break-words ">
+          {description}
+        </p>
       </div>
     </article>
   );

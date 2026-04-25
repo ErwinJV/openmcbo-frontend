@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   //   ];
   // },
   images: {
-    qualities: [30, 70, 60, 50],
+    qualities: [30, 70, 60, 50, 90, 80, 40],
     remotePatterns: [
       new URL("https://images.unsplash.com/**"),
       new URL("https://cdnjs.cloudflare.com/**"),
