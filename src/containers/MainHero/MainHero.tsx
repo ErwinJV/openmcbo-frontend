@@ -5,7 +5,7 @@ import FadeIn from "../FadeIn";
 export default function MainHero() {
   return (
     <FadeIn>
-      <section className="h-[calc(100vh-80px)] md:h-[calc(100vh-160px)] lg:h-[calc(100vh-110px)] xl:bg-right bg-no-repeat xl:bg-contain w-full flex   ">
+      <section className=" h-[580px] xl:bg-right bg-no-repeat xl:bg-contain w-full flex   ">
         <div className="relative xl:flex w-full xl:w-320 xl:container xl:mx-auto ">
           <div className="hidden pb-10 px-3  m:px-10 lg:px-30 xl:px-0  xl:w-177  xl:h-auto xl:flex flex-col items-center justify-end md:justify-center xl:items-start space-y-4 "></div>
           <div className="bg-[url('/img/main-hero.webp')]  bg-cover xl:bg-none   xl:z-10 xl:absolute xl:left-0 xl:top-0   w-full h-full xl:h-auto xl:mx-auto flex flex-col items-center justify-end md:justify-center xl:items-start space-y-4 ">
@@ -18,7 +18,7 @@ export default function MainHero() {
                 Descubre las nuevas propiedades que están disponibles en la zona
                 que gustes habitar.
               </h4>
-              <Pad amt={100} />
+              <Pad amt={50} />
               <SearchBar />
             </div>
           </div>
