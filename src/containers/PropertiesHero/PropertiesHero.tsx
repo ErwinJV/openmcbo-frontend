@@ -1,8 +1,11 @@
 import { PropertyStatus, PropertyType } from "@/graphql/generated-types";
+import FilterSection from "../FilterSection";
+import SearchResults from "@/components/SearchResults";
 
 interface PropertiesHeroProps {
   propertyType: PropertyType;
   propertyStatus: PropertyStatus;
+  total: number;
 }
 
 // Mapeo de contenido para cada combinación
@@ -36,6 +39,7 @@ const contentMap = {
 export default function PropertiesHero({
   propertyType,
   propertyStatus,
+  total,
 }: PropertiesHeroProps) {
   // Obtener el contenido basado en los props
   const content = contentMap[propertyType]?.[propertyStatus] || {
@@ -46,14 +50,22 @@ export default function PropertiesHero({
 
   return (
     <section className="w-full">
-      <div className="container mx-auto bg-[url('/img/panorama-mcbo.webp')] bg-cover md:w-170 w-full h-89  md:h-100 lg:w-230 xl:w-282 xl:h-106.5 flex flex-col ">
-        <div className="px-8 md:px-14 flex flex-col justify-end space-y-1.5 h-full w-full bg-black/40">
-          <h1 className="text-white text-center text-3xl md:text-left xl:text-4xl font-bold">
-            {content.title}
-          </h1>
-          <p className="text-white text-center md:text-left text-xl xl:text-xl mb-10 md:mb-20 xl:w-141.5">
-            {content.description}
-          </p>
+      <div className="container  mx-auto bg-[url('/img/panorama-mcbo.webp')] bg-cover md:w-170 w-full h-auto md:h-70  lg:w-230 xl:w-282  flex flex-col ">
+        <div className="px-8 md:px-14 flex flex-col justify-center space-y-5 py-4  h-full w-full bg-black/40">
+          <div className="flex flex-col">
+            <h1 className="text-white  text-2xl md:text-left xl:text-4xl font-bold">
+              {content.title}
+            </h1>
+            <p className="text-white hidden md:contents  md:text-left text-lg xl:text-xl  xl:w-141.5">
+              {content.description}
+            </p>
+          </div>
+
+          <div className="flex flex-col space-y-1 md:space-y-0 md:flex-row space-x-2.5">
+            <SearchResults total={total} />
+
+            <FilterSection />
+          </div>
         </div>
       </div>
     </section>

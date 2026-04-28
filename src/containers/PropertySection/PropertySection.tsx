@@ -15,14 +15,25 @@ interface PropertySectionProps {
 export default function PropertySection({ property }: PropertySectionProps) {
   return (
     <main className="container mx-auto flex flex-col ">
-      <div className="grid xl:grid-cols-2 w-9/10 md:w-170  xl:w-282 mx-auto">
+      <div
+        className="w-9/10 md:w-170  xl:w-282 mx-auto"
+        style={{ display: "flex", flexDirection: "row" }}
+      >
         <div className="flex mx-auto justify-start w-full ">
-          <h1 className="text-[#3559B6]  text-3xl   md:text-left md:w-162  md:text-4xl xl:w-auto xl:text-4xl font-bold  ">
+          <h1 className="text-[#3559B6] text-3xl pb-4 md:text-left   md:text-4xl xl:w-auto xl:text-4xl font-bold  ">
             {property.title}
           </h1>
         </div>
-        <Pad amt={20} />
-        <div className="xl:flex justify-end h-auto hidden ">
+
+        <div
+          className="xl:flex justify-end h-auto hidden"
+          style={{
+            display:
+              property.videos?.length === 0 && property.images360?.length === 0
+                ? "none"
+                : "unset",
+          }}
+        >
           <GalleryOptions
             has360Pics={
               property.images360 && property.images360.length > 0 ? true : false

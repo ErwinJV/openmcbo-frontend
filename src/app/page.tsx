@@ -1,3 +1,4 @@
+import MainHeroMotion from "@/components/MainHeroMotion";
 import Pad from "@/components/Pad";
 import WhatWeDo from "@/components/WhatWeDo";
 import AvailableOptions from "@/containers/AvailableOptions";
@@ -39,7 +40,7 @@ export default async function Home() {
   const { properties } = await lastProperties();
   return (
     <>
-      <MainHero />
+      <MainHeroMotion properties={properties.properties} />
       <Pad amt={30} />
       <LastPosts />
       <Pad amt={70} />

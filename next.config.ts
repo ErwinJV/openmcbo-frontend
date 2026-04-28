@@ -13,12 +13,32 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [30, 70, 60, 50, 90, 80, 40],
     remotePatterns: [
-      new URL("https://images.unsplash.com/**"),
-      new URL("https://cdnjs.cloudflare.com/**"),
-      new URL("https://picsum.photos/**"),
-      new URL("https://lh3.googleusercontent.com/**"),
-      new URL("https://res.cloudinary.com/**"),
-      new URL("https://cdnjs.cloudflare.com/**"),
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**", // Permite cualquier ruta dentro de este host
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "googleusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "inmob-api.vercel.app",
+        pathname: "/**",
+      },
+      // Agrega aquí los demás si los necesitas siguiendo el mismo formato
     ],
   },
 };

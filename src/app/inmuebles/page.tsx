@@ -16,6 +16,8 @@ import Paginator from "@/components/Paginator";
 import SearchResults from "@/components/SearchResults";
 
 import VisualLoadingTrigger from "@/components/VisualLoadingTrigger";
+import EmptyState from "@/components/EmptyState";
+import Pad from "@/components/Pad";
 
 interface PropertiesPageProps {
   searchParams: Promise<PropertyFilterInput & PaginationDto>;
@@ -122,21 +124,12 @@ export default async function PropertiesPage({
         <PropertiesHero
           propertyStatus={status as PropertyStatus}
           propertyType={type as PropertyType}
+          total={total}
         />
-
-        <SearchResults total={total} />
-
-        <FilterSection />
-
+        <Pad amt={20} />
         {isPropertiesEmptyOrNull ? (
           <section className="w-full flex flex-col justify-center items-center ">
-            <Image
-              src={"/img/not-found-results.webp"}
-              className="w-full sm:w-150 md:w-190  lg:w-240 "
-              width={1080}
-              height={720}
-              alt="Not found image"
-            />
+            <EmptyState />
           </section>
         ) : (
           <>

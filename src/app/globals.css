@@ -338,7 +338,7 @@ pre {
 }
 
 .filter-container {
-  @apply z-10 absolute right-0 top-10 bg-[#F5F7FB];
+  @apply z-30 absolute left-0 top-15 bg-[#F5F7FB];
 }
 
 /* Paginator Styles */
