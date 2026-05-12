@@ -39,7 +39,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             alt="Main Picture"
             width={480}
             height={320}
-            quality={70}
+            quality={90}
           />
         </Link>
       </li>
@@ -55,7 +55,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             alt={pics[0].id}
             width={480}
             height={320}
-            quality={70}
+            quality={90}
           />
         </Link>
       </li>
@@ -71,7 +71,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             alt={pics[1].id}
             width={480}
             height={320}
-            quality={70}
+            quality={90}
           />
         </Link>
       </li>
@@ -83,7 +83,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             alt={pics[2].id}
             width={480}
             height={320}
-            quality={70}
+            quality={90}
           />
         </Link>
       </li>
@@ -108,7 +108,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             alt={pics[3].id}
             width={480}
             height={320}
-            quality={70}
+            quality={90}
           />
         </Link>
         {[main_picture, ...pics].length > 5 && (

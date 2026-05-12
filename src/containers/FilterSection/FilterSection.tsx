@@ -2,10 +2,10 @@
 
 import Accordion from "@/components/Accordion";
 import Button from "@/components/Button";
-import Chip from "@/components/Chip";
+
 import Counter from "@/components/Counter";
 import Input from "@/components/Input";
-import Pad from "@/components/Pad";
+
 import RadioGroup from "@/components/RadioGroup";
 import SearchFilter from "@/components/SearchFilter";
 import { PropertyStatus, PropertyType } from "@/graphql/generated-types";
@@ -256,84 +256,26 @@ export default function FilterSection() {
     ],
   );
 
-  const handleDeleteType = useCallback(() => {
-    const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key]) => key !== "type"),
-    );
-    const stringSearchParams = Object.fromEntries(
-      Object.entries(filterParams).map(([key, value]) => [key, String(value)]),
-    );
-    const filterSearchParams = new URLSearchParams(
-      stringSearchParams,
-    ).toString();
-
-    handleSearchParams(filterParams);
-
-    const url = `/inmuebles?${filterSearchParams}`;
-    router.push(url, { scroll: false });
-  }, [handleSearchParams, router, searchParams]);
-
-  const handleDeleteStatus = useCallback(() => {
-    const filterParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([key]) => key !== "status"),
-    );
-    const stringSearchParams = Object.fromEntries(
-      Object.entries(filterParams).map(([key, value]) => [key, String(value)]),
-    );
-    const filterSearchParams = new URLSearchParams(
-      stringSearchParams,
-    ).toString();
-
-    handleSearchParams(filterParams);
-
-    const url = `/inmuebles?${filterSearchParams}`;
-    router.push(url, { scroll: false });
-  }, [handleSearchParams, router, searchParams]);
-
   return (
     <>
-      <Pad amt={30} />
-      <section className="w-full">
-        <div className="container mx-auto flex justify-between w-[90%] md:w-170 lg:w-230 xl:w-282">
-          <div className="flex justify-center  md:space-x-2">
-            {searchParams.type === PropertyType.Apartment ? (
-              <Chip label="Apartamento" onDelete={handleDeleteType} />
-            ) : searchParams.type === PropertyType.House ? (
-              <Chip label="Casa" />
-            ) : (
-              <></>
-            )}
-
-            {searchParams.status === PropertyStatus.Sale ? (
-              <Chip label="Venta" onDelete={handleDeleteStatus} />
-            ) : searchParams.status === PropertyStatus.Rent ? (
-              <Chip label="Alquiler" onDelete={handleDeleteStatus} />
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className="relative">
-            <div className="w-auto">
-              <Button
-                leftIcon={<IoFilter />}
-                onClick={toggleFilter}
-                size="small"
-                text="Mas filtros"
-                variant="tonal"
-              />
-            </div>
-            <div
-              className={`${showFilter ? "filter-container" : "filter-hidden"}`}
-            >
-              <SearchFilter
-                inputs={filterContent}
-                submit={submit}
-                clear={cleanParams}
-              />
-            </div>
-          </div>
+      <div className="relative">
+        <div className="w-40 ">
+          <Button
+            leftIcon={<IoFilter />}
+            onClick={toggleFilter}
+            size="small"
+            text="Mas filtros"
+            variant="tonal"
+          />
         </div>
-      </section>
+        <div className={`${showFilter ? "filter-container" : "filter-hidden"}`}>
+          <SearchFilter
+            inputs={filterContent}
+            submit={submit}
+            clear={cleanParams}
+          />
+        </div>
+      </div>
     </>
   );
 }

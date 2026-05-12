@@ -35,10 +35,9 @@ export default function PropertyDescription({
         <Image
           alt="Property article image"
           className="object-cover w-full h-full"
-          height={320}
-          quality={95}
+          height={720}
           src={imgUrl}
-          width={480}
+          width={1080}
         />
       </div>
       <div className="col-span-1 xl:col-span-3 xl:row-span-4 xl:flex xl:flex-col space-y-2 xl:p-4">
@@ -48,7 +47,7 @@ export default function PropertyDescription({
         <h2 className="text-[#2E3038] font-bold text-2xl md:text-3xl xl:text-4xl ">
           {price.toLocaleString("ve")} $
         </h2>
-        <h3 className=" text-black  text-lg md:text-xl xl:text-2xl ">
+        <h3 className=" text-[#757680]  text-lg md:text-xl xl:text-2xl ">
           {place}
         </h3>
         <Pad amt={20} />
