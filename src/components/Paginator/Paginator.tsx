@@ -73,19 +73,17 @@ export default function Paginator({
   if (totalPages <= 1) return null; // No renderizar si solo hay 1 página
 
   return (
-    <>
-      <nav
-        aria-label="Navegación de páginas"
-        className="flex flex-wrap items-center justify-center gap-2 my-8 w-full"
-      >
-        {/* Botón Anterior */}
-        <button
-          onClick={() =>
-            handlePageChange(Math.max(0, (currentPage - 2) * limit))
-          }
-          disabled={currentPage === 1}
-          aria-label="Página anterior"
-          className={`
+    <nav
+      aria-label="Navegación de páginas"
+      className="flex flex-wrap items-center justify-center gap-2 my-8 w-full"
+      role="nav-paginator"
+    >
+      {/* Botón Anterior */}
+      <button
+        onClick={() => handlePageChange(Math.max(0, (currentPage - 2) * limit))}
+        disabled={currentPage === 1}
+        aria-label="Página anterior"
+        className={`
             flex items-center justify-center h-10 px-3 sm:px-4 rounded-md 
             transition-all duration-200 text-sm font-medium
             ${
@@ -94,22 +92,22 @@ export default function Paginator({
                 : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-[#003593] active:bg-gray-100 cursor-pointer"
             }
           `}
-        >
-          <IoChevronBack className="mr-1 text-lg" />
-          <span className="hidden sm:inline">Anterior</span>
-        </button>
+      >
+        <IoChevronBack className="mr-1 text-lg" />
+        <span className="hidden sm:inline">Anterior</span>
+      </button>
 
-        {/* Números de página */}
-        <div className="flex items-center justify-center overflow-x-auto no-scrollbar">
-          {generatePageNumbers()}
-        </div>
+      {/* Números de página */}
+      <div className="flex items-center justify-center overflow-x-auto no-scrollbar">
+        {generatePageNumbers()}
+      </div>
 
-        {/* Botón Siguiente */}
-        <button
-          onClick={() => handlePageChange(currentPage * limit)}
-          disabled={currentPage === totalPages}
-          aria-label="Página siguiente"
-          className={`
+      {/* Botón Siguiente */}
+      <button
+        onClick={() => handlePageChange(currentPage * limit)}
+        disabled={currentPage === totalPages}
+        aria-label="Página siguiente"
+        className={`
             flex items-center justify-center h-10 px-3 sm:px-4 rounded-md 
             transition-all duration-200 text-sm font-medium
             ${
@@ -118,11 +116,10 @@ export default function Paginator({
                 : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-[#003593] active:bg-gray-100 cursor-pointer"
             }
           `}
-        >
-          <span className="hidden sm:inline">Siguiente</span>
-          <IoChevronForward className="ml-1 text-lg" />
-        </button>
-      </nav>
-    </>
+      >
+        <span className="hidden sm:inline">Siguiente</span>
+        <IoChevronForward className="ml-1 text-lg" />
+      </button>
+    </nav>
   );
 }

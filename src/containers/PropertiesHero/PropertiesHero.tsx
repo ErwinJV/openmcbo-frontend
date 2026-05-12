@@ -8,7 +8,6 @@ interface PropertiesHeroProps {
   total: number;
 }
 
-// Mapeo de contenido para cada combinación
 const contentMap = {
   [PropertyType.Apartment]: {
     [PropertyStatus.Rent]: {

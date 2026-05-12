@@ -12,31 +12,13 @@ export default function Accordion({ title, children }: AccordionProps) {
   const accordionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Cerrar el accordion al hacer clic fuera de él
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       accordionRef.current &&
-  //       !accordionRef.current.contains(event.target as Node)
-  //     ) {
-  //       setIsOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
-
   return (
-    <div ref={accordionRef} className="relative w-full">
+    <div ref={accordionRef} className="relative w-full" role="accordion">
       {/* Botón para abrir/cerrar el accordion */}
       <button
         type="button"
         className="accordion-button"
         onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
       >
         <span className="accordion-title">{title}</span>
         <IoChevronDown

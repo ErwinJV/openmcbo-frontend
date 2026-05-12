@@ -57,7 +57,7 @@ export default function MainHeroMotion({
 
   const slides = useMemo(
     () =>
-      properties.map((prop) => ({
+      (properties || []).map((prop) => ({
         id: prop.id,
         component: (
           <Card
@@ -72,7 +72,7 @@ export default function MainHeroMotion({
   );
 
   const handleSearch = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e: React.SubmitEvent<HTMLFormElement>) => {
       e.preventDefault();
       const filterSearchParams = new URLSearchParams({
         term: searchTerm,
@@ -160,14 +160,14 @@ export default function MainHeroMotion({
         <div className="relative w-full max-w-md h-[300px] sm:h-[350px] lg:h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
-              key={current.id}
+              key={current?.id}
               className="absolute w-full h-full"
               initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 1.05, rotate: 3 }}
               transition={{ duration: 0.6 }}
             >
-              {current.component}
+              {current?.component}
             </motion.div>
           </AnimatePresence>
         </div>
