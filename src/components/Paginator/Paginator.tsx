@@ -73,11 +73,7 @@ export default function Paginator({
   if (totalPages <= 1) return null; // No renderizar si solo hay 1 página
 
   return (
-    <nav
-      aria-label="Navegación de páginas"
-      className="flex flex-wrap items-center justify-center gap-2 my-8 w-full"
-      role="nav-paginator"
-    >
+    <nav className="flex flex-wrap items-center justify-center gap-2 my-8 w-full">
       {/* Botón Anterior */}
       <button
         onClick={() => handlePageChange(Math.max(0, (currentPage - 2) * limit))}

@@ -15,11 +15,7 @@ export default function Accordion({ title, children }: AccordionProps) {
   return (
     <div ref={accordionRef} className="relative w-full" role="accordion">
       {/* Botón para abrir/cerrar el accordion */}
-      <button
-        type="button"
-        className="accordion-button"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button className="accordion-button" onClick={() => setIsOpen(!isOpen)}>
         <span className="accordion-title">{title}</span>
         <IoChevronDown
           className={`accordion-icon ${isOpen ? "accordion-icon-open" : ""}`}
