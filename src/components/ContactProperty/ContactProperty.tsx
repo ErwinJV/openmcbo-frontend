@@ -11,8 +11,6 @@ export default function ContactProperty({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Busca los elementos en el DOM.
-    // IMPORTANTE: Debes agregar id="navbar" a tu componente Navbar y id="footer" al Footer.
     const navbar = document.getElementById("navbar");
     const footer = document.getElementById("footer");
 

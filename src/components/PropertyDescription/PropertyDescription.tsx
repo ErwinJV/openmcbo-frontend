@@ -1,8 +1,6 @@
 import { PropertyType } from "@/graphql/generated-types";
 import Image from "next/image";
-import TextFade from "../TextFade";
 
-import MyCustomButton from "./MyCustomButton";
 import Pad from "../Pad";
 
 interface PropertyDescriptionProps {
