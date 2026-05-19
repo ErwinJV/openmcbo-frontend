@@ -16,6 +16,8 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
 
+  testPathIgnorePatterns: ["<rootDir>/src/e2e/"],
+
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
