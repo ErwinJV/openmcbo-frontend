@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Pad from "../Pad";
+
 import { useRouter } from "next/navigation";
 
 function Card({
@@ -21,25 +21,30 @@ function Card({
 }) {
   return (
     <Link
-      className="w-full h-full  relative  flex items-center justify-center text-2xl font-bold"
+      className="group relative flex h-full w-full overflow-hidden  shadow-md transition-shadow duration-300 hover:shadow-xl"
       href={`/inmuebles/${slug}`}
       target="_blank"
     >
+      {/* Imagen con efecto de zoom al pasar el cursor */}
       <Image
         alt={title}
         src={main_picture_url}
-        className="object-cover h-full w-full"
+        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         width={1080}
         height={720}
       />
-      <div className="absolute bottom-0 w-full h-[40%] bg-black/40 flex flex-col ps-3  ">
-        <Pad amt={30} />
-        <div className="flex flex-col space-y-2">
-          <h3 className="text-white text-xl font-bold">{title}</h3>
-          <p className="text-white text-start text-xl font-bold ">
-            ${price.toLocaleString("us")}
-          </p>
-        </div>
+
+      {/* Gradiente superpuesto para mejorar la legibilidad del texto */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+
+      {/* Contenedor de Texto */}
+      <div className="absolute bottom-0 flex w-full flex-col justify-end p-5">
+        <h3 className="mb-1 line-clamp-2 text-lg font-bold leading-tight text-white sm:text-xl">
+          {title}
+        </h3>
+        <p className="text-xl font-extrabold text-white sm:text-2xl">
+          ${price.toLocaleString("en-US")}
+        </p>
       </div>
     </Link>
   );
@@ -162,9 +167,9 @@ export default function MainHeroMotion({
             <motion.div
               key={current?.id}
               className="absolute w-full h-full"
-              initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 1.05, rotate: 3 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
               transition={{ duration: 0.6 }}
             >
               {current?.component}
