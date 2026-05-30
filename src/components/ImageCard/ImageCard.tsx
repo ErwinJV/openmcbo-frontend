@@ -27,7 +27,7 @@ export default function ImageCard({
         flex flex-col
         bg-[#F5F7FB]  overflow-hidden
         w-full max-w-[360px] h-[460px] lg:w-[320px] lg:h-[480px]
-        transition-transform duration-300 ease-in-out hover:scale-105
+        transition-transform duration-300 ease-in-out hover:scale-105 
         ${className}
       `}
     >
