@@ -250,6 +250,8 @@ export type PropertyVirtualTour = {
 
 export type Query = {
   filterProperties: PropertiesDataResponse;
+  /** Find properties nearby a location by providing lat, long and radius in km */
+  nearbyProperties: Array<Property>;
   /** Returns a paginated list of properties */
   properties: PropertiesDataResponse;
   /** Returns a paginated list of properties  */
@@ -271,6 +273,14 @@ export type Query = {
 export type QueryFilterPropertiesArgs = {
   filters?: InputMaybe<PropertyFilterInput>;
   paginationDto: PaginationDto;
+};
+
+
+export type QueryNearbyPropertiesArgs = {
+  lat: Scalars['Float']['input'];
+  long: Scalars['Float']['input'];
+  radius: Scalars['Float']['input'];
+  slug: Scalars['String']['input'];
 };
 
 
