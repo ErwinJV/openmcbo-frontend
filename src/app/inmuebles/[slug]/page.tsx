@@ -131,6 +131,39 @@ const getFilteredProperties = async (
   return data;
 };
 
+const getNearbyProperties = async (slug: string, lat: number, long: number) => {
+  const { data } = await getClient().query<{
+    nearbyProperties: Property[] | undefined;
+  }>({
+    query: gql`
+      query GetNearbyProperties(
+        $slug: String!
+        $lat: Float!
+        $long: Float!
+        $radius: Float = 1
+      ) {
+        nearbyProperties(slug: $slug, lat: $lat, long: $long, radius: $radius) {
+          id
+          title
+          price
+          slug
+          lat
+          long
+          main_picture_url
+        }
+      }
+    `,
+    variables: {
+      slug,
+      lat,
+      long,
+      radius: 1, // Puedes ajustar el radio según tus necesidades
+    },
+  });
+  console.log("Nearby properties data:", data);
+  return data;
+};
+
 // Función para validar si la propiedad está completa
 const isPropertyComplete = async (property: Property) => {
   const hasMinimumImages = property.images && property.images.length >= 5;
@@ -205,6 +238,12 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     notFound();
   }
 
+  const { nearbyProperties } = await getNearbyProperties(
+    slug,
+    propertyBySlug?.lat || 0,
+    propertyBySlug?.long || 0,
+  );
+
   const propertyComplete = await isPropertyComplete(propertyBySlug);
 
   if (!propertyComplete) {
@@ -254,7 +293,13 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       <section className="w-9/10 md:w-170  xl:w-282 flex flex-col mx-auto ps-4">
         <PropertyMap
           main_property={mainLocation}
-          relatives_properties={locations}
+          relatives_properties={
+            nearbyProperties?.map((prop) => ({
+              lat: prop.lat || 0,
+              long: prop.long || 0,
+              title: prop.title,
+            })) || []
+          }
         />
       </section>
 
