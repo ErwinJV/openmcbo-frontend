@@ -38,7 +38,21 @@ const nextConfig: NextConfig = {
         hostname: "inmob-api.vercel.app",
         pathname: "/**",
       },
-      // Agrega aquí los demás si los necesitas siguiendo el mismo formato
+      {
+        protocol: "https",
+        hostname: "cdnjs.cloudflare.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "c139c5c539084222741458a4ac5bed40.r2.cloudflarestorage.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "pub-729846b41cde489ea4510ce9369c4ca9.r2.dev",
+        pathname: "/**",
+      },
     ],
   },
 };
