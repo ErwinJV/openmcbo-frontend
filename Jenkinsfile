@@ -104,8 +104,8 @@ pipeline {
                         docker build -f Dockerfile \
                             -t ${DOCKER_IMAGE} \
                             -t ${IMAGE_NAME} \
-                            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="\$(grep -E '^NEXT_PUBLIC_GRAPHQL_ENDPOINT=' .env | head -1 | cut -d= -f2-)" \
-                            --build-arg NEXT_PUBLIC_API="\$(grep -E '^NEXT_PUBLIC_API=' .env | head -1 | cut -d= -f2-)" \
+                            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="\$(grep -E '^NEXT_PUBLIC_GRAPHQL_ENDPOINT=' .env | head -1 | cut -d= -f2- | tr -d '\"')" \
+                            --build-arg NEXT_PUBLIC_API="\$(grep -E '^NEXT_PUBLIC_API=' .env | head -1 | cut -d= -f2- | tr -d '\"')" \
                             --label 'built-by=jenkins' \
                             --label 'build-number=${BUILD_NUMBER}' \
                             --label 'git-commit=${GIT_COMMIT_8}' \
