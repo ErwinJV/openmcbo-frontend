@@ -16,6 +16,13 @@ RUN yarn install --frozen-lockfile || yarn install
 # Copy source code
 COPY . .
 
+# Build-time PUBLIC env vars (inlined into the client bundle by Next.js).
+# Values are passed via --build-arg from the Jenkinsfile (.env is dockerignored).
+ARG NEXT_PUBLIC_GRAPHQL_ENDPOINT
+ARG NEXT_PUBLIC_API
+ENV NEXT_PUBLIC_GRAPHQL_ENDPOINT=$NEXT_PUBLIC_GRAPHQL_ENDPOINT
+ENV NEXT_PUBLIC_API=$NEXT_PUBLIC_API
+
 # Build the Next.js application
 RUN yarn build
 
