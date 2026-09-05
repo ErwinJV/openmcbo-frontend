@@ -35,13 +35,9 @@ export const GET_PROPERTIES = gql`
         num_parking_lot
         created_at
         updated_at
-        user {
-          id
-          name
-          last_name
-          email
-        }
+
         images {
+          id
           url
         }
       }
@@ -70,6 +66,10 @@ export const GET_PROPERTY_QUERY = gql`
       num_bathrooms
       num_bedrooms
       num_parking_lot
+      images {
+        id
+        url
+      }
     }
   }
 `;

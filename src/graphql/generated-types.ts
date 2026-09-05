@@ -672,7 +672,6 @@ export type Property = {
   type: PropertyType;
   /** Property's last update date in ISO format. Example: "2023-01-01T00:00:00.000Z" */
   updated_at?: Maybe<Scalars['DateTime']['output']>;
-  user: User;
   /** User creator of the property */
   userId: Scalars['String']['output'];
   videos?: Maybe<Array<PropertyVideo>>;
@@ -1207,7 +1206,7 @@ export type GetPropertiesQueryVariables = Exact<{
 }>;
 
 
-export type GetPropertiesQuery = { properties: { total: number, properties: Array<{ id: string, title: string, slug: string, status: PropertyStatus, type: PropertyType, description: string, place: string, lat?: number | null, long?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_pools?: number | null, num_parking_lot?: number | null, created_at?: any | null, updated_at?: any | null, user: { id: string, name: string, last_name: string, email: string }, images?: Array<{ url: string }> | null }> } };
+export type GetPropertiesQuery = { properties: { total: number, properties: Array<{ id: string, title: string, slug: string, status: PropertyStatus, type: PropertyType, description: string, place: string, lat?: number | null, long?: number | null, num_bathrooms?: number | null, num_bedrooms?: number | null, num_pools?: number | null, num_parking_lot?: number | null, created_at?: any | null, updated_at?: any | null, images?: Array<{ id: string, url: string }> | null }> } };
 
 export type GetPropertyQueryVariables = Exact<{
   term: Scalars['String']['input'];
