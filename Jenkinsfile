@@ -16,7 +16,7 @@ pipeline {
         DEPLOY_ENV = 'qa'
         REPO_URL = 'git@github.com:ErwinJV/openmcbo-frontend.git'
         REPO_CREDS_ID = 'github-private-repo-ssh'     // SSH key credential in Jenkins
-        ENV_FILE_CREDS_ID = '.env openmcbo frontend'  // Secret file credential with .env contents
+        ENV_FILE_CREDS_ID = '.envclient'  // Secret file credential with .env contents
         COMPOSE_FILE = 'docker-compose.qa.yml'
         IMAGE_NAME = "${APP_NAME}:${DEPLOY_ENV}"
     }
@@ -170,7 +170,7 @@ pipeline {
         }
         success {
             script {
-                echo "Deployment successful: ${DOCKER_IMAGE} (DEPLOY_QA=${params.DEPLOY_QA})"
+                echo "Deployment successful: ${DOCKER_IMAGE ?: IMAGE_NAME} (DEPLOY_QA=${params.DEPLOY_QA})"
                 // Optional email notification (email-ext plugin). Configure SMTP in
                 // Jenkins first, then uncomment:
                 // emailext(
@@ -183,7 +183,7 @@ pipeline {
         }
         failure {
             script {
-                echo "Deployment FAILED: ${DOCKER_IMAGE} - check console log"
+                echo "Deployment FAILED: ${DOCKER_IMAGE ?: IMAGE_NAME} - check console log"
             }
         }
     }
