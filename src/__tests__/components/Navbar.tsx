@@ -75,10 +75,11 @@ describe("NavBar component", () => {
 
     const links = screen.getAllByTestId("nav-link");
 
-    expect(links).toHaveLength(3);
+    expect(links).toHaveLength(4);
 
     expect(screen.getByText("inicio")).toBeInTheDocument();
     expect(screen.getByText("inmuebles")).toBeInTheDocument();
+    expect(screen.getByText("adecuaciones")).toBeInTheDocument();
     expect(screen.getByText("sobre nosotros")).toBeInTheDocument();
   });
 
@@ -89,7 +90,8 @@ describe("NavBar component", () => {
 
     expect(links[0]).toHaveAttribute("href", "/");
     expect(links[1]).toHaveAttribute("href", "/inmuebles");
-    expect(links[2]).toHaveAttribute("href", "/sobre-nosotros");
+    expect(links[2]).toHaveAttribute("href", "/adecuaciones");
+    expect(links[3]).toHaveAttribute("href", "/sobre-nosotros");
   });
 
   it("renders Wrapper component", () => {
@@ -113,7 +115,7 @@ describe("NavBar component", () => {
 
     const items = screen.getAllByRole("listitem");
 
-    expect(items).toHaveLength(3);
+    expect(items).toHaveLength(4);
   });
 
   it("renders nav element", () => {

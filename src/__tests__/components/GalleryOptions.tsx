@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GalleryOptions from "@/components/GalleryOptions";
 import { PropertyContext } from "@/providers/PropertyProvider/property-page-context";
+import { GalleryViewType } from "@/types/context";
 
 // Mock GalleryButton
 jest.mock("@/components/GalleryButton", () => ({
@@ -32,7 +33,7 @@ describe("GalleryOptions component", () => {
   const mockHandleGalleryView = jest.fn();
 
   const renderComponent = ({
-    galleryView = "pics",
+    galleryView = "pics" as GalleryViewType,
     hasPics = true,
     has360Pics = true,
     hasVideos = true,
