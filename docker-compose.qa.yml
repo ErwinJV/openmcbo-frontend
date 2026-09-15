@@ -1,0 +1,40 @@
+# Docker Compose for Homelab QA Deployment
+# This runs the Next.js frontend container on your homelab Docker host
+
+services:
+  openmcbo-frontend-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: openmcbo-frontend:qa
+    container_name: openmcbo-frontend-qa
+    restart: unless-stopped
+
+    # Map the host port to the SAME container port the app listens on (PORT env).
+    # Do NOT hardcode :3000 -- the app honors the PORT variable from .env.
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT:-3000}
+      NEXT_PUBLIC_GRAPHQL_ENDPOINT: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
+      REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+
+    # Resource limits (adjust for your homelab)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+
+    # Optional: if you want to use a Docker network for other services
+    # networks:
+    #   - openmcbo-network
+
+# networks:
+#   openmcbo-network:
+#     external: true

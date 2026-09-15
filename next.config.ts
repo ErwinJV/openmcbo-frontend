@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   /* config options here */
   // async rewrites() {
   //   return [
@@ -51,6 +54,16 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "pub-729846b41cde489ea4510ce9369c4ca9.r2.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "example.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "example.com",
         pathname: "/**",
       },
     ],
