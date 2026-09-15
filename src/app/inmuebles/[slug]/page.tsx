@@ -24,6 +24,10 @@ interface PropertyPageProps {
 }
 
 const getProperties = async () => {
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT) {
+    return { properties: { properties: [] } };
+  }
+
   const { data } = await getClient().query<GetPropertiesQuery>({
     query: gql`
         query {
@@ -54,6 +58,10 @@ export async function generateStaticParams() {
 }
 
 const getProperty = async (slug: string) => {
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT) {
+    return { propertyBySlug: null };
+  }
+
   const { data } = await getClient().query<GetPropertyQuery>({
     query: gql`
       query GetProperty($slug: String!) {

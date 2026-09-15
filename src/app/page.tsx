@@ -2,6 +2,7 @@ import MainHeroMotion from "@/components/MainHeroMotion";
 import Pad from "@/components/Pad";
 import WhatWeDo from "@/components/WhatWeDo";
 import AvailableOptions from "@/containers/AvailableOptions";
+import HomeAdecuacionesSection from "@/containers/HomeAdecuacionesSection";
 import LastPosts from "@/containers/LastPosts";
 import MainHero from "@/containers/MainHero";
 import OurServices from "@/containers/OurServices";
@@ -11,6 +12,10 @@ import { GetPropertiesQuery } from "@/graphql/queries";
 import { gql } from "@apollo/client";
 
 const lastProperties = async () => {
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT) {
+    return { properties: { properties: [] } };
+  }
+
   const { data } = await getClient().query<GetPropertiesQuery>({
     query: gql`
         query {
@@ -45,6 +50,8 @@ export default async function Home() {
       <LastPosts />
       <Pad amt={70} />
       <AvailableOptions properties={properties.properties} />
+      <Pad amt={70} />
+      <HomeAdecuacionesSection />
       <Pad amt={70} />
       <OurServices />
       <Pad amt={50} />

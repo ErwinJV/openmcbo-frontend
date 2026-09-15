@@ -27,6 +27,10 @@ const getFilteredProperties = async (
   searchParams: PropertyFilterInput,
   pagination: PaginationDto,
 ) => {
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT) {
+    return { filterProperties: { properties: [], total: 0 } };
+  }
+
   const { data } = await getClient().query<{
     filterProperties: PropertiesDataResponse;
   }>({
