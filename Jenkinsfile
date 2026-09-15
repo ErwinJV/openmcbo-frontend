@@ -70,7 +70,7 @@ pipeline {
                 script {
                     // Run CI inside a node:22-alpine container so the agent does not
                     // need Node.js preinstalled. Failures are non-fatal (|| true).
-                    docker.image('node:20-alpine').inside("-u \$(id -u):\$(id -g)") {
+                    docker.image('node:20-alpine').inside() {
                         sh 'yarn install --frozen-lockfile || true'
                         sh 'yarn build || true'
                         sh 'yarn lint || true'
