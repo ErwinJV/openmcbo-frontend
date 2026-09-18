@@ -1,4 +1,7 @@
 import Pad from "@/components/Pad";
+import ProductDetails from "@/components/ProductDetails";
+import ProductGallery from "@/components/ProductGallery";
+import ProductShowcase from "@/components/ProductShowcase";
 import AdecuacionGallery from "@/containers/AdecuacionGallery";
 import AdecuacionInfo from "@/containers/AdecuacionInfo";
 import ProviderInfo from "@/containers/ProviderInfo";
@@ -8,6 +11,7 @@ import { Product } from "@/graphql/generated-types";
 import { gql } from "@apollo/client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MdCheck } from "react-icons/md";
 
 interface AdecuacionPageProps {
   params: Promise<{ slug: string }>;
@@ -68,7 +72,11 @@ const getAdecuacion = async (slug: string) => {
             id
             name
             slug
-            description
+            tenant {
+              id
+              name
+              website
+            }
             details
             status
             mainImageUrl
@@ -77,6 +85,10 @@ const getAdecuacion = async (slug: string) => {
               name
               logoUrl
               slug
+            }
+            subcategory {
+              id
+              name
             }
             images {
               url
@@ -108,7 +120,10 @@ const getRelatedAdecuaciones = async (brandId: string, excludeSlug: string) => {
       products: { items: Product[] };
     }>({
       query: gql`
-        query GetRelatedAdecuaciones($filters: ProductFiltersInput, $pagination: PaginationDto) {
+        query GetRelatedAdecuaciones(
+          $filters: ProductFiltersInput
+          $pagination: PaginationDto
+        ) {
           products(filters: $filters, pagination: $pagination) {
             items {
               id
@@ -152,7 +167,8 @@ export async function generateMetadata({
 
   return {
     title: `${adecuacion.name} | OpenMCBO`,
-    description: adecuacion.description || `Encuentra ${adecuacion.name} en OpenMCBO`,
+    description:
+      adecuacion.description || `Encuentra ${adecuacion.name} en OpenMCBO`,
   };
 }
 
@@ -163,42 +179,39 @@ export default async function AdecuacionPage({ params }: AdecuacionPageProps) {
   if (!adecuacion) {
     notFound();
   }
+  const mainImage = { src: adecuacion.mainImageUrl!, alt: adecuacion.name };
+  const galleryImages = adecuacion.images?.map((image) => ({
+    src: image.url,
+    alt: (image.alt || image.filename)!,
+  }));
 
+  if (!galleryImages) {
+    notFound();
+  }
+
+  const specs = Object.keys(adecuacion.details || {}).map((key) => ({
+    label: key,
+    value: adecuacion.details[key],
+    icon: <MdCheck />,
+  }));
   const relatedAdecuaciones = adecuacion.brand?.id
     ? await getRelatedAdecuaciones(adecuacion.brand.id, slug)
     : [];
 
   return (
-    <main className="w-full min-h-screen bg-white">
-      <section className="w-9/10 md:w-170 xl:w-282 mx-auto pt-8 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          <div>
-            <AdecuacionGallery
-              images={adecuacion.images || []}
-              mainImageUrl={adecuacion.mainImageUrl}
-              adecuacionName={adecuacion.name}
-            />
-          </div>
-          <div className="flex flex-col gap-6">
-            <AdecuacionInfo
-              name={adecuacion.name}
-              description={adecuacion.description}
-              details={adecuacion.details as Record<string, any> | null}
-              brandName={adecuacion.brand?.name}
-              brandLogoUrl={adecuacion.brand?.logoUrl}
-            />
-            <ProviderInfo
-              tenantName={null}
-              tenantLogo={null}
-              productName={adecuacion.name}
-              tenantWebsite={null}
-            />
-          </div>
+    <main className="flex-grow flex flex-col justify-center py-8 lg:py-12">
+      <div className="max-w-[1320px] w-full mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ">
+          <ProductGallery images={[mainImage, ...galleryImages]} />
+          <ProductDetails
+            brand={adecuacion.brand.name}
+            category={adecuacion.subcategory.name}
+            title={adecuacion.name}
+            specs={specs}
+            storeUrl={adecuacion.tenant.website || ""}
+          />
         </div>
-
-        <Pad amt={50} />
-        <RelatedAdecuaciones products={relatedAdecuaciones} />
-      </section>
+      </div>
     </main>
   );
 }

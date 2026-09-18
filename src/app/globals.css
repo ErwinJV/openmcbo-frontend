@@ -1,6 +1,46 @@
 @layer theme, base, mui, components, utilities;
 @import "tailwindcss";
 
+/* ============================================================
+   TEMA (Tailwind v4) — solo tokens nuevos que NO chocan con
+   tus clases existentes. Tus hex directos (#003593, #3559B6,
+   #EEF0FF, #F5F7FB, #EFF2F9, #E2E2EC, #757680, #8F909A, etc.)
+   se mantienen intactos en el resto del archivo.
+   ============================================================ */
+@theme {
+  /* Aliases semánticos que apuntan a tus mismos hex */
+  --color-brand-50: #f5f7fb; /* = surface-subtle */
+  --color-brand-100: #eef0ff; /* = btn-chip bg */
+  --color-brand-400: #3559b6; /* = input-outlined border */
+  --color-brand-500: #003593; /* = color principal */
+
+  --color-heading: #191b23;
+  --color-bodytext: #2e3038;
+  --color-muted: #5d5e67;
+
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f5f7fb;
+  --color-surface-alt: #eff2f9;
+
+  --color-line: #e2e2ec;
+
+  /* Tipografía */
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Sombras */
+  --shadow-subtle:
+    0 4px 20px -2px rgba(0, 53, 147, 0.08),
+    0 2px 6px -1px rgba(0, 53, 147, 0.04);
+
+  --shadow-cta:
+    0 8px 24px -4px rgba(0, 53, 147, 0.28),
+    0 3px 8px -2px rgba(0, 53, 147, 0.16);
+}
+
+/* ============================================================
+   TODO LO QUE SIGUE ES TU ARCHIVO ORIGINAL, SIN CAMBIOS
+   ============================================================ */
+
 pre {
   @apply font-sans;
 }
