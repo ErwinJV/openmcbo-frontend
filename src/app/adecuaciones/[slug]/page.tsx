@@ -1,11 +1,6 @@
-import Pad from "@/components/Pad";
 import ProductDetails from "@/components/ProductDetails";
 import ProductGallery from "@/components/ProductGallery";
-import ProductShowcase from "@/components/ProductShowcase";
-import AdecuacionGallery from "@/containers/AdecuacionGallery";
-import AdecuacionInfo from "@/containers/AdecuacionInfo";
-import ProviderInfo from "@/containers/ProviderInfo";
-import RelatedAdecuaciones from "@/containers/RelatedAdecuaciones";
+
 import { getClient } from "@/graphql/client";
 import { Product } from "@/graphql/generated-types";
 import { gql } from "@apollo/client";
@@ -182,7 +177,7 @@ export default async function AdecuacionPage({ params }: AdecuacionPageProps) {
   const mainImage = { src: adecuacion.mainImageUrl!, alt: adecuacion.name };
   const galleryImages = adecuacion.images?.map((image) => ({
     src: image.url,
-    alt: (image.alt || image.filename)!,
+    alt: image.url!,
   }));
 
   if (!galleryImages) {
@@ -197,6 +192,8 @@ export default async function AdecuacionPage({ params }: AdecuacionPageProps) {
   const relatedAdecuaciones = adecuacion.brand?.id
     ? await getRelatedAdecuaciones(adecuacion.brand.id, slug)
     : [];
+
+  console.log({ tenant: adecuacion.tenant });
 
   return (
     <main className="flex-grow flex flex-col justify-center py-8 lg:py-12">
