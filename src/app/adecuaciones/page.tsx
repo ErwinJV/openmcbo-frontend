@@ -57,7 +57,7 @@ const getAdecuaciones = async () => {
               id
               name
               slug
-              description
+
               mainImageUrl
               brand {
                 id
