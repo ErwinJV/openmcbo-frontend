@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Thumbnail from "../Thumbnail";
 import { MdCloseFullscreen, MdFullscreen } from "react-icons/md";
+import Link from "next/link";
 
 interface GalleryImage {
   src: string;
@@ -37,15 +38,18 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
     <div className="lg:col-span-7 flex flex-col gap-4">
       {/* Imagen principal */}
       <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-subtle border border-line shadow-subtle group">
-        <Image
-          id="mainDisplayImage"
-          src={mainImage.src}
-          alt={mainImage.alt}
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 58vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
+        <Link key={mainImage.src} href={mainImage.src} data-fancybox="gallery">
+          <Image
+            id="mainDisplayImage"
+            src={mainImage.src}
+            alt={mainImage.alt}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 58vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        </Link>
+
         <button
           type="button"
           onClick={toggleFullscreen}
@@ -59,13 +63,19 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       {/* Miniaturas */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {images.map((img, index) => (
-          <Thumbnail
+          <Link
             key={img.src}
-            src={img.src}
-            alt={img.alt}
-            isActive={index === activeIndex}
-            onClick={() => setActiveIndex(index)}
-          />
+            href={img.src}
+            data-fancybox="gallery"
+            className="block w-full"
+          >
+            <Thumbnail
+              src={img.src}
+              alt={img.alt}
+              isActive={index === activeIndex}
+              onClick={() => setActiveIndex(index)}
+            />
+          </Link>
         ))}
       </div>
     </div>

@@ -173,13 +173,13 @@ const getNearbyProperties = async (slug: string, lat: number, long: number) => {
 };
 
 // Función para validar si la propiedad está completa
-const isPropertyComplete = async (property: Property) => {
-  const hasMinimumImages = property.images && property.images.length >= 5;
-  const hasRequiredFields =
-    property.description && property.title && property.price;
+// const isPropertyComplete = async (property: Property) => {
+//   const hasMinimumImages = property.images && property.images.length >= 5;
+//   const hasRequiredFields =
+//     property.description && property.title && property.price;
 
-  return hasMinimumImages && hasRequiredFields;
-};
+//   return hasMinimumImages && hasRequiredFields;
+// };
 
 const breakpoints: SwiperOptions["breakpoints"] = {
   // Mobile: 1 card
@@ -252,11 +252,11 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     propertyBySlug?.long || 0,
   );
 
-  const propertyComplete = await isPropertyComplete(propertyBySlug);
+  // const propertyComplete = await isPropertyComplete(propertyBySlug);
 
-  if (!propertyComplete) {
-    return <PropertyNotAvailable />;
-  }
+  // if (!propertyComplete) {
+  //   return <PropertyNotAvailable />;
+  // }
 
   const {
     filterProperties: { properties },
