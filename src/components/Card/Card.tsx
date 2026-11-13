@@ -130,20 +130,23 @@ export default function Card({
           className="flex transition-transform duration-300 ease-out h-full"
           style={{ transform: `translateX(-${currentImage * 100}%)` }}
         >
-          {[main_picture, ...srcImg].map((src, index) => (
-            <div key={index} className="flex-shrink-0 w-full h-full">
+          {[main_picture, ...srcImg].map((src) => (
+            <div
+              key={`card-component-${title}-${src}`}
+              className="shrink-0 w-full h-full"
+            >
               {!src ? (
                 <div className="w-full h-full flex items-center justify-center bg-gray-200">
                   <span className="text-gray-500">Sin imagen</span>
                 </div>
               ) : (
                 <Image
-                  alt={`${title} - Imagen ${index + 1}`}
+                  alt={`card-component-${title}-${src}`}
                   className="object-cover w-full h-full pointer-events-none select-none"
                   height={1080}
                   src={src}
                   width={1080}
-                  quality={90}
+                  quality={70}
                   loading="lazy"
                   draggable={false}
                 />

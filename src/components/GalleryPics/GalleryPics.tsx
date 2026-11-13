@@ -1,6 +1,7 @@
 import { PropertyImage } from "@/graphql/generated-types";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import { Fragment } from "react/jsx-runtime";
 
 interface GalleryPicsProps {
@@ -16,6 +17,9 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
       </span>
     );
   }
+
+  const displayedPics = pics.slice(0, 4);
+
   return (
     <ul className="grid grid-cols-1 md:grid-cols-4  gap-3 w-9/10  md:w-170   xl:w-282  mx-auto ">
       <li className=" md:row-span-2 md:col-span-2 aspect-square">
@@ -43,7 +47,98 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
           />
         </Link>
       </li>
-      <li className="hidden md:flex  aspect-square  ">
+
+      {displayedPics.map((pic, index) => (
+        <React.Fragment key={typeof pic === "string" ? pic : pic.id}>
+          {index < 1 ? (
+            <li className="hidden md:flex  aspect-square  ">
+              <Link
+                className="w-full h-full"
+                href={pics[0].url}
+                data-fancybox="gallery"
+              >
+                <Image
+                  className="object-cover w-full h-full overflow-hidden"
+                  src={pics[0].url}
+                  alt={pics[0].id}
+                  width={480}
+                  height={320}
+                  quality={90}
+                />
+              </Link>
+            </li>
+          ) : index >= 1 && index < 3 ? (
+            <li className="hidden md:inline-block aspect-square ">
+              <Link
+                className="w-full h-full"
+                href={pic.url}
+                data-fancybox="gallery"
+              >
+                <Image
+                  className="object-cover w-full h-full overflow-hidden"
+                  src={pic.url}
+                  alt={pic.id}
+                  width={480}
+                  height={320}
+                  quality={90}
+                />
+              </Link>
+            </li>
+          ) : (
+            <li className="hidden md:inline-block relative aspect-square ">
+              <Link
+                className="w-full h-full z-20"
+                href={pic.url}
+                data-fancybox="gallery"
+              >
+                {[main_picture, ...pics].length - 5 !== 0 ? (
+                  <div className="absolute z-10 bottom-0 left-0 w-full h-full bg-black/40">
+                    <span className="text-white font-bold text-5xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      +{[main_picture, ...pics].length - 5}
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <Image
+                  className="object-cover w-full h-full"
+                  src={pic.url}
+                  alt={pic.id}
+                  width={480}
+                  height={320}
+                  quality={90}
+                  loading="lazy"
+                />
+              </Link>
+              {[main_picture, ...pics].length > 5 && (
+                <div className="hidden">
+                  {[main_picture, ...pics].slice(5).map((image) => (
+                    <Fragment
+                      key={typeof image === "string" ? image : image.id}
+                    >
+                      {typeof image === "string" ? (
+                        <Link key={image} href={image} data-fancybox="gallery">
+                          {image}
+                        </Link>
+                      ) : (
+                        <Link
+                          key={image.id}
+                          href={image.url}
+                          data-fancybox="gallery"
+                        >
+                          {image.id}
+                        </Link>
+                      )}
+                    </Fragment>
+                  ))}
+                </div>
+              )}
+            </li>
+          )}
+        </React.Fragment>
+      ))}
+
+      {/* <li className="hidden md:flex  aspect-square  ">
         <Link
           className="w-full h-full"
           href={pics[0].url}
@@ -109,6 +204,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             width={480}
             height={320}
             quality={90}
+            loading="lazy"
           />
         </Link>
         {[main_picture, ...pics].length > 5 && (
@@ -128,7 +224,7 @@ export default function GalleryPics({ pics, main_picture }: GalleryPicsProps) {
             ))}
           </div>
         )}
-      </li>
+      </li> */}
     </ul>
   );
 }
